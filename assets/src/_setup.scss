@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+// Global Classes
+.fx-row {
+    display: flex;
+}
+.fx-col {
+    display: flex;
+    flex-direction: column;
+}

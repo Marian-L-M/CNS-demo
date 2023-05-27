@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Clouds and Spaceships</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body>
-    <h1>Ello Govna!</h1>
+<body class="main-page">
+    <main>
+        <div class="fx-row">
+            <canvas id="main-visual"></canvas>
+            <div class="main-text">
+                <h1>I am an explanation title</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia esse consectetur culpa excepturi iste odit modi ullam nam ea, est neque quis id vitae animi, molestiae dolorum officia sequi consequuntur.
+                </p>
+            </div>
+        </div>
+        <div class="content-box fx-row">
+            <button id="minus-btn" onclick="decreaseTime(1)">-</button>
+            <input type="range" name="timeline" id="timeline" min="0" max="5" onchange="setTimeIndex()">
+            <button id="plus-btn" onclick="incrementTime(1)">+</button>
+            <h1 id="time-index">ABC</h1>
+        </div>
+    </main>
 </body>
 </html>
+<script src="./assets/js/main.js"></script>
+<script src="./assets/js/background.js"></script>
+<script src="./assets/js/timeLineHandler.js"></script>

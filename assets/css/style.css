@@ -1,0 +1,30 @@
+.fx-row {
+  display: flex;
+}
+
+.fx-col {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#main-visual {
+  border: 2px solid black;
+  margin: 50px;
+}
+
+.main-text {
+  box-sizing: border-box;
+  padding: 50px 20px;
+}
+
+.content-box {
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=style.css.map */

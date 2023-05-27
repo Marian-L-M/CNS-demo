@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@use "./setup" ;
+
+// 
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#main-visual {
+    border: 2px solid black;
+    margin: 50px;
+}
+
+.main-text {
+    box-sizing: border-box;
+    padding: 50px 20px;
+}
+
+.content-box {
+    justify-content: center;
+    align-items: center;
+}
