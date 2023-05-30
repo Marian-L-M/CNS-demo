@@ -2,7 +2,8 @@ let timeIndex = 0;
 let timeIndexMax = 5;
 let timeDisplay = document.getElementById("time-index") ;
 timeDisplay.max = timeIndexMax;
-// showSlides(timeIndex);
+
+
 
 // Next/previous controls
 function incrementTime(n) {
@@ -26,3 +27,4 @@ function setTimeIndex() {
 function setTimeIndexValue() {
     timeDisplay.innerHTML = timeIndex;
 }
+
