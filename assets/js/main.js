@@ -46,8 +46,9 @@ let timeIndexStart = 0;
 let timeIndexMax = data.length - 1;
 let timeScroller = document.getElementById('timeline');
 let timeDisplay = document.getElementById("time-display") ;
+let globalTime = timeIndexStart;
 
-timeScroller.value = 0;
+timeScroller.value = timeIndexStart;
 timeScroller.min = timeIndexStart;
 timeScroller.max = timeIndexMax;
 
@@ -65,14 +66,15 @@ function setPage() {
 // Set Canvas contents
 function setCanvas() {
     // Load Map Object
-    let mapInstance = new MapMaker(canvas, data)
-    // mapInstance.start();
+    let mapInstance = new MapMaker(canvas, globalTime, data)
+    mapInstance.start();
 }
 
 // Set time index and time display
 function setTimeIndex() {
     // Set Current Time
     let timeIndex = timeScroller.value;
+    globalTime = timeIndex
 
     // Set Page Content
     setContent(data, timeIndex)
