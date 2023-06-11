@@ -2,7 +2,7 @@ let data = [
     {
         "id": 0,
         "timeIndex": 0,
-        "title": "I am an explanation title",
+        "title": "I am an explanatory title",
         "content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia esse consectetur culpa excepturi iste odit modi ullam nam ea, est neque quis id vitae animi, molestiae dolorum officia sequi consequuntur.</p>"
     },
     {

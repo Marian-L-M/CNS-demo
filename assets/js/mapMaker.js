@@ -54,6 +54,4 @@ MapMaker.prototype.drawInitialScreen = function() {
     map.context.fillStyle = 'white';
     map.context.font = '36px Arial';
     map.context.fillText(data[globalTime].title, map.canvas.width / 10, map.canvas.height / 2)
-    
-    
 }
