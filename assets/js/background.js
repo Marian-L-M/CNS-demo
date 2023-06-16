@@ -1,19 +1,4 @@
-// const canvas = document.getElementById("main-visual")
-
-// canvas.width = 800;
-// canvas.height = 800;
-
-// let c = canvas.getContext('2d');
-
-// let bg = new Image();
-// bg.src = "./assets/img/kamolin-map.jpg";
-
-// bg.onload = () => {
-//     let bgSize = canvas.width;
-//     c.drawImage(bg, 0, 0, bgSize, bgSize)
-// }
-
-function mapBackground(src, canvas){
+function MapBackground(src, canvas){
     // Base
     let bg = this;
 
@@ -34,7 +19,7 @@ function mapBackground(src, canvas){
     
 }
 
-mapBackground.prototype.create = function() {
+MapBackground.prototype.create = function() {
     // Base
     let bg = this;
 
@@ -43,7 +28,7 @@ mapBackground.prototype.create = function() {
     bg.img.src = bg.src;
 };
 
-mapBackground.prototype.draw = function() {
+MapBackground.prototype.draw = function() {
     // Base
     let bg = this;
 

@@ -11,7 +11,37 @@ function MapMaker(canvas, globalTime, data) {
 
     // Map State
     map.currentState = INITIAL;
+
+    // Bind Events
+    map.bindEvents();
+
+    // Create Map Objects
+    map.createObjects();
 };
+
+MapMaker.prototype.bindEvents = function() {
+    // Base
+    var map = this;
+
+    // Mouse Listener
+    map.canvas.addEventListener('click', function(event){
+        // For Wiki function
+    });
+
+    // Key Listener
+    window.addEventListener('keydown', function(event){
+        // Filter function
+        // Arrows for global movement
+    });
+};
+
+MapMaker.prototype.createObjects = function() {
+    // Base
+    var map = this;
+    map.background = new MapBackground(data[globalTime].baseMap, map.canvas);
+    map.background.draw();
+
+}
 
 MapMaker.prototype.start = function() {
     // Base
@@ -46,10 +76,10 @@ MapMaker.prototype.drawInitialScreen = function() {
     // Base
     let map = this;
 
-    // Draw
-    map.context.fillStyle = 'black';
-    map.context.fillRect(0, 0, map.canvas.width, map.canvas.height);
-
+    // Set starting Map
+    map.background = new MapBackground(data[0].baseMap, map.canvas);
+    map.background.draw();
+    
     // Text
     map.context.fillStyle = 'white';
     map.context.font = '36px Arial';

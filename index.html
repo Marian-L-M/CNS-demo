@@ -10,27 +10,27 @@
 <body class="main-page">
     <main>
         <div class="fx-row">
-            <canvas id="main-visual" width="600" height="600"></canvas>
+            <canvas id="main-visual" width="1000" height="1000"></canvas>
             <div class="main-text">
                 <h1 id="main-title"></h1>
                 <div id="main-content">
                     Canvas element cannot be displayed. Please check if your browser supports Javascript and HTML5 Canvas.
                 </div>
+                <div class="content-box fx-row">
+                    <button id="minus-btn" onclick="decreaseTime(1)">-</button>
+                    <input type="range" name="timeline" id="timeline" onchange="setPage()">
+                    <button id="plus-btn" onclick="increaseTime(1)">+</button>
+                    <h1 id="time-display">2</h1>
+                </div>
             </div>
-        </div>
-        <div class="content-box fx-row">
-            <button id="minus-btn" onclick="decreaseTime(1)">-</button>
-            <input type="range" name="timeline" id="timeline" onchange="setPage()">
-            <button id="plus-btn" onclick="increaseTime(1)">+</button>
-            <h1 id="time-display">2</h1>
         </div>
     </main>
 </body>
 </html>
 <script src="./assets/js/util.js"></script>
+<script src="./assets/js/background.js"></script>
 <script src="./assets/js/mapMaker.js"></script>
 <script src="./assets/js/loadData.js"></script>
 <script src="./assets/js/main.js"></script>
-<!-- <script src="./assets/js/background.js"></script> -->
 <script>
 </script>
