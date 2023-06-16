@@ -38,8 +38,6 @@ MapMaker.prototype.bindEvents = function() {
 MapMaker.prototype.createObjects = function() {
     // Base
     var map = this;
-    map.background = new MapBackground(data[globalTime].baseMap, map.canvas);
-    map.background.draw();
 
 }
 
@@ -77,9 +75,9 @@ MapMaker.prototype.drawInitialScreen = function() {
     let map = this;
 
     // Set starting Map
-    map.background = new MapBackground(data[0].baseMap, map.canvas);
+    map.background = new MapBackground(data[globalTime].baseMap, map.canvas);
     map.background.draw();
-    
+
     // Text
     map.context.fillStyle = 'white';
     map.context.font = '36px Arial';
