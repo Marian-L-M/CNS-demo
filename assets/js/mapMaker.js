@@ -35,12 +35,6 @@ MapMaker.prototype.bindEvents = function() {
     });
 };
 
-MapMaker.prototype.createObjects = function() {
-    // Base
-    var map = this;
-
-}
-
 MapMaker.prototype.start = function() {
     // Base
     let map = this;
@@ -82,4 +76,10 @@ MapMaker.prototype.drawInitialScreen = function() {
     map.context.fillStyle = 'white';
     map.context.font = '36px Arial';
     map.context.fillText(data[globalTime].title, map.canvas.width / 10, map.canvas.height / 2)
+}
+
+MapMaker.prototype.createObjects = function() {
+    // Base
+    var map = this;
+
 }
