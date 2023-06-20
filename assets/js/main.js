@@ -4,42 +4,108 @@ let data = [
         "timeIndex": 0,
         "title": "I am an explanatory title",
         "content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia esse consectetur culpa excepturi iste odit modi ullam nam ea, est neque quis id vitae animi, molestiae dolorum officia sequi consequuntur.</p>",
-        "baseMap": "assets/img/kamolin-map.jpg"
+        "baseMap": "assets/img/kamolin-map.jpg",
+        "character" : [
+            {
+                "id": 0,
+                "name": "char-1",
+                "icon": "assets/img/characters/character-1.png",
+                "x": 115,
+                "y": 115,
+                "w": 115,
+                "h": 115,
+            }
+        ]
     },
     {
         "id": 1,
         "timeIndex": 1,
         "title": "I am the second title",
         "content": "<p>Second text</p>",
-        "baseMap": "assets/img/northeast.jpg"
+        "baseMap": "assets/img/northeast.jpg",
+        "character" : [
+            {
+                "id": 0,
+                "name": "char-1",
+                "icon": "assets/img/characters/character-2.png",
+                "x": 115,
+                "y": 315,
+                "w": 115,
+                "h": 115,
+            }
+        ]
     },
     {
         "id": 2,
         "timeIndex": 2,
         "title": "I am the third title",
         "content": "<p>Third text</p>",
-        "baseMap": "assets/img/rozendale.jpg"
+        "baseMap": "assets/img/rozendale.jpg",
+        "character" : [
+            {
+                "id": 0,
+                "name": "char-1",
+                "icon": "assets/img/characters/character-3.png",
+                "x": 315,
+                "y": 315,
+                "w": 115,
+                "h": 115,
+            }
+        ]
     },
     {
         "id": 3,
         "timeIndex": 3,
         "title": "I am the fourth title",
         "content": "<p>Fourth text</p>",
-        "baseMap": "assets/img/new_roslingen.jpg"
+        "baseMap": "assets/img/new_roslingen.jpg",
+        "character" : [
+            {
+                "id": 0,
+                "name": "char-1",
+                "icon": "assets/img/characters/character-4.png",
+                "x": 315,
+                "y": 315,
+                "w": 115,
+                "h": 115,
+            }
+        ]
     },
     {
         "id": 4,
         "timeIndex": 4,
         "title": "I am the fifth title",
         "content": "<p>Fifth text</p>",
-        "baseMap": "assets/img/tenbrake.jpg"
+        "baseMap": "assets/img/tenbrake.jpg",
+        "character" : [
+            {
+                "id": 0,
+                "name": "char-1",
+                "icon": "assets/img/characters/character-1.png",
+                "x": 115,
+                "y": 315,
+                "w": 115,
+                "h": 115,
+            }
+        ]
     },
     {
         "id": 5,
         "timeIndex": 5,
         "title": "I am the sixth title",
         "content": "<p>Sixth text</p>",
-        "baseMap": "assets/img/academy-island.jpg"
+        "baseMap": "assets/img/academy-island.jpg",
+        "character" : [
+            {
+                "id": 0,
+                "name": "char-1",
+                "icon": "assets/img/characters/character-1.png",
+                "x": 115,
+                "y": 315,
+                "w": 115,
+                "h": 115,
+            }
+        ]
     },
 ];
 

@@ -15,8 +15,7 @@ function MapMaker(canvas, globalTime, data) {
     // Bind Events
     map.bindEvents();
 
-    // Create Map Objects
-    map.createObjects();
+
 };
 
 MapMaker.prototype.bindEvents = function() {
@@ -39,6 +38,7 @@ MapMaker.prototype.start = function() {
     // Base
     let map = this;
 
+
     // Start Map
     window.requestAnimationFrame(function() {
         map.runMapLoop();
@@ -54,6 +54,9 @@ MapMaker.prototype.runMapLoop = function() {
         case INITIAL:
             // Draw INITIAl SCREEN
             map.drawInitialScreen()
+
+            // Create Map Objects
+            map.createObjects();
             break
     }
 
@@ -68,18 +71,51 @@ MapMaker.prototype.drawInitialScreen = function() {
     // Base
     let map = this;
 
+    // Clear Canvas
+    map.context.clearRect(0, 0, map.canvas.width, map.canvas.height);
+
     // Set starting Map
     map.background = new MapBackground(data[globalTime].baseMap, map.canvas);
     map.background.draw();
-
-    // Text
-    map.context.fillStyle = 'white';
-    map.context.font = '36px Arial';
-    map.context.fillText(data[globalTime].title, map.canvas.width / 10, map.canvas.height / 2)
 }
 
 MapMaker.prototype.createObjects = function() {
     // Base
     var map = this;
+    
 
+
+    // Text
+    map.context.fillStyle = 'white';
+    map.context.font = '36px Arial';
+    map.context.fillText(data[globalTime].title, map.canvas.width / 10, map.canvas.height / 2)
+    
+    // Character
+    map.character = new Character(map.canvas, data, globalTime);
+    map.character.create()
+    map.character.draw()
+
+    // window.requestAnimationFrame(function() {
+        // map.animateObjects();
+    // });
+}
+
+// Structure is inefficient as images need to reload on every icon movement. Cant clear out the icons as it would cut the map bg.
+// Split into two canvas. One for background, one for objects
+MapMaker.prototype.animateObjects = function() {
+    // Base
+    var map = this;
+
+    // Clear Canvas
+    map.context.clearRect(0, 0, map.canvas.width, map.canvas.height);
+
+    map.character.x += 500;
+    map.character.draw()
+
+    moveMyImg()
+    // // Animate
+    function moveMyImg() {
+        map.character.x += 1;
+        map.character.draw()
+    }
 }
