@@ -112,6 +112,8 @@ let data = [
 // Initialize
 // Canvas
 const canvas = document.getElementById("main-visual");
+canvas.width = window.innerWidth * 0.95;
+canvas.height = window.innerHeight * 0.95 //4:3 aspect ratio
 
 // Time Controls
 let timeIndexStart = 0;

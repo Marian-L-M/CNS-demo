@@ -2,9 +2,11 @@
 function setContent(data, timeStep) {
     let mainTitle = document.getElementById("main-title") ;
     let mainContent = document.getElementById("main-content") ;
+    let map = document.getElementById("map-element") ;
 
     mainTitle.innerHTML = data[timeStep].title;
     mainContent.innerHTML = data[timeStep].content;
+    map.style.backgroundImage = `url(${data[timeStep].baseMap})`
 }
 
 // Get Timeline Value as an integer

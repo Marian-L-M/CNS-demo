@@ -74,9 +74,9 @@ MapMaker.prototype.drawInitialScreen = function() {
     // Clear Canvas
     map.context.clearRect(0, 0, map.canvas.width, map.canvas.height);
 
-    // Set starting Map
-    map.background = new MapBackground(data[globalTime].baseMap, map.canvas);
-    map.background.draw();
+    // // Set starting Map
+    // map.background = new MapBackground(data[globalTime].baseMap, map.canvas);
+    // map.background.draw();
 }
 
 MapMaker.prototype.createObjects = function() {
