@@ -105,28 +105,26 @@ MapMaker.prototype.createPath = function() {
     let ballRadius = 4;
 
     map.context.beginPath();
-    map.context.strokeStyle = "red";
-    map.context.lineWidth=8;
+    map.context.lineWidth=4;
     map.context.lineJoin='round';
+    
+    // Draw Node Lines
+    map.paths = data[globalTime].paths;
 
-    // Draw Node
-    // map.context.arc(250, 250,ballRadius, 37 * radian, 323 * radian, false);
-    drawBall(cw * 130, ch * 237, ballRadius, "black")
-    map.context.moveTo(cw * 130, ch * 237);
-
-    // Draw Line
-    map.context.lineTo(cw * 250, ch * 350);
-
-    map.context.stroke();
-
-    // 
-    function drawBall(x,y,radius, color) {
-        const radian = Math.PI / 180;
-
+    if(map.paths) {
+        map.paths.forEach((e) => {
+            drawNodeLine(cw*e.x, ch*e.y, cw*e.lx, ch*e.ly, ballRadius, "black")
+        });
+    }
+     
+    // Node Line Utility
+    function drawNodeLine(x,y,l,ly,radius, color) {
         map.context.beginPath();
         map.context.strokeStyle= color;
         map.context.fillStyle= color;
-        map.context.arc(x, y, radius, 0, radian * 360, false);
+        map.context.arc(x + (ballRadius/2), y, radius, 0, radian * 360, false);
+        map.context.moveTo(x,y);
+        map.context.lineTo(l,ly);
         map.context.stroke();
         map.context.fill();
     }
