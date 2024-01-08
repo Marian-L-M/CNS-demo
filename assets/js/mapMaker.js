@@ -40,9 +40,7 @@ MapMaker.prototype.start = function() {
 
 
     // Start Map
-    window.requestAnimationFrame(function() {
-        map.runMapLoop();
-    });
+    map.runMapLoop();
 };
 
 MapMaker.prototype.runMapLoop = function() {
@@ -91,31 +89,45 @@ MapMaker.prototype.createObjects = function() {
     map.context.fillText(data[globalTime].title, map.canvas.width / 10, map.canvas.height / 2)
     
     // Character
-    map.character = new Character(map.canvas, data, globalTime);
-    map.character.create()
-    map.character.draw()
+    map.characters = new Character(map.canvas, data, globalTime, 0);
+    map.characters.create()
+    map.characters.draw()
 
-    // window.requestAnimationFrame(function() {
-        // map.animateObjects();
-    // });
+    map.createPath();
 }
 
-// Structure is inefficient as images need to reload on every icon movement. Cant clear out the icons as it would cut the map bg.
-// Split into two canvas. One for background, one for objects
-MapMaker.prototype.animateObjects = function() {
-    // Base
-    var map = this;
+MapMaker.prototype.createPath = function() {
+    // Setup
+    let map = this;
+    let cw  = canvas.width / 1000;
+    let ch = canvas.height / 1000;
+    const radian = Math.PI / 180;
+    let ballRadius = 4;
 
-    // Clear Canvas
-    map.context.clearRect(0, 0, map.canvas.width, map.canvas.height);
+    map.context.beginPath();
+    map.context.strokeStyle = "red";
+    map.context.lineWidth=8;
+    map.context.lineJoin='round';
 
-    map.character.x += 500;
-    map.character.draw()
+    // Draw Node
+    // map.context.arc(250, 250,ballRadius, 37 * radian, 323 * radian, false);
+    drawBall(cw * 130, ch * 237, ballRadius, "black")
+    map.context.moveTo(cw * 130, ch * 237);
 
-    moveMyImg()
-    // // Animate
-    function moveMyImg() {
-        map.character.x += 1;
-        map.character.draw()
+    // Draw Line
+    map.context.lineTo(cw * 250, ch * 350);
+
+    map.context.stroke();
+
+    // 
+    function drawBall(x,y,radius, color) {
+        const radian = Math.PI / 180;
+
+        map.context.beginPath();
+        map.context.strokeStyle= color;
+        map.context.fillStyle= color;
+        map.context.arc(x, y, radius, 0, radian * 360, false);
+        map.context.stroke();
+        map.context.fill();
     }
 }

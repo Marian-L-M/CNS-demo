@@ -1,4 +1,4 @@
-function Character (canvas, data, globalTime) {
+function Character (canvas, data, globalTime, index) {
     //
     let character = this;
 
@@ -7,11 +7,11 @@ function Character (canvas, data, globalTime) {
     character.context = character.canvas.getContext('2d');
 
     // Specifications
-    character.x = data[globalTime].character[0].x;
-    character.y = data[globalTime].character[0].y;
-    character.w = data[globalTime].character[0].w;
-    character.h = data[globalTime].character[0].h;
-    character.src = data[globalTime].character[0].icon;
+    character.x = data[globalTime].characters[index].x;
+    character.y = data[globalTime].characters[index].y;
+    character.w = data[globalTime].characters[index].w;
+    character.h = data[globalTime].characters[index].h;
+    character.src = data[globalTime].characters[index].icon;
     character.img = null;
 }
 
