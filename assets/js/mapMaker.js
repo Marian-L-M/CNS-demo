@@ -1,5 +1,4 @@
 // Define game state as int variable:
-const INITIAL = 0;
 
 function MapMaker(canvas, globalTime, data) {
     // Base
@@ -9,13 +8,92 @@ function MapMaker(canvas, globalTime, data) {
     map.canvas = canvas;
     map.context = map.canvas.getContext('2d');
 
-    // Map State
-    map.currentState = INITIAL;
-
     // Bind Events
     map.bindEvents();
 
+    // Clickability
+    // Note: Next step: move clickability demo to createLocations folder
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+        console.log("x: " + x + " y: " + y)
 
+        for (var i = 0; i < shapes.length; i++) {
+            var shape = shapes[i];
+            // define the current shape
+            define(shape);
+            // test if the mouse is in the current shape
+            if (map.context.isPointInPath(x,y)) {
+                // if inside, display the shape's message
+                alert(shape.message);
+            }
+        }
+    }
+    
+    
+    map.canvas.addEventListener('mousedown', function(e) {
+        getCursorPosition(canvas, e)
+    })
+
+    map.context.fillStyle = "skyblue";
+    map.context.strokeStyle = "lightgray";
+    map.context.lineWidth = 2;
+
+    var triangle = {
+        points: [{
+            x: 25,
+            y: 100
+        }, {
+            x: 50,
+            y: 50
+        }, {
+            x: 75,
+            y: 100
+        }],
+        message: "I am a triangle"
+    }
+    
+    var parallelogram = {
+        points: [{
+            x: 150,
+            y: 50
+        }, {
+            x: 250,
+            y: 50
+        }, {
+            x: 200,
+            y: 100
+        }, {
+            x: 100,
+            y: 100
+        }],
+        message: "I am a parallelogram"
+    }
+
+    var shapes = [];
+    shapes.push(triangle);
+    shapes.push(parallelogram);
+
+    function define(shape) {
+        var points = shape.points;
+        map.context.beginPath();
+        map.context.moveTo(points[0].x, points[0].y);
+        for (var i = 1; i < points.length; i++) {
+            map.context.lineTo(points[i].x, points[i].y);
+        }
+    }
+
+    function draw(shape) {
+        define(shape);
+        map.context.fill();
+        map.context.stroke();
+    }
+
+    draw(triangle);
+    draw(parallelogram);
+    // console.log(shapes)
+    
 };
 
 MapMaker.prototype.bindEvents = function() {
@@ -37,32 +115,28 @@ MapMaker.prototype.bindEvents = function() {
 MapMaker.prototype.start = function() {
     // Base
     let map = this;
-
-
+    
     // Start Map
-    map.runMapLoop();
+    // map.runMapLoop();
 };
 
 MapMaker.prototype.runMapLoop = function() {
     // Base
     let map = this;
 
-    // Map State
-    switch(map.currentState) {
-        case INITIAL:
-            // Draw INITIAl SCREEN
-            map.drawInitialScreen()
+    // Draw INITIAl SCREEN
+    map.drawInitialScreen()
+    
+    // Create Map Objects
+    map.createObjects();
 
-            // Create Map Objects
-            map.createObjects();
-            break
-    }
+    
+    // Create Paths
+    map.createPath();
 
-    // Start Map
     window.requestAnimationFrame(function() {
         map.runMapLoop();
     });
-    
 };
 
 MapMaker.prototype.drawInitialScreen = function() {
@@ -71,18 +145,12 @@ MapMaker.prototype.drawInitialScreen = function() {
 
     // Clear Canvas
     map.context.clearRect(0, 0, map.canvas.width, map.canvas.height);
-
-    // // Set starting Map
-    // map.background = new MapBackground(data[globalTime].baseMap, map.canvas);
-    // map.background.draw();
 }
 
 MapMaker.prototype.createObjects = function() {
     // Base
     var map = this;
     
-
-
     // Text
     map.context.fillStyle = 'white';
     map.context.font = '36px Arial';
@@ -93,9 +161,18 @@ MapMaker.prototype.createObjects = function() {
     map.characters.create()
     map.characters.draw()
 
-    map.createPath();
+    // Paths
+    // map.createPath();
+
+
+    // Locations
+    map.createLocations();
 }
 
+MapMaker.prototype.createLocations = function() {
+    // Setup
+    let map = this;
+}
 MapMaker.prototype.createPath = function() {
     // Setup
     let map = this;
