@@ -46,6 +46,73 @@ let data = [
                 "ly": 420,
             },
         ],
+        "locations": [
+            {
+                "id" : 0,
+                "name" : "triangle",
+                "message": "I am a triangle",
+                "design": {
+                    "fill" : "green",
+                    "stroke" : "blue",
+                    "lineW" : 2,
+                },
+                "points": [{
+                    x: 25,
+                    y: 100
+                    }, {
+                        x: 50,
+                        y: 50
+                    }, {
+                        x: 75,
+                        y: 100
+                }],
+            }, {
+                "id" : 1,
+                "name" : "parallelogram",
+                "message": "I am a parallelogram",
+                "design": {
+                    "fill" : "white",
+                    "stroke" : "yellow",
+                    "lineW" : 20,
+                },
+                "points": [{
+                    x: 150,
+                    y: 50
+                }, {
+                    x: 250,
+                    y: 50
+                }, {
+                    x: 200,
+                    y: 100
+                }, {
+                    x: 100,
+                    y: 100
+                }],
+            }, {
+                "id" : 2,
+                "name" : "parasffsallelogram",
+                "message": "I am an abomination",
+                "design": {
+                    "fill" : "orange",
+                    "stroke" : "black",
+                    "lineW" : 2,
+                },
+                "points": [{
+                    x: 1250,
+                    y: 150
+                }, {
+                    x: 1350,
+                    y: 150
+                }, {
+                    x: 1300,
+                    y: 400
+                }, {
+                    x: 1200,
+                    y: 200
+                }],
+       
+            }
+        ]
     },
     {
         "id": 1,

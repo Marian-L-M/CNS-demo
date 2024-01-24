@@ -1,5 +1,5 @@
-https://jsfiddle.net/m1erickson/wPMk5/
-https://stackoverflow.com/questions/55677/how-do-i-get-the-coordinates-of-a-mouse-click-on-a-canvas-element
+// https://jsfiddle.net/m1erickson/wPMk5/
+// https://stackoverflow.com/questions/55677/how-do-i-get-the-coordinates-of-a-mouse-click-on-a-canvas-element
  // Clickability
  function getCursorPosition(canvas, event) {
     const rect = canvas.getBoundingClientRect()
