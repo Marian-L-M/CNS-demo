@@ -73,7 +73,7 @@ let data = [
                 "design": {
                     "fill" : "white",
                     "stroke" : "yellow",
-                    "lineW" : 20,
+                    "lineW" : 2,
                 },
                 "points": [{
                     x: 150,

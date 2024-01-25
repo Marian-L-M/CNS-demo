@@ -31,6 +31,7 @@ Location.prototype.draw = function() {
     for (var i = 1; i < points.length; i++) {
         location.context.lineTo(points[i].x, points[i].y);
     }
+    location.context.lineTo(points[0].x, points[0].y);
     location.context.fill();
     location.context.stroke();
 }

@@ -95,6 +95,8 @@ MapMaker.prototype.createObjects = function() {
 MapMaker.prototype.getCursorPosition = function(canvas, event) {
     let map = this;
 
+    // 240124 Next action: Map cursor logic to location.js or at least location data object
+
     var triangle = {
         points: [{
             x: 25,
