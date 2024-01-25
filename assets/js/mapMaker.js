@@ -1,5 +1,4 @@
-// Unify define, draw into separate js file
-// Transfer shape to JSON data
+// Remap message alert to info box
 
 function MapMaker(canvas, globalTime, data) {
     // Base
@@ -11,7 +10,6 @@ function MapMaker(canvas, globalTime, data) {
 
     // Bind Events
     map.bindEvents();
-
     
 };
 
@@ -19,20 +17,16 @@ MapMaker.prototype.bindEvents = function() {
     // Base
     var map = this;
 
-    // Mouse Listener
-    map.canvas.addEventListener('click', function(event){
-        // For Wiki function
-    });
-
+    // Mouse Listener for wiki functions
     map.canvas.addEventListener('mousedown', function(e) {
         map.getCursorPosition(canvas, e)
     })
 
     // Key Listener
-    window.addEventListener('keydown', function(event){
-        // Filter function
-        // Arrows for global movement
-    });
+    // window.addEventListener('keydown', function(event){
+    //     // Filter function
+    //     // Arrows for global movement
+    // });
 };
 
 MapMaker.prototype.start = function() {
@@ -53,7 +47,6 @@ MapMaker.prototype.runMapLoop = function() {
     // Create Map Objects
     map.createObjects();
 
-    
     // Create Paths
     map.createPath();
 
@@ -87,76 +80,34 @@ MapMaker.prototype.createObjects = function() {
     // Paths
     // map.createPath();
 
-
     // Locations
     map.createLocations();
 }
 
 MapMaker.prototype.getCursorPosition = function(canvas, event) {
     let map = this;
+    let locationLength = data[globalTime].locations.length
 
-    // 240124 Next action: Map cursor logic to location.js or at least location data object
+    for (let i = 0; i < locationLength; i++) {
+        // Structure is a bit inefficient Location constructor is called twice
+        // Problem: calling the mouse listener inside the map loop will cause it to fire multiple times
+        map.location = new Location(map.canvas, data, globalTime,i);
 
-    var triangle = {
-        points: [{
-            x: 25,
-            y: 100
-        }, {
-            x: 50,
-            y: 50
-        }, {
-            x: 75,
-            y: 100
-        }],
-        message: "I am a triangle"
-    }
+        const rect = canvas.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+        console.log("x: " + x + " y: " + y)
     
-    var parallelogram = {
-        points: [{
-            x: 150,
-            y: 50
-        }, {
-            x: 250,
-            y: 50
-        }, {
-            x: 200,
-            y: 100
-        }, {
-            x: 100,
-            y: 100
-        }],
-        message: "I am a parallelogram"
-    }
+        var shape = data[globalTime].locations[i];
 
-    var shapes = [];
-    shapes.push(triangle);
-    shapes.push(parallelogram);
+        map.location.define(shape);
 
-    function define(shape) {
-        var points = shape.points;
-        map.context.beginPath();
-        map.context.moveTo(points[0].x, points[0].y);
-        for (var i = 1; i < points.length; i++) {
-            map.context.lineTo(points[i].x, points[i].y);
-        }
-    }
-
-    const rect = canvas.getBoundingClientRect()
-    const x = event.clientX - rect.left
-    const y = event.clientY - rect.top
-    console.log("x: " + x + " y: " + y)
-
-    for (var i = 0; i < shapes.length; i++) {
-        var shape = shapes[i];
-        // define the current shape
-        define(shape);
-        // test if the mouse is in the current shape
-        if (map.context.isPointInPath(x,y)) {
-            // if inside, display the shape's message
+        if (map.location.context.isPointInPath(x,y)) {
             alert(shape.message);
         }
     }
 }
+
 MapMaker.prototype.createLocations = function() {
     // Setup
     let map = this;
@@ -167,8 +118,8 @@ MapMaker.prototype.createLocations = function() {
         map.location = new Location(map.canvas, data, globalTime,i);
         map.location.draw()
     }
-  
 }
+
 MapMaker.prototype.createPath = function() {
     // Setup
     let map = this;

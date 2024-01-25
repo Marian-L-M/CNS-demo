@@ -36,4 +36,17 @@ Location.prototype.draw = function() {
     location.context.stroke();
 }
 
+Location.prototype.define = function() {
+    // Base
+    let location = this;
+
+    let points = location.points;
+
+    location.context.beginPath();
+    location.context.moveTo(points[0].x, points[0].y);
+    for (var i = 1; i < points.length; i++) {
+        location.context.lineTo(points[i].x, points[i].y);
+    }
+}
+
 
