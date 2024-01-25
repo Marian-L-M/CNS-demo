@@ -102,9 +102,21 @@ MapMaker.prototype.getCursorPosition = function(canvas, event) {
 
         map.location.define(shape);
 
+
+        // Update infobox
+        let mainTitle = document.getElementById("main-title") ;
+        let mainContent = document.getElementById("main-content") ;
+
         if (map.location.context.isPointInPath(x,y)) {
-            alert(shape.message);
+            console.log("click inside shape")
+            mainTitle.innerHTML = shape.name;
+            mainContent.innerHTML = shape.message;
         }
+        else {
+            console.log("click outside")
+        }
+
+
     }
 }
 

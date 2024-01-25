@@ -131,6 +131,7 @@ let data = [
                 "h": 115,
             }
         ],
+        "locations": [],
         "paths" : [
             {
                 "id": 0,
@@ -178,7 +179,9 @@ let data = [
                 "w": 115,
                 "h": 115,
             }
-        ]
+        ],
+        "locations": [],
+        "paths": [],
     },
     {
         "id": 3,
@@ -196,7 +199,9 @@ let data = [
                 "w": 115,
                 "h": 115,
             }
-        ]
+        ],
+        "locations": [],
+        "paths": [],
     },
     {
         "id": 4,
@@ -214,7 +219,9 @@ let data = [
                 "w": 115,
                 "h": 115,
             }
-        ]
+        ],
+        "locations": [],
+        "paths": [],
     },
     {
         "id": 5,
@@ -232,7 +239,9 @@ let data = [
                 "w": 115,
                 "h": 115,
             }
-        ]
+        ],
+        "locations": [],
+        "paths": [],
     },
 ];
 
