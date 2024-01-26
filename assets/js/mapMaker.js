@@ -1,4 +1,4 @@
-// Remap message alert to info box
+// Fix Hostinger Webhook
 
 function MapMaker(canvas, globalTime, data) {
     // Base
