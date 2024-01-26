@@ -1,5 +1,3 @@
-// Fix Hostinger Webhook
-
 function MapMaker(canvas, globalTime, data) {
     // Base
     var map = this;
@@ -17,10 +15,29 @@ MapMaker.prototype.bindEvents = function() {
     // Base
     var map = this;
 
-    // Mouse Listener for wiki functions
+    // Click Listener for wiki functions
     map.canvas.addEventListener('mousedown', function(e) {
         map.getCursorPosition(canvas, e)
-    })
+    });
+
+    // Mouse movement for hover functions
+    var r = map.canvas.getBoundingClientRect()
+
+    map.location = new Location(map.canvas, data, globalTime,1);
+    map.canvas.onmousemove = (e) => {
+        let x = e.clientX - r.left;
+        let y = e.clientY - r.top;
+        // console.log("current postion x:" + x + " y:" + y);
+
+        // If I cant get point in path working
+        // https://stackoverflow.com/questions/29300280/update-html5-canvas-rectangle-on-hover
+        // user5066707
+
+        if (map.location.context.isPointInPath(x,y)) {
+            console.log(map.location.context);
+            console.log("You hovered me senpai!")
+        }
+    }
 
     // Key Listener
     // window.addEventListener('keydown', function(event){
@@ -100,8 +117,8 @@ MapMaker.prototype.getCursorPosition = function(canvas, event) {
     
         var shape = data[globalTime].locations[i];
 
+        // Define Location
         map.location.define(shape);
-
 
         // Update infobox
         let mainTitle = document.getElementById("main-title") ;
@@ -115,8 +132,6 @@ MapMaker.prototype.getCursorPosition = function(canvas, event) {
         else {
             console.log("click outside")
         }
-
-
     }
 }
 
