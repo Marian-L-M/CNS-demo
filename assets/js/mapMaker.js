@@ -8,7 +8,6 @@ function MapMaker(canvas, globalTime, data) {
 
     // Bind Events
     map.bindEvents();
-    
 };
 
 MapMaker.prototype.bindEvents = function() {
@@ -19,31 +18,6 @@ MapMaker.prototype.bindEvents = function() {
     map.canvas.addEventListener('mousedown', function(e) {
         map.getCursorPosition(canvas, e)
     });
-
-    // Mouse movement for hover functions
-    var r = map.canvas.getBoundingClientRect()
-
-    map.location = new Location(map.canvas, data, globalTime,1);
-    map.canvas.onmousemove = (e) => {
-        let x = e.clientX - r.left;
-        let y = e.clientY - r.top;
-        // console.log("current postion x:" + x + " y:" + y);
-
-        // If I cant get point in path working
-        // https://stackoverflow.com/questions/29300280/update-html5-canvas-rectangle-on-hover
-        // user5066707
-
-        if (map.location.context.isPointInPath(x,y)) {
-            console.log(map.location.context);
-            console.log("You hovered me senpai!")
-        }
-    }
-
-    // Key Listener
-    // window.addEventListener('keydown', function(event){
-    //     // Filter function
-    //     // Arrows for global movement
-    // });
 };
 
 MapMaker.prototype.start = function() {
@@ -84,21 +58,14 @@ MapMaker.prototype.createObjects = function() {
     // Base
     var map = this;
     
-    // Text
-    map.context.fillStyle = 'white';
-    map.context.font = '36px Arial';
-    map.context.fillText(data[globalTime].title, map.canvas.width / 10, map.canvas.height / 2)
-    
     // Character
     map.characters = new Character(map.canvas, data, globalTime, 0);
     map.characters.create()
     map.characters.draw()
 
-    // Paths
-    // map.createPath();
-
     // Locations
     map.createLocations();
+
 }
 
 MapMaker.prototype.getCursorPosition = function(canvas, event) {
@@ -106,14 +73,11 @@ MapMaker.prototype.getCursorPosition = function(canvas, event) {
     let locationLength = data[globalTime].locations.length
 
     for (let i = 0; i < locationLength; i++) {
-        // Structure is a bit inefficient Location constructor is called twice
-        // Problem: calling the mouse listener inside the map loop will cause it to fire multiple times
         map.location = new Location(map.canvas, data, globalTime,i);
 
         const rect = canvas.getBoundingClientRect()
         const x = event.clientX - rect.left
         const y = event.clientY - rect.top
-        console.log("x: " + x + " y: " + y)
     
         var shape = data[globalTime].locations[i];
 
@@ -125,12 +89,8 @@ MapMaker.prototype.getCursorPosition = function(canvas, event) {
         let mainContent = document.getElementById("main-content") ;
 
         if (map.location.context.isPointInPath(x,y)) {
-            console.log("click inside shape")
             mainTitle.innerHTML = shape.name;
             mainContent.innerHTML = shape.message;
-        }
-        else {
-            console.log("click outside")
         }
     }
 }
@@ -144,6 +104,29 @@ MapMaker.prototype.createLocations = function() {
     for (var i = 0; i < locationLength; i++) {
         map.location = new Location(map.canvas, data, globalTime,i);
         map.location.draw()
+    }
+    
+    // Mouse movement for hover functions
+    var r = map.canvas.getBoundingClientRect()
+    let mouselabel = document.getElementById("mouse-label") // Doesnt actually need to be declared again
+    
+    // Next step
+    // Make Label invisible when not in path
+    // If not skilled enough, think of default text/icon
+    
+    map.canvas.onmousemove = (e) => {
+        let x = e.clientX - r.left;
+        let y = e.clientY - r.top;
+
+        mouselabel.innerHTML = ""
+        for (var i = 0; i < locationLength; i++) {
+            map.location = new Location(map.canvas, data, globalTime,i);
+            map.location.define();
+            if (map.location.context.isPointInPath(x,y)) {
+                mouselabel.innerHTML = map.location.name;
+            }
+        }
+
     }
 }
 

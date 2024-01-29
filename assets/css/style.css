@@ -68,3 +68,12 @@ body {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.mouse-label {
+  position: absolute;
+  z-index: 1000;
+  box-sizing: border-box;
+  padding: 0.5em 1em;
+  background-color: grey;
+  border: black;
+}

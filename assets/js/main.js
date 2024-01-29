@@ -293,3 +293,26 @@ function setTimeIndex() {
     setTimeIndexValue(timeIndex)
     return timeIndex
 }
+
+// // Set Cursor Label
+let mouselabel = document.getElementById("mouse-label")
+let mousePos = { x: undefined, y: undefined };
+window.addEventListener('mousemove', (e) => {
+    mousePos = { x: e.clientX, y: e.clientY };
+    let left = mousePos.x;
+    let top = mousePos.y;
+    mouselabel.style.left = left + 10 +'px';
+    mouselabel.style.top = top + 5 + 'px';
+    // mouselabel.innerHTML = `(${mousePos.x}, ${mousePos.y})`;
+
+    // Add edge cases - right border
+  });
+
+//   document.addEventListener('mousemove', function(e) {
+//     let body = document.querySelector('body');
+//     let circle = document.getElementById('circle');
+//     let left = e.offsetX;
+//     let top = e.offsetY;
+//     circle.style.left = left + 'px';
+//     circle.style.top = top + 'px';
+//   });
