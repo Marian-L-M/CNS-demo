@@ -110,10 +110,7 @@ MapMaker.prototype.createLocations = function() {
     var r = map.canvas.getBoundingClientRect()
     let mouselabel = document.getElementById("mouse-label") // Doesnt actually need to be declared again
     
-    // Next step
-    // Make Label invisible when not in path
-    // If not skilled enough, think of default text/icon
-    
+    // Set mouse label contents
     map.canvas.onmousemove = (e) => {
         let x = e.clientX - r.left;
         let y = e.clientY - r.top;

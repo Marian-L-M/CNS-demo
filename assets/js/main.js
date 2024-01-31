@@ -110,6 +110,28 @@ let data = [
                     x: 1200,
                     y: 200
                 }],
+            }, {
+                "id" : 3,
+                "name" : "random shape",
+                "message": "I am a random shape",
+                "design": {
+                    "fill" : "green",
+                    "stroke" : "black",
+                    "lineW" : 2,
+                },
+                "points": [{
+                    x: 1750,
+                    y: 150
+                }, {
+                    x: 1850,
+                    y: 150
+                }, {
+                    x: 1800,
+                    y: 400
+                }, {
+                    x: 1700,
+                    y: 200
+                }],
        
             }
         ]
@@ -299,20 +321,25 @@ let mouselabel = document.getElementById("mouse-label")
 let mousePos = { x: undefined, y: undefined };
 window.addEventListener('mousemove', (e) => {
     mousePos = { x: e.clientX, y: e.clientY };
-    let left = mousePos.x;
+    const screenW = window.screen.width;
     let top = mousePos.y;
-    mouselabel.style.left = left + 10 +'px';
+    let left = mousePos.x;
+    let right = (screenW - mousePos.x);
+    let labelW = mouselabel.offsetWidth
+    
+    if (mouselabel.innerHTML.length == 0) {
+        mouselabel.style.display = "none";
+    } else {
+        mouselabel.style.display = "unset";
+    }
+
     mouselabel.style.top = top + 5 + 'px';
-    // mouselabel.innerHTML = `(${mousePos.x}, ${mousePos.y})`;
-
-    // Add edge cases - right border
+    if (labelW + 30 > right) {
+        mouselabel.style.right = right + 20 +'px';
+        mouselabel.style.left = 'unset';
+        
+    } else {
+        mouselabel.style.left = left + 20 +'px';
+        mouselabel.style.right = 'unset';
+    }
   });
-
-//   document.addEventListener('mousemove', function(e) {
-//     let body = document.querySelector('body');
-//     let circle = document.getElementById('circle');
-//     let left = e.offsetX;
-//     let top = e.offsetY;
-//     circle.style.left = left + 'px';
-//     circle.style.top = top + 'px';
-//   });
