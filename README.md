@@ -1,12 +1,22 @@
 ### ToDo (2024/01/31)
 - [x] Create READEME kappa
 - [ ] Make characters clickable and hoverable
+    - [ ] Make character multi character compatible
+    - [ ] Add define function to character.js
 - [ ] Make paths clickable and hoverable
-- [ ] Make paths clickable and hoverable
-- [ ] Split story bar into story bar and info box (Story bar clickable for path only)
+    - [ ] Make multi paths possible
+    - [ ] Export paths to separate file
+    - [ ] Add define function for path nodes
+    - [ ] Create story data for paths
+- [ ] Split story bar into story bar and info box 
+    - [ ] Path to story bar
+    - [ ] Locations & Characters to info box
 - [ ] Add wiki links
+    - [ ] Create wiki sample page
 - [ ] Transform object system to percentage base ( 1000*1000 grid)
 - [ ] Clean up code
+    - [ ] Unify overlapping defines
+    - [ ] Unify overlapping event listeners
 - [ ] Create proper sample data
 - [ ] Version 1 complete (present!)
 
