@@ -58,10 +58,8 @@ MapMaker.prototype.createObjects = function() {
     // Base
     var map = this;
     
-    // Character
-    map.characters = new Character(map.canvas, data, globalTime, 0);
-    map.characters.create()
-    map.characters.draw()
+    // Characters
+    map.createCharacters();
 
     // Locations
     map.createLocations();
@@ -69,29 +67,62 @@ MapMaker.prototype.createObjects = function() {
 }
 
 MapMaker.prototype.getCursorPosition = function(canvas, event) {
+    // Base
     let map = this;
+
+    // Setup
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Infobar
+    let mainTitle = document.getElementById("main-title") ;
+    let mainContent = document.getElementById("main-content") ;
+
+    // Location click events
     let locationLength = data[globalTime].locations.length
+
 
     for (let i = 0; i < locationLength; i++) {
         map.location = new Location(map.canvas, data, globalTime,i);
-
-        const rect = canvas.getBoundingClientRect()
-        const x = event.clientX - rect.left
-        const y = event.clientY - rect.top
     
-        var shape = data[globalTime].locations[i];
+        let shape = data[globalTime].locations[i];
 
         // Define Location
-        map.location.define(shape);
-
-        // Update infobox
-        let mainTitle = document.getElementById("main-title") ;
-        let mainContent = document.getElementById("main-content") ;
+        map.location.define();
 
         if (map.location.context.isPointInPath(x,y)) {
             mainTitle.innerHTML = shape.name;
             mainContent.innerHTML = shape.message;
         }
+    }
+
+    // Character click events
+    let charactersLength = data[globalTime].characters.length;
+
+    for (let i = 0; i < charactersLength; i++) {
+        map.character = new Character(map.canvas, data, globalTime, i);
+
+        // Define character location
+        map.character.define(map.character);
+
+        if (map.character.context.isPointInPath(x,y)) {
+            mainTitle.innerHTML = map.character.name;
+            mainContent.innerHTML = map.character.description;
+        }
+    }
+}
+
+MapMaker.prototype.createCharacters = function() {
+    // Setup
+    let map = this;
+    let charactersLength = data[globalTime].characters.length
+
+    // Character
+    for (let i = 0; i < charactersLength; i++) {
+        map.character = new Character(map.canvas, data, globalTime, i);
+        map.character.create()
+        map.character.draw()
     }
 }
 
@@ -101,7 +132,7 @@ MapMaker.prototype.createLocations = function() {
     let locationLength = data[globalTime].locations.length
 
     // Draw Locations
-    for (var i = 0; i < locationLength; i++) {
+    for (let i = 0; i < locationLength; i++) {
         map.location = new Location(map.canvas, data, globalTime,i);
         map.location.draw()
     }

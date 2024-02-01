@@ -9,9 +9,19 @@ let data = [
             {
                 "id": 0,
                 "name": "char-1",
+                "description": " Hello! I am char-1!",
                 "icon": "assets/img/characters/character-1.png",
                 "x": 115,
                 "y": 115,
+                "w": 115,
+                "h": 115,
+            },{
+                "id": 1,
+                "name": "char-2",
+                "description": " Hello! I am char-2!",
+                "icon": "assets/img/characters/character-2.png",
+                "x": 815,
+                "y": 415,
                 "w": 115,
                 "h": 115,
             }
@@ -145,7 +155,8 @@ let data = [
         "characters" : [
             {
                 "id": 0,
-                "name": "char-1",
+                "name": "char-2.2",
+                "description": " Hello! I am char-2.2!",
                 "icon": "assets/img/characters/character-2.png",
                 "x": 115,
                 "y": 315,
@@ -194,7 +205,8 @@ let data = [
         "characters" : [
             {
                 "id": 0,
-                "name": "char-1",
+                "name": "char-3",
+                "description": " Hello! I am char-3!",
                 "icon": "assets/img/characters/character-3.png",
                 "x": 315,
                 "y": 315,
@@ -214,7 +226,8 @@ let data = [
         "characters" : [
             {
                 "id": 0,
-                "name": "char-1",
+                "name": "char-4",
+                "description": " Hello! I am char-4!",
                 "icon": "assets/img/characters/character-4.png",
                 "x": 315,
                 "y": 315,
@@ -234,7 +247,8 @@ let data = [
         "characters" : [
             {
                 "id": 0,
-                "name": "char-1",
+                "name": "char-1.2",
+                "description": " Hello! I am char-1.2!",
                 "icon": "assets/img/characters/character-1.png",
                 "x": 115,
                 "y": 315,
@@ -254,7 +268,8 @@ let data = [
         "characters" : [
             {
                 "id": 0,
-                "name": "char-1",
+                "name": "char-1.3",
+                "description": " Hello! I am char-1.3!",
                 "icon": "assets/img/characters/character-1.png",
                 "x": 115,
                 "y": 315,
