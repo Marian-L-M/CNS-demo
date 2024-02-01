@@ -17,6 +17,8 @@
 - [ ] Clean up code
     - [ ] Unify overlapping defines
     - [ ] Unify overlapping event listeners
+- [ ] Clean up design
+    - [ ] Toggle switches for info bar and info box
 - [ ] Create proper sample data
 - [ ] Version 1 complete (present!)
 
