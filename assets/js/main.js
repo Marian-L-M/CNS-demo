@@ -26,9 +26,11 @@ let data = [
                 "h": 115,
             }
         ],
-        "paths" : [
-            {
+        "journeys" : [
+            [{
                 "id": 0,
+                "name": "event-1",
+                "description": "Battle of the bushes",
                 "x": 130,
                 "y": 237,
                 "lx": 250,
@@ -36,6 +38,8 @@ let data = [
             },
             {
                 "id": 1,
+                "name": "event-2",
+                "description": "Trimming of the bushes",
                 "x": 250,
                 "y": 350,
                 "lx": 450,
@@ -43,6 +47,8 @@ let data = [
             },
             {
                 "id": 2,
+                "name": "event-3",
+                "description": "OK, lets stop these dirty metaphors",
                 "x": 450,
                 "y": 350,
                 "lx": 475,
@@ -50,11 +56,49 @@ let data = [
             },
             {
                 "id": 3,
+                "name": "event-4",
+                "description": "Look, this one is not even getting a description. Happy now?",
                 "x": 475,
                 "y": 410,
                 "lx": 650,
                 "ly": 420,
+            }],
+            [{
+                "id": 1,
+                "name": "quest-1",
+                "description": "Rise of the Beavers",
+                "x": 830,
+                "y": 570,
+                "lx": 780,
+                "ly": 150,
             },
+            {
+                "id": 1,
+                "name": "quest-2",
+                "description": "Devourers of TImber",
+                "x": 780,
+                "y": 150,
+                "lx": 650,
+                "ly": 350,
+            },
+            {
+                "id": 2,
+                "name": "quest-3",
+                "description": "flooding in Beavertown",
+                "x": 650,
+                "y": 350,
+                "lx": 375,
+                "ly": 360,
+            },
+            {
+                "id": 3,
+                "name": "quest-4",
+                "description": "Just can't help myself",
+                "x": 375,
+                "y": 360,
+                "lx": 375,
+                "ly": 420,
+            }],
         ],
         "locations": [
             {
@@ -165,7 +209,7 @@ let data = [
             }
         ],
         "locations": [],
-        "paths" : [
+        "journeys" : [
             {
                 "id": 0,
                 "x": 250,
@@ -215,7 +259,7 @@ let data = [
             }
         ],
         "locations": [],
-        "paths": [],
+        "journeys": [],
     },
     {
         "id": 3,
@@ -236,7 +280,7 @@ let data = [
             }
         ],
         "locations": [],
-        "paths": [],
+        "journeys": [],
     },
     {
         "id": 4,
@@ -257,7 +301,7 @@ let data = [
             }
         ],
         "locations": [],
-        "paths": [],
+        "journeys": [],
     },
     {
         "id": 5,
@@ -278,7 +322,7 @@ let data = [
             }
         ],
         "locations": [],
-        "paths": [],
+        "journeys": [],
     },
 ];
 

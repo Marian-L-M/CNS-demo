@@ -16,7 +16,7 @@ MapMaker.prototype.bindEvents = function() {
 
     // Click Listener for wiki functions
     map.canvas.addEventListener('mousedown', function(e) {
-        map.getCursorPosition(canvas, e)
+        map.createClickEvents(canvas, e)
     });
 };
 
@@ -38,8 +38,6 @@ MapMaker.prototype.runMapLoop = function() {
     // Create Map Objects
     map.createObjects();
 
-    // Create Paths
-    map.createPath();
 
     window.requestAnimationFrame(function() {
         map.runMapLoop();
@@ -62,11 +60,12 @@ MapMaker.prototype.createObjects = function() {
     map.createCharacters();
 
     // Locations
-    map.createLocations();
+    map.createEvents();
 
+    // map.createHoverEvents();
 }
 
-MapMaker.prototype.getCursorPosition = function(canvas, event) {
+MapMaker.prototype.createClickEvents = function(canvas, event) {
     // Base
     let map = this;
 
@@ -126,27 +125,38 @@ MapMaker.prototype.createCharacters = function() {
     }
 }
 
-MapMaker.prototype.createLocations = function() {
+MapMaker.prototype.createEvents = function() {
     // Setup
     let map = this;
     let locationLength = data[globalTime].locations.length
+    let charactersLength = data[globalTime].characters.length
 
-    // Draw Locations
-    for (let i = 0; i < locationLength; i++) {
-        map.location = new Location(map.canvas, data, globalTime,i);
-        map.location.draw()
-    }
     
     // Mouse movement for hover functions
     var r = map.canvas.getBoundingClientRect()
     let mouselabel = document.getElementById("mouse-label") // Doesnt actually need to be declared again
     
+    // Draw Locations
+    for (let i = 0; i < locationLength; i++) {
+        map.location = new Location(map.canvas, data, globalTime,i);
+        map.location.draw();
+    }
+
+    // Draw Journeys
+    map.journey = new Journey(map.canvas, data, globalTime,0);
+    map.journey.draw();
+
+    // 240205 Define journey for clicks and hover
+
     // Set mouse label contents
     map.canvas.onmousemove = (e) => {
         let x = e.clientX - r.left;
         let y = e.clientY - r.top;
 
-        mouselabel.innerHTML = ""
+        // Reset mouse label
+        mouselabel.innerHTML = "";
+
+        // Location hover
         for (var i = 0; i < locationLength; i++) {
             map.location = new Location(map.canvas, data, globalTime,i);
             map.location.define();
@@ -155,39 +165,13 @@ MapMaker.prototype.createLocations = function() {
             }
         }
 
-    }
-}
+        for (var i = 0; i < charactersLength; i++) {
+            map.character = new Character(map.canvas, data, globalTime,i);
+            map.character.define();
+            if (map.character.context.isPointInPath(x,y)) {
+                mouselabel.innerHTML = map.character.name;
+            }
+        }
 
-MapMaker.prototype.createPath = function() {
-    // Setup
-    let map = this;
-    let cw  = canvas.width / 1000;
-    let ch = canvas.height / 1000;
-    const radian = Math.PI / 180;
-    let ballRadius = 4;
-
-    map.context.beginPath();
-    map.context.lineWidth=4;
-    map.context.lineJoin='round';
-    
-    // Draw Node Lines
-    map.paths = data[globalTime].paths;
-
-    if(map.paths) {
-        map.paths.forEach((e) => {
-            drawNodeLine(cw*e.x, ch*e.y, cw*e.lx, ch*e.ly, ballRadius, "black")
-        });
-    }
-     
-    // Node Line Utility
-    function drawNodeLine(x,y,l,ly,radius, color) {
-        map.context.beginPath();
-        map.context.strokeStyle= color;
-        map.context.fillStyle= color;
-        map.context.arc(x + (ballRadius/2), y, radius, 0, radian * 360, false);
-        map.context.moveTo(x,y);
-        map.context.lineTo(l,ly);
-        map.context.stroke();
-        map.context.fill();
     }
 }

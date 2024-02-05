@@ -1,5 +1,5 @@
 function Character (canvas, data, globalTime, index) {
-    //
+    // Base
     let character = this;
 
     // Global Attributes
@@ -33,9 +33,9 @@ Character.prototype.draw = function() {
     character.context.drawImage(character.img, character.x, character.y, character.w, character.h)
 }
 
-Character.prototype.define = (char) => {
+Character.prototype.define = function () {
     // Base
-    let character = char;
+    let character = this;
     // console.log(character)
 
     character.context.beginPath();
