@@ -130,6 +130,7 @@ MapMaker.prototype.createEvents = function() {
     let map = this;
     let locationLength = data[globalTime].locations.length
     let charactersLength = data[globalTime].characters.length
+    let journeysLength = data[globalTime].journeys.length
 
     
     // Mouse movement for hover functions
@@ -143,8 +144,10 @@ MapMaker.prototype.createEvents = function() {
     }
 
     // Draw Journeys
-    map.journey = new Journey(map.canvas, data, globalTime,0);
-    map.journey.draw();
+    for (let i = 0; i < journeysLength; i++) {
+        map.journey = new Journey(map.canvas, data, globalTime,i);
+        map.journey.draw();
+    }
 
     // 240205 Define journey for clicks and hover
 
@@ -172,6 +175,27 @@ MapMaker.prototype.createEvents = function() {
                 mouselabel.innerHTML = map.character.name;
             }
         }
+        
+        for (var i = 0; i < journeysLength; i++) {
 
+            // Approach is nonesense
+            // Treat journey as a nested location instead
+            // Problem: i is not connected so there is a lot of superflous data/inefficient (Everything is called everytime either way)
+            // Solution: Connect i first for draw function
+            // Then move on to hover functions
+
+            // map.journey.defineNode(i);
+            // console.log(map.journey.paths)
+            // map.journey.paths.forEach((path) => {
+            //     path.forEach((point) => {
+            //         map.journey = new Journey(map.canvas, data, globalTime,i);
+            //         map.journey.defineNode();
+            //     });
+            // })
+            if (map.journey.context.isPointInPath(x,y)) {
+                // mouselabel.innerHTML = map.character.name;
+                alert("in path")
+            }
+        }
     }
 }
