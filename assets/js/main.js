@@ -64,7 +64,7 @@ let data = [
                 "ly": 420,
             }],
             [{
-                "id": 1,
+                "id": 0,
                 "name": "quest-1",
                 "description": "Rise of the Beavers",
                 "x": 830,

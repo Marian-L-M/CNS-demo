@@ -149,8 +149,6 @@ MapMaker.prototype.createEvents = function() {
         map.journey.draw();
     }
 
-    // 240205 Define journey for clicks and hover
-
     // Set mouse label contents
     map.canvas.onmousemove = (e) => {
         let x = e.clientX - r.left;
@@ -168,6 +166,7 @@ MapMaker.prototype.createEvents = function() {
             }
         }
 
+        // Character hover
         for (var i = 0; i < charactersLength; i++) {
             map.character = new Character(map.canvas, data, globalTime,i);
             map.character.define();
@@ -176,26 +175,5 @@ MapMaker.prototype.createEvents = function() {
             }
         }
         
-        for (var i = 0; i < journeysLength; i++) {
-
-            // Approach is nonesense
-            // Treat journey as a nested location instead
-            // Problem: i is not connected so there is a lot of superflous data/inefficient (Everything is called everytime either way)
-            // Solution: Connect i first for draw function
-            // Then move on to hover functions
-
-            // map.journey.defineNode(i);
-            // console.log(map.journey.paths)
-            // map.journey.paths.forEach((path) => {
-            //     path.forEach((point) => {
-            //         map.journey = new Journey(map.canvas, data, globalTime,i);
-            //         map.journey.defineNode();
-            //     });
-            // })
-            if (map.journey.context.isPointInPath(x,y)) {
-                // mouselabel.innerHTML = map.character.name;
-                alert("in path")
-            }
-        }
     }
 }

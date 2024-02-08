@@ -12,6 +12,9 @@ function Journey (canvas, data, globalTime, index) {
 }
 
 Journey.prototype.draw = function() {
+    // Draws all nodes
+    // Remap to only draw nodes suggested by index
+
     // Setup
     let journey = this;
     const path = journey.path;
@@ -30,7 +33,7 @@ Journey.prototype.draw = function() {
     journey.context.beginPath();
     journey.context.strokeStyle= "black";
     journey.context.fillStyle= "black";
-    
+
     journey.drawNode(cw * firstNode.x, ch * firstNode.y, ballRadius)
 
     // Draw Node & Node line
@@ -58,24 +61,4 @@ Journey.prototype.drawNode = function(x,y, radius) {
     
     journey.context.moveTo(x,y);
     journey.context.arc(x, y, radius, 0, radian * 360, false);
-}
-
-Journey.prototype.defineNode = function(i) {
-    // Setup
-    let journey = this;
-    let pathPoints = journey.paths[i];
-    console.log()
-    const oh = 20;
-    // Create clickbox
-
-    // Drawing multiple separate instances does not work like this
-    // console.log(pathPoints)
-    // journey.context.beginPath();
-    // pathPoints.forEach((point) => {
-    //     journey.context.moveTo(point.lx - oh , point.ly - oh);
-    //     journey.context.lineTo(point.lx + oh , point.ly - oh);
-    //     journey.context.lineTo(point.lx + oh , point.ly + oh);
-    //     journey.context.lineTo(point.lx - oh , point.ly + oh);
-    //     journey.context.lineTo(point.lx - oh , point.ly - oh);
-    // });
 }

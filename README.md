@@ -22,3 +22,5 @@
 - [ ] Create proper sample data
 - [ ] Version 1 complete (present!)
 
+### Memo
+2024/02/08 Abandoned journey hover as it causes too many problems and inefficiencies
