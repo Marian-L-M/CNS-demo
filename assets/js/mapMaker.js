@@ -110,6 +110,24 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
             mainContent.innerHTML = map.character.description;
         }
     }
+
+    // Journey click events
+    // 240208 Not working - check why?
+    // Solution: New Event constructor for each Journey node
+
+    let journeysLength = data[globalTime].journeys.length; // Journey elements
+    const oh = 20;
+
+    for (let i = 0; i < journeysLength; i++) {
+        for (let j = 0; j < map.journey.path.length; j++) {
+            map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
+            map.journeyEvent.defineEvent();
+            console.log(map.journeyEvent)
+            if (map.journeyEvent.context.isPointInPath(x,y)) {
+                alert("hit" + map.journeyEvent.name);
+            }
+        }
+    };
 }
 
 MapMaker.prototype.createCharacters = function() {
