@@ -9,16 +9,18 @@ function Journey (canvas, data, globalTime, index) {
     journey.time = globalTime;
     journey.index = index;
     journey.path = journey.data[journey.time].journeys[index];
+    
 }
 
 Journey.prototype.draw = function() {
     // Setup
     let journey = this;
+    const cw = journey.canvas.cw;
+    const ch = journey.canvas.ch;
+
     const path = journey.path;
 
-    let cw  = canvas.width / 1000;
-    let ch = canvas.height / 1000;
-    let ballRadius = 4;
+    const ballRadius = 4;
     
     
     // Draw Node Lines
@@ -44,28 +46,6 @@ Journey.prototype.draw = function() {
     
     journey.context.stroke();
     journey.context.fill();
-
-    const offset = 20;
-
-    // Draw click hitbox
-    // Pattern looks like path but with distances shortened!
-    // I forgot CW & CH journey already uses relative placement, journey event is written in absolute placement!
-    // Bingpot
-
-    for (let i = 0; i < (nodeLimit); i++) {
-        journey.context.beginPath();
-        journey.context.lineWidth=4;
-        journey.context.lineJoin='round';
-        journey.context.strokeStyle= "red";
-        journey.context.fillStyle= "red";
-        journey.context.moveTo(path[i].x - offset , path[i].y - offset);
-        journey.context.lineTo(path[i].x + offset , path[i].y - offset);
-        journey.context.lineTo(path[i].x + offset , path[i].y + offset);
-        journey.context.lineTo(path[i].x - offset , path[i].y + offset);
-        journey.context.lineTo(path[i].x - offset , path[i].y - offset);
-        journey.context.stroke();
-        journey.context.fill();
-    }
 }
 
 Journey.prototype.drawNodeLine = function(x,y,lx,ly) {
@@ -79,7 +59,6 @@ Journey.prototype.drawNodeLine = function(x,y,lx,ly) {
 Journey.prototype.drawNode = function(x,y, radius) {
     // Setup
     let journey = this;
-    const radian = Math.PI / 180;
     
     journey.context.moveTo(x,y);
     journey.context.lineTo(x - 5 , y - 5);
@@ -87,8 +66,7 @@ Journey.prototype.drawNode = function(x,y, radius) {
     journey.context.lineTo(x + 5 , y + 5);
     journey.context.lineTo(x - 5 , y + 5);
     journey.context.lineTo(x - 5 , y - 5);
-
-    // journey.context.arc(x, y, radius, 0, radian * 360, false);
+    
 }
 
 function JourneyEvent(canvas, data, globalTime, journey, index){
@@ -102,14 +80,18 @@ function JourneyEvent(canvas, data, globalTime, journey, index){
 
     journeyEvent.name = journeyEvent.data.name;
     journeyEvent.description = journeyEvent.data.description;
-    journeyEvent.x = journeyEvent.data.x;
-    journeyEvent.y = journeyEvent.data.y;
+
+    // Coordinates adjusted for canvas grid
+    const cw = journeyEvent.canvas.cw;
+    const ch = journeyEvent.canvas.ch;
+    journeyEvent.x = journeyEvent.data.x * cw; 
+    journeyEvent.y = journeyEvent.data.y * ch;
 }
 
 JourneyEvent.prototype.defineEvent = function() {
     // Base
     let journeyEvent = this;
-    const offset = 50;
+    const offset = 15;
 
     journeyEvent.context.beginPath();
     journeyEvent.context.moveTo(journeyEvent.x - offset , journeyEvent.y - offset);

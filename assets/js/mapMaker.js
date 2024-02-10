@@ -6,6 +6,10 @@ function MapMaker(canvas, globalTime, data) {
     map.canvas = canvas;
     map.context = map.canvas.getContext('2d');
 
+    // Grid 1000*1000
+    map.canvas.cw  = canvas.width / 1000;
+    map.canvas.ch = canvas.height / 1000;
+
     // Bind Events
     map.bindEvents();
 };
@@ -112,17 +116,13 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     }
 
     // Journey click events
-    // 240208 Not working - check why?
-    // Solution: New Event constructor for each Journey node
-
-    let journeysLength = data[globalTime].journeys.length; // Journey elements
+    let journeysLength = data[globalTime].journeys.length; 
     const oh = 20;
 
     for (let i = 0; i < journeysLength; i++) {
         for (let j = 0; j < map.journey.path.length; j++) {
             map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
             map.journeyEvent.defineEvent();
-            console.log(map.journeyEvent)
             if (map.journeyEvent.context.isPointInPath(x,y)) {
                 alert("hit" + map.journeyEvent.name);
             }
