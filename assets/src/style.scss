@@ -1,7 +1,24 @@
 @charset "UTF-8";
 @use "./setup" ;
 
-// 
+// Components
+
+button.toggle {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    z-index: 1000;
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+    &.active-btn {
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+}
+// Content
 body {
     margin: 0;
     padding: 0;
@@ -9,12 +26,13 @@ body {
 .canvas-base {
     display: grid;
     width: 95vw;
-    height: 95vh;
-    margin: 2.5vh auto;
+    height: 97.5vh;
+    margin: 2.5vh auto 0;
     grid-template-columns: auto auto;
-    grid-template-rows: 75% 25%;
+    grid-template-rows: 3fr 1fr 2.5vh;
     grid-template-areas: 
         "mv mv" 
+        "content content"
         "content content";
     #main-visual {
         grid-row: 1/3;
@@ -46,15 +64,33 @@ body {
 .main-text {
     position: relative;
     width: 95%;
-    height: 90%;
-    overflow-y: scroll;
+    height: 40px;
     box-sizing: border-box;
-    margin: auto;
-    padding: 2em;
+    margin: auto auto 0 auto;
     z-index: 100;
     background-color: hsla(0, 0%, 100%, 0.9);
     border-radius: 1em;
     border: 2px solid #000;
+    button.toggle {
+        left: 0;
+        top: 0;
+    }
+    .content-box,
+    #main-content,
+    #main-title{
+        // Fix naming convention to classes
+        display: none;
+    }
+    &.active-menu {
+        height: 90%;
+        padding: 2em;
+        overflow-y: scroll;
+        .content-box,
+        #main-content,
+        #main-title{
+            display: block;
+        }
+    }
 }
 
 .content-box {
@@ -92,22 +128,8 @@ body {
     box-sizing: border-box;
     background-color: hsla(0, 0%, 96%, 0.9);
     button.toggle {
-        position: absolute;
-        align-self: flex-start;
-        width: 32px;
-        height: 32px;
-        z-index: 1000;
         left: 0;
         top: 0;
-        svg {
-            width: 100%;
-            height: 100%;
-        }
-        &.active-btn {
-            svg {
-                transform: rotate(180deg);
-            }
-        }
     }
     .img-container,
     .info-area,

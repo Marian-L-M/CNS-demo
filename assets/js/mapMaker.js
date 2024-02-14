@@ -1,3 +1,7 @@
+// Next action: Toggle Button for main-text
+// Split click functions between main-text & info-box
+// Create utility function for click event - text/info-box update
+
 function MapMaker(canvas, globalTime, data) {
     // Base
     var map = this;
@@ -81,6 +85,11 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     // Infobar
     let mainTitle = document.getElementById("main-title") ;
     let mainContent = document.getElementById("main-content") ;
+    let infoBox = document.getElementById("info-box") ;
+    let ibToggle = document.getElementById("toggle-info-box") ;
+    let ibImg = document.getElementById("ib-img") ;
+    let ibTitle = document.getElementById("ib-title") ;
+    let ibText = document.getElementById("info-text") ;
 
     // Location click events
     let locationLength = data[globalTime].locations.length
@@ -95,8 +104,10 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
         map.location.define();
 
         if (map.location.context.isPointInPath(x,y)) {
-            mainTitle.innerHTML = shape.name;
-            mainContent.innerHTML = shape.message;
+            infoBox.classList.add("active-menu");
+            ibToggle.classList.add("active-btn")
+            ibTitle.innerHTML = shape.name;
+            ibText.innerHTML = shape.description;
         }
     }
 

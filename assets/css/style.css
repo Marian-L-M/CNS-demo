@@ -11,6 +11,20 @@ img {
   flex-direction: column;
 }
 
+button.toggle {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  z-index: 1000;
+}
+button.toggle svg {
+  width: 100%;
+  height: 100%;
+}
+button.toggle.active-btn svg {
+  transform: rotate(180deg);
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,11 +33,11 @@ body {
 .canvas-base {
   display: grid;
   width: 95vw;
-  height: 95vh;
-  margin: 2.5vh auto;
+  height: 97.5vh;
+  margin: 2.5vh auto 0;
   grid-template-columns: auto auto;
-  grid-template-rows: 75% 25%;
-  grid-template-areas: "mv mv" "content content";
+  grid-template-rows: 3fr 1fr 2.5vh;
+  grid-template-areas: "mv mv" "content content" "content content";
 }
 .canvas-base #main-visual {
   grid-row: 1/3;
@@ -55,15 +69,32 @@ body {
 .main-text {
   position: relative;
   width: 95%;
-  height: 90%;
-  overflow-y: scroll;
+  height: 40px;
   box-sizing: border-box;
-  margin: auto;
-  padding: 2em;
+  margin: auto auto 0 auto;
   z-index: 100;
   background-color: hsla(0, 0%, 100%, 0.9);
   border-radius: 1em;
   border: 2px solid #000;
+}
+.main-text button.toggle {
+  left: 0;
+  top: 0;
+}
+.main-text .content-box,
+.main-text #main-content,
+.main-text #main-title {
+  display: none;
+}
+.main-text.active-menu {
+  height: 90%;
+  padding: 2em;
+  overflow-y: scroll;
+}
+.main-text.active-menu .content-box,
+.main-text.active-menu #main-content,
+.main-text.active-menu #main-title {
+  display: block;
 }
 
 .content-box {
@@ -99,20 +130,8 @@ body {
   background-color: hsla(0, 0%, 96%, 0.9);
 }
 .info-box button.toggle {
-  position: absolute;
-  align-self: flex-start;
-  width: 32px;
-  height: 32px;
-  z-index: 1000;
   left: 0;
   top: 0;
-}
-.info-box button.toggle svg {
-  width: 100%;
-  height: 100%;
-}
-.info-box button.toggle.active-btn svg {
-  transform: rotate(180deg);
 }
 .info-box .img-container,
 .info-box .info-area,

@@ -104,7 +104,7 @@ let data = [
             {
                 "id" : 0,
                 "name" : "triangle",
-                "message": "I am a triangle",
+                "description": "I am a triangle",
                 "design": {
                     "fill" : "green",
                     "stroke" : "blue",
@@ -123,7 +123,7 @@ let data = [
             }, {
                 "id" : 1,
                 "name" : "parallelogram",
-                "message": "I am a parallelogram",
+                "description": "I am a parallelogram",
                 "design": {
                     "fill" : "white",
                     "stroke" : "yellow",
@@ -145,7 +145,7 @@ let data = [
             }, {
                 "id" : 2,
                 "name" : "parasffsallelogram",
-                "message": "I am an abomination",
+                "description": "I am an abomination",
                 "design": {
                     "fill" : "orange",
                     "stroke" : "black",
@@ -167,7 +167,7 @@ let data = [
             }, {
                 "id" : 3,
                 "name" : "random shape",
-                "message": "I am a random shape",
+                "description": "I am a random shape",
                 "design": {
                     "fill" : "green",
                     "stroke" : "black",

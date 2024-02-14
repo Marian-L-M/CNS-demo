@@ -6,7 +6,7 @@ function Location (canvas, data, globalTime, index) {
     location.canvas = canvas;
     location.context = location.canvas.getContext('2d');
 
-    location.message = data[globalTime].locations[index].message;
+    location.description = data[globalTime].locations[index].description;
     location.name = data[globalTime].locations[index].name;
     location.points = data[globalTime].locations[index].points;
 
