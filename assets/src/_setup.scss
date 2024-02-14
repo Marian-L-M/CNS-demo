@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+// Reset {
+    img {
+        max-width: 100%;
+    }
+
 // Global Classes
 .fx-row {
     display: flex;

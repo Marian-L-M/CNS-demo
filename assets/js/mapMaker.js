@@ -124,7 +124,8 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
             map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
             map.journeyEvent.defineEvent();
             if (map.journeyEvent.context.isPointInPath(x,y)) {
-                alert("hit" + map.journeyEvent.name);
+                mainTitle.innerHTML = map.journeyEvent.name;
+                mainContent.innerHTML = map.journeyEvent.description;
             }
         }
     };

@@ -5,6 +5,11 @@
  * 
  */
 
+// Toggle menu
+function toggleMenu(element) {
+    element.classList.toggle("active-btn");
+    element.parentElement.classList.toggle("active-menu");
+  }
 
 // Battery saving animation frame
 // https://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
