@@ -193,6 +193,24 @@ MapMaker.prototype.createEvents = function() {
                 mouselabel.innerHTML = map.character.name;
             }
         }
+
+        // Character hover
+        for (var i = 0; i < journeysLength; i++) {
+            map.character = new Character(map.canvas, data, globalTime,i);
+            map.character.define();
+            if (map.character.context.isPointInPath(x,y)) {
+                mouselabel.innerHTML = map.character.name;
+            }
+        }
+        for (let i = 0; i < journeysLength; i++) {
+            for (let j = 0; j < map.journey.path.length; j++) {
+                map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
+                map.journeyEvent.defineEvent();
+                if (map.journeyEvent.context.isPointInPath(x,y)) {
+                    mouselabel.innerHTML = map.journeyEvent.name;
+                }
+            }
+        };
         
     }
 }
