@@ -11,19 +11,89 @@ let data = [
                 "name": "char-1",
                 "description": " Hello! I am char-1!",
                 "icon": "assets/img/characters/character-1.png",
+                "img": "assets/img/characters/character-1.png",
                 "x": 115,
                 "y": 115,
                 "w": 115,
                 "h": 115,
+                "info":{
+                    "area":[{
+                        "label" : "Character-1",
+                        "content" : "Character that comes first",
+                    },
+                        {
+                        "label" : "Age",
+                        "content" : "XYZ",
+                    },
+                        {
+                        "label" : "other info",
+                        "content" : "ABCDEFGHIJ",
+                    },
+                        {
+                        "label" : "other info",
+                        "content" : "ABCDEFGHIJ",
+                    },
+                        {
+                        "label" : "other info",
+                        "content" : "ABCDEFGHIJ",
+                    },
+                        {
+                        "label" : "other info",
+                        "content" : "ABCDEFGHIJ",
+                    },],
+                    "text":[{
+                        "title" : "Joerg",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-2",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-3",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-4",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },],
+                },
             },{
                 "id": 1,
                 "name": "char-2",
                 "description": " Hello! I am char-2!",
                 "icon": "assets/img/characters/character-2.png",
+                "img": "assets/img/characters/character-2.png",
                 "x": 815,
                 "y": 415,
                 "w": 115,
                 "h": 115,
+                "info":{
+                    "area":[{
+                        "label" : "Character-2",
+                        "content" : "Character that barely didnt make the cut",
+                    },
+                        {
+                        "label" : "Age",
+                        "content" : "z-Y-X",
+                    },],
+                    "text":[{
+                        "title" : "Petra",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-2",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-3",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-4",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },],
+                },
             }
         ],
         "journeys" : [
@@ -105,6 +175,7 @@ let data = [
                 "id" : 0,
                 "name" : "triangle",
                 "description": "I am a triangle",
+                "img": "assets/img/locations/location-1.jpg",
                 "design": {
                     "fill" : "green",
                     "stroke" : "blue",
@@ -120,10 +191,53 @@ let data = [
                         x: 75,
                         y: 100
                 }],
+                "info":{
+                    "area":[{
+                        "label" : "Beast of Bodmin",
+                        "content" : "A large feline inhabiting Bodmin Moor.",
+                    },
+                        {
+                        "label" : "label-1-1",
+                        "content" : "1-1 Content",
+                    },
+                        {
+                        "label" : "label-1-2",
+                        "content" : "1-2 Content text",
+                    },
+                        {
+                        "label" : "label-3",
+                        "content" : "1-3 Content text",
+                    },
+                        {
+                        "label" : "label-4",
+                        "content" : "1-4 Content text",
+                    },
+                        {
+                        "label" : "label-5",
+                        "content" : "1-5 Content text Content text Content text Content text Content text Content text ",
+                    },],
+                    "text":[{
+                        "title" : "title-1-1",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-2",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-3",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-4",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },],
+                },
             }, {
                 "id" : 1,
                 "name" : "parallelogram",
                 "description": "I am a parallelogram",
+                "img": "assets/img/locations/location-2.jpg",
                 "design": {
                     "fill" : "white",
                     "stroke" : "yellow",
@@ -142,10 +256,53 @@ let data = [
                     x: 100,
                     y: 100
                 }],
+                "info":{
+                    "area":[{
+                        "label" : "Beast of Bodmin",
+                        "content" : "A large feline inhabiting Bodmin Moor.",
+                    },
+                        {
+                        "label" : "label-2-1",
+                        "content" : "2-1 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-2-2",
+                        "content" : "2-2 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-2-3",
+                        "content" : "2-3 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-2-4",
+                        "content" : "2-4 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-2-5",
+                        "content" : "2-5 Content text Content text Content text Content text Content text Content text ",
+                    },],
+                    "text":[{
+                        "title" : "title-2-1",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-2-2",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-2-3",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-2-4",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },]
+                },
             }, {
                 "id" : 2,
                 "name" : "parasffsallelogram",
                 "description": "I am an abomination",
+                "img": "assets/img/locations/location-3.jpg",
                 "design": {
                     "fill" : "orange",
                     "stroke" : "black",
@@ -164,10 +321,53 @@ let data = [
                     x: 1200,
                     y: 200
                 }],
+                "info":{
+                    "area":[{
+                        "label" : "Beast of Bodmin",
+                        "content" : "A large feline inhabiting Bodmin Moor.",
+                    },
+                        {
+                        "label" : "label-3-1",
+                        "content" : "3-1 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-3-2",
+                        "content" : "3-2 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-3-3",
+                        "content" : "3-3 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-3-4",
+                        "content" : "3-4 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-3-5",
+                        "content" : "3-5 Content text Content text Content text Content text Content text Content text ",
+                    },],
+                    "text":[{
+                        "title" : "title-3-1",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-3-2",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-3-3",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-3-4",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },]
+                },
             }, {
                 "id" : 3,
                 "name" : "random shape",
                 "description": "I am a random shape",
+                "img": "assets/img/locations/location-4.jpg",
                 "design": {
                     "fill" : "green",
                     "stroke" : "black",
@@ -186,143 +386,50 @@ let data = [
                     x: 1700,
                     y: 200
                 }],
-       
+                "info":{
+                    "area":[{
+                        "label" : "Beast of Bodmin",
+                        "content" : "A large feline inhabiting Bodmin Moor.",
+                    },
+                        {
+                        "label" : "label-4-1",
+                        "content" : "4-1 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-4-2",
+                        "content" : "4-2 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-4-3",
+                        "content" : "4-3 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-4-4",
+                        "content" : "4-4 Content text Content text Content text Content text Content text Content text ",
+                    },
+                        {
+                        "label" : "label-4-5",
+                        "content" : "4-5 Content text Content text Content text Content text Content text Content text ",
+                    },],
+                    "text":[{
+                        "title" : "title-4-1",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-4-2",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-4-3",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-4-4",
+                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                    },]
+                },
             }
         ]
-    },
-    {
-        "id": 1,
-        "timeIndex": 1,
-        "title": "I am the second title",
-        "content": "<p>Second text</p>",
-        "baseMap": "assets/img/northeast.jpg",
-        "characters" : [
-            {
-                "id": 0,
-                "name": "char-2.2",
-                "description": " Hello! I am char-2.2!",
-                "icon": "assets/img/characters/character-2.png",
-                "x": 115,
-                "y": 315,
-                "w": 115,
-                "h": 115,
-            }
-        ],
-        "locations": [],
-        "journeys" : [
-            {
-                "id": 0,
-                "x": 250,
-                "y": 350,
-                "lx": 450,
-                "ly": 350,
-            },
-            {
-                "id": 1,
-                "x": 130,
-                "y": 537,
-                "lx": 250,
-                "ly": 350,
-            },
-            {
-                "id": 2,
-                "x": 450,
-                "y": 350,
-                "lx": 475,
-                "ly": 410,
-            },
-            {
-                "id": 3,
-                "x": 475,
-                "y": 410,
-                "lx": 650,
-                "ly": 420,
-            },
-        ],
-    },
-    {
-        "id": 2,
-        "timeIndex": 2,
-        "title": "I am the third title",
-        "content": "<p>Third text</p>",
-        "baseMap": "assets/img/rozendale.jpg",
-        "characters" : [
-            {
-                "id": 0,
-                "name": "char-3",
-                "description": " Hello! I am char-3!",
-                "icon": "assets/img/characters/character-3.png",
-                "x": 315,
-                "y": 315,
-                "w": 115,
-                "h": 115,
-            }
-        ],
-        "locations": [],
-        "journeys": [],
-    },
-    {
-        "id": 3,
-        "timeIndex": 3,
-        "title": "I am the fourth title",
-        "content": "<p>Fourth text</p>",
-        "baseMap": "assets/img/new_roslingen.jpg",
-        "characters" : [
-            {
-                "id": 0,
-                "name": "char-4",
-                "description": " Hello! I am char-4!",
-                "icon": "assets/img/characters/character-4.png",
-                "x": 315,
-                "y": 315,
-                "w": 115,
-                "h": 115,
-            }
-        ],
-        "locations": [],
-        "journeys": [],
-    },
-    {
-        "id": 4,
-        "timeIndex": 4,
-        "title": "I am the fifth title",
-        "content": "<p>Fifth text</p>",
-        "baseMap": "assets/img/tenbrake.jpg",
-        "characters" : [
-            {
-                "id": 0,
-                "name": "char-1.2",
-                "description": " Hello! I am char-1.2!",
-                "icon": "assets/img/characters/character-1.png",
-                "x": 115,
-                "y": 315,
-                "w": 115,
-                "h": 115,
-            }
-        ],
-        "locations": [],
-        "journeys": [],
-    },
-    {
-        "id": 5,
-        "timeIndex": 5,
-        "title": "I am the sixth title",
-        "content": "<p>Sixth text</p>",
-        "baseMap": "assets/img/academy-island.jpg",
-        "characters" : [
-            {
-                "id": 0,
-                "name": "char-1.3",
-                "description": " Hello! I am char-1.3!",
-                "icon": "assets/img/characters/character-1.png",
-                "x": 115,
-                "y": 315,
-                "w": 115,
-                "h": 115,
-            }
-        ],
-        "locations": [],
-        "journeys": [],
     },
 ];
 

@@ -90,6 +90,7 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     let ibImg = document.getElementById("ib-img") ;
     let ibTitle = document.getElementById("ib-title") ;
     let ibText = document.getElementById("info-text") ;
+    let ibArea = document.getElementById("info-area") ;
 
     // Location click events
     let locationLength = data[globalTime].locations.length
@@ -98,6 +99,8 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     for (let i = 0; i < locationLength; i++) {
         map.location = new Location(map.canvas, data, globalTime,i);
     
+        // Why? Might be obsolete? Handle via map.location?
+        // Character has correct way of handling this
         let shape = data[globalTime].locations[i];
 
         // Define Location
@@ -107,9 +110,37 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
             infoBox.classList.add("active-menu");
             ibToggle.classList.add("active-btn")
             ibTitle.innerHTML = shape.name;
-            ibText.innerHTML = shape.description;
-        }
-    }
+            ibImg.src = shape.img;
+            
+            // Purge Info area & repopulate
+            ibArea.innerHTML = "";
+            shape.info.area.forEach(e => {
+                // Add Text
+                const label = document.createElement("dt");
+                const labelNode = document.createTextNode(e.label.toString());
+                const content = document.createElement("dd");
+                const node = document.createTextNode(e.content.toString());
+                
+                label.appendChild(labelNode);
+                content.appendChild(node);
+                ibArea.append(label, content);
+            }); 
+
+            // Purge Info Box & repopulate
+            ibText.innerHTML = "";
+            shape.info.text.forEach(e => {
+                // Add Text
+                const title = document.createElement("h4");
+                const titleNode = document.createTextNode(e.title.toString());
+                const para = document.createElement("p");
+                const node = document.createTextNode(e.paragraph.toString());
+                
+                title.appendChild(titleNode);
+                para.appendChild(node);
+                ibText.append(title, para);
+            }); 
+        };
+    };
 
     // Character click events
     let charactersLength = data[globalTime].characters.length;
@@ -122,7 +153,42 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
 
         if (map.character.context.isPointInPath(x,y)) {
             mainTitle.innerHTML = map.character.name;
-            mainContent.innerHTML = map.character.description;
+            infoBox.classList.add("active-menu");
+            ibToggle.classList.add("active-btn")
+            console.log (map.character)
+
+            let character = map.character
+
+            ibTitle.innerHTML = character.name;            
+            ibImg.src = character.img; // Get different stock img to separate from icon
+            
+            // Purge Info area & repopulate
+            ibArea.innerHTML = "";
+            character.info.area.forEach(e => {
+                // Add Text
+                const label = document.createElement("dt");
+                const labelNode = document.createTextNode(e.label.toString());
+                const content = document.createElement("dd");
+                const node = document.createTextNode(e.content.toString());
+                
+                label.appendChild(labelNode);
+                content.appendChild(node);
+                ibArea.append(label, content);
+            }); 
+
+            // Purge Info Box & repopulate
+            ibText.innerHTML = "";
+            character.info.text.forEach(e => {
+                // Add Text
+                const title = document.createElement("h4");
+                const titleNode = document.createTextNode(e.title.toString());
+                const para = document.createElement("p");
+                const node = document.createTextNode(e.paragraph.toString());
+                
+                title.appendChild(titleNode);
+                para.appendChild(node);
+                ibText.append(title, para);
+            }); 
         }
     }
 

@@ -14,7 +14,8 @@ function Character (canvas, data, globalTime, index) {
     character.w = data[globalTime].characters[index].w;
     character.h = data[globalTime].characters[index].h;
     character.src = data[globalTime].characters[index].icon;
-    character.img = null;
+    character.img = data[globalTime].characters[index].img;
+    character.info = data[globalTime].characters[index].info;
 }
 
 Character.prototype.create = function() {

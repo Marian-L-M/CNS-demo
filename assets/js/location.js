@@ -6,10 +6,11 @@ function Location (canvas, data, globalTime, index) {
     location.canvas = canvas;
     location.context = location.canvas.getContext('2d');
 
+    // Note 2024/02/15
+    // Declarations might be doing nothing
     location.description = data[globalTime].locations[index].description;
     location.name = data[globalTime].locations[index].name;
     location.points = data[globalTime].locations[index].points;
-
     location.fill = data[globalTime].locations[index].design.fill;
     location.stroke = data[globalTime].locations[index].design.stroke;
     location.lineWidth = data[globalTime].locations[index].design.lineW;
