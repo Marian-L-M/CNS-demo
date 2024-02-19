@@ -115,29 +115,15 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
             // Purge Info area & repopulate
             ibArea.innerHTML = "";
             shape.info.area.forEach(e => {
-                // Add Text
-                const label = document.createElement("dt");
-                const labelNode = document.createTextNode(e.label.toString());
-                const content = document.createElement("dd");
-                const node = document.createTextNode(e.content.toString());
-                
-                label.appendChild(labelNode);
-                content.appendChild(node);
-                ibArea.append(label, content);
+                // Set Text
+                map.setInfobox(e,ibArea,"dt","dd");
             }); 
 
             // Purge Info Box & repopulate
             ibText.innerHTML = "";
             shape.info.text.forEach(e => {
-                // Add Text
-                const title = document.createElement("h4");
-                const titleNode = document.createTextNode(e.title.toString());
-                const para = document.createElement("p");
-                const node = document.createTextNode(e.paragraph.toString());
-                
-                title.appendChild(titleNode);
-                para.appendChild(node);
-                ibText.append(title, para);
+                // Set Text
+                map.setInfobox(e,ibText, "h4", "p");
             }); 
         };
     };
@@ -155,39 +141,24 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
             mainTitle.innerHTML = map.character.name;
             infoBox.classList.add("active-menu");
             ibToggle.classList.add("active-btn")
-            console.log (map.character)
 
             let character = map.character
 
             ibTitle.innerHTML = character.name;            
-            ibImg.src = character.img; // Get different stock img to separate from icon
+            ibImg.src = character.img; 
             
             // Purge Info area & repopulate
             ibArea.innerHTML = "";
             character.info.area.forEach(e => {
-                // Add Text
-                const label = document.createElement("dt");
-                const labelNode = document.createTextNode(e.label.toString());
-                const content = document.createElement("dd");
-                const node = document.createTextNode(e.content.toString());
-                
-                label.appendChild(labelNode);
-                content.appendChild(node);
-                ibArea.append(label, content);
+                // Set Text
+                map.setInfobox(e,ibArea,"dt","dd");
             }); 
 
             // Purge Info Box & repopulate
             ibText.innerHTML = "";
             character.info.text.forEach(e => {
-                // Add Text
-                const title = document.createElement("h4");
-                const titleNode = document.createTextNode(e.title.toString());
-                const para = document.createElement("p");
-                const node = document.createTextNode(e.paragraph.toString());
-                
-                title.appendChild(titleNode);
-                para.appendChild(node);
-                ibText.append(title, para);
+                // Set Text
+                map.setInfobox(e,ibText, "h4", "p");
             }); 
         }
     }
@@ -290,4 +261,17 @@ MapMaker.prototype.createEvents = function() {
         };
         
     }
+}
+
+
+// Infobox functions
+MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType){
+    const title = document.createElement(titleType);
+    const titleNode = document.createTextNode(ib.title);
+    const para = document.createElement(contentType);
+    const node = document.createTextNode(ib.content);
+    
+    title.appendChild(titleNode);
+    para.appendChild(node);
+    container.append(title, para);
 }

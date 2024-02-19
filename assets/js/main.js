@@ -11,51 +11,51 @@ let data = [
                 "name": "char-1",
                 "description": " Hello! I am char-1!",
                 "icon": "assets/img/characters/character-1.png",
-                "img": "assets/img/characters/character-1.png",
+                "img": "assets/img/characters/character-1-full.jpg",
                 "x": 115,
                 "y": 115,
                 "w": 115,
                 "h": 115,
                 "info":{
                     "area":[{
-                        "label" : "Character-1",
+                        "title" : "Character-1",
                         "content" : "Character that comes first",
                     },
                         {
-                        "label" : "Age",
+                        "title" : "Age",
                         "content" : "XYZ",
                     },
                         {
-                        "label" : "other info",
+                        "title" : "other info",
                         "content" : "ABCDEFGHIJ",
                     },
                         {
-                        "label" : "other info",
+                        "title" : "other info",
                         "content" : "ABCDEFGHIJ",
                     },
                         {
-                        "label" : "other info",
+                        "title" : "other info",
                         "content" : "ABCDEFGHIJ",
                     },
                         {
-                        "label" : "other info",
+                        "title" : "other info",
                         "content" : "ABCDEFGHIJ",
                     },],
                     "text":[{
                         "title" : "Joerg",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-2",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-3",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-4",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },],
                 },
             },{
@@ -63,35 +63,35 @@ let data = [
                 "name": "char-2",
                 "description": " Hello! I am char-2!",
                 "icon": "assets/img/characters/character-2.png",
-                "img": "assets/img/characters/character-2.png",
+                "img": "assets/img/characters/character-2-full.jpg",
                 "x": 815,
                 "y": 415,
                 "w": 115,
                 "h": 115,
                 "info":{
                     "area":[{
-                        "label" : "Character-2",
+                        "title" : "Character-2",
                         "content" : "Character that barely didnt make the cut",
                     },
                         {
-                        "label" : "Age",
+                        "title" : "Age",
                         "content" : "z-Y-X",
                     },],
                     "text":[{
                         "title" : "Petra",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-2",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-3",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-4",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },],
                 },
             }
@@ -193,44 +193,44 @@ let data = [
                 }],
                 "info":{
                     "area":[{
-                        "label" : "Beast of Bodmin",
+                        "title" : "Beast of Bodmin",
                         "content" : "A large feline inhabiting Bodmin Moor.",
                     },
                         {
-                        "label" : "label-1-1",
+                        "title" : "label-1-1",
                         "content" : "1-1 Content",
                     },
                         {
-                        "label" : "label-1-2",
+                        "title" : "label-1-2",
                         "content" : "1-2 Content text",
                     },
                         {
-                        "label" : "label-3",
+                        "title" : "label-3",
                         "content" : "1-3 Content text",
                     },
                         {
-                        "label" : "label-4",
+                        "title" : "label-4",
                         "content" : "1-4 Content text",
                     },
                         {
-                        "label" : "label-5",
+                        "title" : "label-5",
                         "content" : "1-5 Content text Content text Content text Content text Content text Content text ",
                     },],
                     "text":[{
                         "title" : "title-1-1",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-2",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-3",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-1-4",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },],
                 },
             }, {
@@ -258,44 +258,44 @@ let data = [
                 }],
                 "info":{
                     "area":[{
-                        "label" : "Beast of Bodmin",
+                        "title" : "Beast of Bodmin",
                         "content" : "A large feline inhabiting Bodmin Moor.",
                     },
                         {
-                        "label" : "label-2-1",
+                        "title" : "label-2-1",
                         "content" : "2-1 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-2-2",
+                        "title" : "label-2-2",
                         "content" : "2-2 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-2-3",
+                        "title" : "label-2-3",
                         "content" : "2-3 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-2-4",
+                        "title" : "label-2-4",
                         "content" : "2-4 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-2-5",
+                        "title" : "label-2-5",
                         "content" : "2-5 Content text Content text Content text Content text Content text Content text ",
                     },],
                     "text":[{
                         "title" : "title-2-1",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-2-2",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-2-3",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-2-4",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },]
                 },
             }, {
@@ -323,44 +323,44 @@ let data = [
                 }],
                 "info":{
                     "area":[{
-                        "label" : "Beast of Bodmin",
+                        "title" : "Beast of Bodmin",
                         "content" : "A large feline inhabiting Bodmin Moor.",
                     },
                         {
-                        "label" : "label-3-1",
+                        "title" : "label-3-1",
                         "content" : "3-1 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-3-2",
+                        "title" : "label-3-2",
                         "content" : "3-2 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-3-3",
+                        "title" : "label-3-3",
                         "content" : "3-3 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-3-4",
+                        "title" : "label-3-4",
                         "content" : "3-4 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-3-5",
+                        "title" : "label-3-5",
                         "content" : "3-5 Content text Content text Content text Content text Content text Content text ",
                     },],
                     "text":[{
                         "title" : "title-3-1",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-3-2",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-3-3",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-3-4",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },]
                 },
             }, {
@@ -388,44 +388,44 @@ let data = [
                 }],
                 "info":{
                     "area":[{
-                        "label" : "Beast of Bodmin",
+                        "title" : "Beast of Bodmin",
                         "content" : "A large feline inhabiting Bodmin Moor.",
                     },
                         {
-                        "label" : "label-4-1",
+                        "title" : "label-4-1",
                         "content" : "4-1 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-4-2",
+                        "title" : "label-4-2",
                         "content" : "4-2 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-4-3",
+                        "title" : "label-4-3",
                         "content" : "4-3 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-4-4",
+                        "title" : "label-4-4",
                         "content" : "4-4 Content text Content text Content text Content text Content text Content text ",
                     },
                         {
-                        "label" : "label-4-5",
+                        "title" : "label-4-5",
                         "content" : "4-5 Content text Content text Content text Content text Content text Content text ",
                     },],
                     "text":[{
                         "title" : "title-4-1",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-4-2",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-4-3",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },
                         {
                         "title" : "title-4-4",
-                        "paragraph" : "paragraph text paragraph textparagraph textparagraph text",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
                     },]
                 },
             }
