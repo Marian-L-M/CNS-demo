@@ -472,6 +472,8 @@ function setCanvas() {
 function setTimeIndex() {
     // Set Current Time
     let timeIndex = timeScroller.value;
+
+    // Superflous?
     globalTime = timeIndex
 
     // Set Page Content
@@ -480,6 +482,20 @@ function setTimeIndex() {
     // Set Display Time
     setTimeIndexValue(timeIndex)
     return timeIndex
+}
+
+// Reset Info box
+window.addEventListener("keydown", (e) => {
+    if (e.isComposing || e.code === "Escape") {
+        resetIb();
+    };
+});
+
+function resetIb() {
+    // Better turn timeIndex into a global variable
+    // Data also is black box behavior
+    let timeIndex = timeScroller.value;
+    setContent(data, timeIndex)
 }
 
 // // Set Cursor Label
