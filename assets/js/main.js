@@ -484,19 +484,25 @@ function setTimeIndex() {
     return timeIndex
 }
 
+// Next action 0219: Create dedicated UI reset button
+// Add hide all windows functionaliy s
+
 // Reset Info box
 window.addEventListener("keydown", (e) => {
-    if (e.isComposing || e.code === "Escape") {
-        resetIb();
+    switch(e.code){
+        case 'Escape':
+            resetMainText();
+            break;
+        case 'KeyH':
+            hideWindows();
+            break;
+        case 'KeyS':
+            showWindows();
+            break;
+        default:
+            break;
     };
 });
-
-function resetIb() {
-    // Better turn timeIndex into a global variable
-    // Data also is black box behavior
-    let timeIndex = timeScroller.value;
-    setContent(data, timeIndex)
-}
 
 // // Set Cursor Label
 let mouselabel = document.getElementById("mouse-label")
@@ -525,3 +531,23 @@ window.addEventListener('mousemove', (e) => {
         mouselabel.style.right = 'unset';
     }
   });
+
+// Global utility functions
+function resetMainText() {
+    // Better turn timeIndex into a global variable
+    let timeIndex = timeScroller.value;
+    setContent(data, timeIndex)
+}
+
+function hideWindows(){
+    let mainText = document.getElementById("main-text") ;
+    let infoBox = document.getElementById("info-box") ;
+    mainText.classList.remove("active-menu");
+    infoBox.classList.remove("active-menu");
+}
+function showWindows(){
+    let mainText = document.getElementById("main-text") ;
+    let infoBox = document.getElementById("info-box") ;
+    mainText.classList.add("active-menu");
+    infoBox.classList.add("active-menu");
+}

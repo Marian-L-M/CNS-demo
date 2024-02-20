@@ -8,10 +8,10 @@
     - [x] Export paths to separate file
     - [x] Add define function for path nodes
     - [x] Create story data for paths
-- [ ] Split story bar into story bar and info box 
-    - [ ] Path to story bar
+- [x] Split story bar into story bar and info box 
+    - [x] Path to story bar
     - [X] Locations & Characters to info box
-    - [ ] Add reset button( + esc)
+    - [x] Add reset button( + esc)
 - [ ] Add wiki links
     - [ ] Create wiki sample page
 - [ ] Transform object system to percentage base ( 1000*1000 grid)
