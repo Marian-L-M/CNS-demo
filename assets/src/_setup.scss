@@ -1,10 +1,23 @@
 @charset "UTF-8";
+@use "./variables" as var ;
 
 // Reset {
     img {
         max-width: 100%;
     }
 
+    a,
+    a:visited,
+    a:focus {
+        color: inherit;
+        text-decoration: unset;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
 // Global Classes
 .fx-row {
     display: flex;

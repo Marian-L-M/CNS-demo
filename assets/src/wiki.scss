@@ -1,0 +1,100 @@
+@charset "UTF-8";
+@use "./variables" as var ;
+@use "./mixins" as mix ;
+
+// Setup
+
+// Page Layout
+$sidebar-width: 100px;
+.wiki-page {
+    display: grid;
+    grid-template-columns: $sidebar-width 1fr;
+    grid-template-rows: 75px 1fr;
+    grid-template-areas: 
+        "a a a"
+        "b c c"
+        "b c c";
+    width: 100%;
+    height: 100vh;
+    .wiki-header {
+        grid-area: a;
+    }
+    .side-bar {
+        grid-area: b;
+    }
+    .wiki-main {
+        grid-row-start: b;
+        grid-column-start: b;
+        grid-row-end: c;
+        grid-column-end: c;
+        
+        overflow-y: scroll;
+    }
+}
+
+// Sections
+header.wiki-header {
+    box-sizing: border-box;
+    width: 100%;
+    
+    justify-content: space-between;
+    align-items: center;
+    
+    background-color: var.$base-white;
+}
+.side-bar {
+    position: relative;
+    background-color: rgba(31, 31, 31, 0.9);
+    color: var.$base-white;
+    z-index: 10;
+    ul {
+        width: 100%;
+    }
+    li {
+        @include mix.fx-center-content;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+    }
+}
+
+// Wiki Main
+article.content-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-content,
+.main-visual { 
+    box-sizing: border-box;
+    padding-left: $sidebar-width;
+}
+.main-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    max-height: 800px;
+    color: var.$base-white;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+}
+.main-content {
+    width: 67%;
+}
+.info {
+    width: 33%;
+    background-color: lightgray;
+}
