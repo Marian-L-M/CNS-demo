@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @use "./setup" ;
+@use "./utilities" ;
 
 // Components
 
@@ -76,6 +77,7 @@ body {
         top: 0;
     }
     .content-box,
+    .ib-link,
     #main-content,
     #main-title{
         // Fix naming convention to classes
@@ -86,6 +88,7 @@ body {
         padding: 2em;
         overflow-y: scroll;
         .content-box,
+        .ib-link,
         #main-content,
         #main-title{
             display: block;
@@ -132,6 +135,7 @@ body {
         top: 0;
     }
     .img-container,
+    .ib-link,
     .info-area,
     .info-text {
         display: none;
@@ -166,6 +170,7 @@ body {
     &.active-menu {
         width: 400px;
         padding: 10px 10px 20px 10px;
+        .ib-link,
         .img-container,
         .info-text {
             display: block;

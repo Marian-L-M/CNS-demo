@@ -88,6 +88,7 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     let infoBox = document.getElementById("info-box") ;
     let ibToggle = document.getElementById("toggle-info-box") ;
     let ibImg = document.getElementById("ib-img") ;
+    let ibLink = document.querySelectorAll(".ib-link") ;
     let ibTitle = document.getElementById("ib-title") ;
     let ibText = document.getElementById("info-text") ;
     let ibArea = document.getElementById("info-area") ;
@@ -111,6 +112,12 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
             ibToggle.classList.add("active-btn")
             ibTitle.innerHTML = shape.name;
             ibImg.src = shape.img;
+
+
+            console.log(shape)
+            ibLink.forEach(e => {
+                e.href = shape.link;
+            });
             
             // Purge Info area & repopulate
             ibArea.innerHTML = "";
@@ -146,7 +153,11 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
 
             ibTitle.innerHTML = character.name;            
             ibImg.src = character.img; 
-            
+
+            ibLink.forEach(e => {
+                e.href = character.src;
+            });
+
             // Purge Info area & repopulate
             ibArea.innerHTML = "";
             character.info.area.forEach(e => {

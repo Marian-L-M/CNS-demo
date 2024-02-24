@@ -1,0 +1,41 @@
+@charset "UTF-8";
+@use "./variables" as var ;
+
+
+// Spacing
+.mb-st {
+    margin-bottom: clamp(40px,7vw,100px);
+}
+.mb-half {
+    margin-bottom: clamp(24px,3vw,50px);
+}
+.mt-st {
+    margin-top: clamp(40px,7vw,100px);
+}
+.mt-half {
+    margin-top: clamp(24px,3vw,50px);
+}
+
+.mb-0{margin-bottom: 0 !important;}
+.mbem-1{margin-bottom: 1em;}
+.mbem-2{margin-bottom: 2em;}
+
+.mt-0{margin-top: 0 !important;}
+.mtem-1{margin-top: 1em;}
+.mtem-2{margin-top: 2em;}
+
+.ml-0{margin-left: 0 !important;}
+.mlem-1{margin-left: 1em;}
+.mlem-2{margin-left: 2em;}
+
+.mr-0{margin-right: 0 !important;}
+.mrem-1{margin-right: 1em;}
+.mrem-2{margin-right: 2em;}
+
+// Text
+.text-bold {
+    font-weight: bold;
+}
+.text-center {
+    text-align: center;
+}

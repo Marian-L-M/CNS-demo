@@ -3,17 +3,111 @@
 @use "./mixins" as mix ;
 
 // Setup
+html,body {
+    scroll-behavior: smooth;
+}
+h1 {
+    font-size: 3.6rem;
+}
+h2 {
+    font-size: 2.4rem;
+}
+h3 {
+    font-size: 1.4rem;
+}
+
+dl {
+    display: grid;
+    grid-template-columns: max-content auto;
+}
+dt,dd {
+    box-sizing: border-box;
+    padding: 0.2em 0.5em;
+    margin: 0;
+    &:nth-of-type(odd) {
+        background-color: #e7e7e7;
+    }
+}
+dt {
+    grid-column-start: 1;
+    font-weight: bold;
+}
+dd {
+    grid-column-start: 2;
+}
+.wiki-header {
+    input[type=text]{
+        box-sizing: border-box;
+        height: 60%;
+        margin: 0 auto 0 6vw;
+        padding: 5px 1em;
+
+        border: unset;
+        border-left: 1px solid lightgray;
+        width: 40%;
+
+        font-family: monospace;
+        &:focus {
+            outline: unset;
+            background-color: rgb(247, 247, 247);
+        }
+    }
+    .profile-container {
+        width: 10%;
+        display: block;
+        height: 100%;
+        svg {
+            margin: auto;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+.wiki-footer {
+    width: 100%;
+    text-align: center;
+    background-color: var.$base-black;
+    color: var.$base-white;
+}
+
+.logo-container {
+    font-size: 3rem;
+    font-family: monospace;
+    font-weight: bold;
+    text-align: center;
+}
 
 // Page Layout
 $sidebar-width: 100px;
+$content-padding: clamp(50px,6vw,100px);
+
+.full-content {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 $content-padding  0 calc($sidebar-width + $content-padding) ;
+    section {
+        box-sizing: border-box;
+        padding: clamp(20px,3vw,40px) 0;
+        border-top: 1px solid lightgray;
+    }
+}
+
+.content {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: clamp(40px,7vw,100px);
+}
+
 .wiki-page {
     display: grid;
     grid-template-columns: $sidebar-width 1fr;
-    grid-template-rows: 75px 1fr;
+    grid-template-rows: 75px 1fr 20px;
     grid-template-areas: 
         "a a a"
         "b c c"
-        "b c c";
+        "b c c"
+        "d d d";
     width: 100%;
     height: 100vh;
     .wiki-header {
@@ -29,6 +123,9 @@ $sidebar-width: 100px;
         grid-column-end: c;
         
         overflow-y: scroll;
+    }
+    .wiki-footer {
+        grid-area: d;
     }
 }
 
@@ -54,6 +151,14 @@ header.wiki-header {
         @include mix.fx-center-content;
         width: 100%;
         aspect-ratio: 1 / 1;
+        a {
+            width: 100%;
+        }
+        svg {
+            width: 60%;
+            display: block;
+            margin: auto;
+        }
     }
 }
 
@@ -91,10 +196,133 @@ article.content-container {
         z-index: -1;
     }
 }
+
+// Main content
 .main-content {
-    width: 67%;
+    display: flex;
+}
+.content-area,
+.info {
+    box-sizing: border-box;
+}
+.content-area {
+    padding: $content-padding;
+    flex: 2;
 }
 .info {
-    width: 33%;
+    height: fit-content;
+    flex: 1;
     background-color: lightgray;
+    padding: clamp(20px,3vw,40px);
+}
+
+
+// Comments
+.comment-container {
+    width: 800px;
+    max-width: 92%;
+    margin: 0 auto;
+}
+
+.comment-input {
+    width: 100%;
+}
+.comment-filter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .filter-group {
+        display: flex;
+        align-items: center;
+        select {
+            margin: 0 0.5em 0 0;
+            padding: 0;
+            appearance: unset;
+            border: unset;
+            color: grey;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        svg {
+            width: 1.2rem;
+        }
+    }
+}
+.comment-group {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+    .profile {
+        width: 15%;   
+    }
+    .comment {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        textarea,button {
+            appearance: unset;
+            box-sizing: border-box;
+            padding: 0.5em 1em;
+            
+            width: 100%;
+            border-radius: 5px;
+            color: #a9a9a9;
+        }
+        textarea {
+            aspect-ratio: 4 / 1;
+            border: 1px solid lightgray;
+            margin-bottom: 1em;
+        }
+        button.post-btn {
+            background-color: rgb(243, 243, 243);
+            border: unset;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        .nested-group {
+            padding: 1em 0 0.5em 1em;
+            border-left: 1px solid lightgrey;
+            margin-bottom: 0;
+            .profile {
+                width: 10%;
+            }
+            .comment {
+                width: 85%;
+            }
+        }
+    }
+    .post-meta {
+        font-size: 1rem;
+        margin-top: 1em;
+        button,span {
+            display: inline-block;
+            width: 6em;
+            height: fit-content;
+            padding: 0;
+
+            background-color: unset;
+            border: unset;
+            color: grey;
+            text-align: center;
+        }
+        button {
+            cursor: pointer;
+            &.rate {
+                width: 1.5em;
+            }
+        }
+    }
+}
+
+// revision
+section.revision-history {
+    dt,dd {
+        padding: 1em;
+        &:nth-of-type(odd) {
+            background-color: #e7e7e7;
+        }
+    }
 }

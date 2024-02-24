@@ -1,18 +1,37 @@
+h1, h2, h3, h4, h5, h6, p, ul, li, a, button, textarea, input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 140%;
+}
+
+p {
+  line-height: 180%;
+}
+
 img {
   max-width: 100%;
 }
 
 a,
 a:visited,
-a:focus {
+a:focus,
+button {
   color: inherit;
   text-decoration: unset;
+}
+a:hover,
+a:visited:hover,
+a:focus:hover,
+button:hover {
+  opacity: 0.8;
 }
 
 ul {
   list-style-type: none;
-  padding: 0;
-  margin: 0;
 }
 
 .fx-row {
@@ -22,6 +41,78 @@ ul {
 .fx-col {
   display: flex;
   flex-direction: column;
+}
+
+.mb-st {
+  margin-bottom: clamp(40px, 7vw, 100px);
+}
+
+.mb-half {
+  margin-bottom: clamp(24px, 3vw, 50px);
+}
+
+.mt-st {
+  margin-top: clamp(40px, 7vw, 100px);
+}
+
+.mt-half {
+  margin-top: clamp(24px, 3vw, 50px);
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mbem-1 {
+  margin-bottom: 1em;
+}
+
+.mbem-2 {
+  margin-bottom: 2em;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mtem-1 {
+  margin-top: 1em;
+}
+
+.mtem-2 {
+  margin-top: 2em;
+}
+
+.ml-0 {
+  margin-left: 0 !important;
+}
+
+.mlem-1 {
+  margin-left: 1em;
+}
+
+.mlem-2 {
+  margin-left: 2em;
+}
+
+.mr-0 {
+  margin-right: 0 !important;
+}
+
+.mrem-1 {
+  margin-right: 1em;
+}
+
+.mrem-2 {
+  margin-right: 2em;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
 }
 
 button.toggle {
@@ -95,6 +186,7 @@ body {
   top: 0;
 }
 .main-text .content-box,
+.main-text .ib-link,
 .main-text #main-content,
 .main-text #main-title {
   display: none;
@@ -105,6 +197,7 @@ body {
   overflow-y: scroll;
 }
 .main-text.active-menu .content-box,
+.main-text.active-menu .ib-link,
 .main-text.active-menu #main-content,
 .main-text.active-menu #main-title {
   display: block;
@@ -147,6 +240,7 @@ body {
   top: 0;
 }
 .info-box .img-container,
+.info-box .ib-link,
 .info-box .info-area,
 .info-box .info-text {
   display: none;
@@ -182,6 +276,7 @@ body {
   width: 400px;
   padding: 10px 10px 20px 10px;
 }
+.info-box.active-menu .ib-link,
 .info-box.active-menu .img-container,
 .info-box.active-menu .info-text {
   display: block;

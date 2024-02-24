@@ -9,6 +9,7 @@ let data = [
             {
                 "id": 0,
                 "name": "char-1",
+                "link": "/wiki/char-1.html",
                 "description": " Hello! I am char-1!",
                 "icon": "assets/img/characters/character-1.png",
                 "img": "assets/img/characters/character-1-full.jpg",
@@ -61,6 +62,7 @@ let data = [
             },{
                 "id": 1,
                 "name": "char-2",
+                "link": "/wiki/char-2.html",
                 "description": " Hello! I am char-2!",
                 "icon": "assets/img/characters/character-2.png",
                 "img": "assets/img/characters/character-2-full.jpg",
@@ -174,6 +176,7 @@ let data = [
             {
                 "id" : 0,
                 "name" : "triangle",
+                "link": "/wiki/location-1.html",
                 "description": "I am a triangle",
                 "img": "assets/img/locations/location-1.jpg",
                 "design": {
@@ -236,6 +239,7 @@ let data = [
             }, {
                 "id" : 1,
                 "name" : "parallelogram",
+                "link": "/wiki/location-2.html",
                 "description": "I am a parallelogram",
                 "img": "assets/img/locations/location-2.jpg",
                 "design": {
@@ -301,6 +305,7 @@ let data = [
             }, {
                 "id" : 2,
                 "name" : "parasffsallelogram",
+                "link": "/wiki/location-3.html",
                 "description": "I am an abomination",
                 "img": "assets/img/locations/location-3.jpg",
                 "design": {
@@ -366,6 +371,7 @@ let data = [
             }, {
                 "id" : 3,
                 "name" : "random shape",
+                "link": "/wiki/location-4.html",
                 "description": "I am a random shape",
                 "img": "assets/img/locations/location-4.jpg",
                 "design": {

@@ -1,23 +1,37 @@
 @charset "UTF-8";
 @use "./variables" as var ;
 
-// Reset {
-    img {
-        max-width: 100%;
-    }
+h1,h2,h3,h4,h5,h6,p,ul, li,a, button, textarea, input {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    a,
-    a:visited,
-    a:focus {
-        color: inherit;
-        text-decoration: unset;
-    }
+h1,h2,h3,h4,h5,h6 {
+    line-height: 140%;
+}
+p {
+    line-height: 180%;
+}
+// Reset 
+img {
+    max-width: 100%;
+}
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
+a,
+a:visited,
+a:focus,
+button {
+    color: inherit;
+    text-decoration: unset;
+    &:hover {
+        opacity: 0.8;
     }
+}
+
+ul {
+    list-style-type: none;
+}
 // Global Classes
 .fx-row {
     display: flex;
