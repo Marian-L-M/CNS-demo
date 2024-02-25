@@ -1,6 +1,8 @@
 function Journey (canvas, data, globalTime, index) {
     // Base
     let journey = this;
+    const cw = canvas.cw;
+    const ch = canvas.ch;
 
     // Global Attributes
     journey.canvas = canvas;
@@ -9,19 +11,16 @@ function Journey (canvas, data, globalTime, index) {
     journey.time = globalTime;
     journey.index = index;
     journey.path = journey.data[journey.time].journeys[index];
+    journey.ch = ch;
+    journey.cw = cw;
     
 }
 
 Journey.prototype.draw = function() {
     // Setup
     let journey = this;
-    const cw = journey.canvas.cw;
-    const ch = journey.canvas.ch;
-
-    const path = journey.path;
-
     const ballRadius = 4;
-    
+    const path = journey.path;
     
     // Draw Node Lines
     journey.context.beginPath();
@@ -30,19 +29,18 @@ Journey.prototype.draw = function() {
     journey.context.strokeStyle= "black";
     journey.context.fillStyle= "black";
     
-    
     // Draw Node & Node line
     let nodeLimit = path.length;
 
     for (let i = 0; i < (nodeLimit - 1); i++) {
-        journey.drawNode(cw*path[i].x, ch*path[i].y, ballRadius)
-        journey.drawNodeLine(cw*path[i].x, ch*path[i].y, cw*path[i].lx, ch*path[i].ly, ballRadius)
+        journey.drawNode(journey.cw*path[i].x, journey.ch*path[i].y, ballRadius)
+        journey.drawNodeLine(journey.cw*path[i].x, journey.ch*path[i].y, journey.cw*path[i].lx, journey.ch*path[i].ly, ballRadius)
     }
 
     // Fix later: Last node has lx/ly but no next point
     // For now separate, but change to safe function 
     const lastNode = path[path.length - 1];
-    journey.drawNode(cw * lastNode.x, ch * lastNode.y, ballRadius)
+    journey.drawNode(journey.cw * lastNode.x, journey.ch * lastNode.y, ballRadius)
     
     journey.context.stroke();
     journey.context.fill();
@@ -73,17 +71,20 @@ function JourneyEvent(canvas, data, globalTime, journey, index){
     // Base
     let journeyEvent = this;
 
+    
     // Global Attributes
+    // Approach needs cleaning up
     journeyEvent.canvas = canvas;
     journeyEvent.context = journeyEvent.canvas.getContext('2d');
     journeyEvent.data = data[globalTime].journeys[journey][index];
 
-    journeyEvent.name = journeyEvent.data.name;
-    journeyEvent.description = journeyEvent.data.description;
-
     // Coordinates adjusted for canvas grid
     const cw = journeyEvent.canvas.cw;
     const ch = journeyEvent.canvas.ch;
+
+    journeyEvent.name = journeyEvent.data.name;
+    journeyEvent.description = journeyEvent.data.description;
+
     journeyEvent.x = journeyEvent.data.x * cw; 
     journeyEvent.y = journeyEvent.data.y * ch;
 }

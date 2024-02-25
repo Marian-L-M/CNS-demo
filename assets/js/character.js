@@ -1,6 +1,8 @@
 function Character (canvas, data, globalTime, index) {
     // Base
     let character = this;
+    const cw = canvas.cw;
+    const ch = canvas.ch;
 
     // Global Attributes
     character.canvas = canvas;
@@ -17,6 +19,8 @@ function Character (canvas, data, globalTime, index) {
     character.link = data[globalTime].characters[index].link;
     character.img = data[globalTime].characters[index].img;
     character.info = data[globalTime].characters[index].info;
+    character.ch = ch;
+    character.cw = cw;
 }
 
 Character.prototype.create = function() {
@@ -32,18 +36,26 @@ Character.prototype.draw = function() {
     // Base
     let character = this;
 
-    character.context.drawImage(character.img, character.x, character.y, character.w, character.h)
+    character.context.drawImage(
+        character.img, 
+        (character.x * character.cw), 
+        (character.y * character.ch), 
+        (character.w * character.cw), 
+        (character.w * character.cw) 
+    );
 }
 
 Character.prototype.define = function () {
     // Base
     let character = this;
-    // console.log(character)
+    const x = character.x * character.cw;
+    const y = character.y * character.ch;
+    const w = character.w * character.cw; // Character icons are square, so no h value is needed
 
     character.context.beginPath();
-    character.context.moveTo(character.x, character.y);
-    character.context.lineTo((character.x + character.w), character.y);
-    character.context.lineTo((character.x + character.w), (character.y + character.h));
-    character.context.lineTo(character.x, (character.y + character.h));
-    character.context.lineTo(character.x, character.y);
+    character.context.moveTo(x, y);
+    character.context.lineTo((x + w), y);
+    character.context.lineTo((x + w), (y + w));
+    character.context.lineTo(x, (y + w));
+    character.context.lineTo(x, y);
 };
