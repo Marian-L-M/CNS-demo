@@ -1,7 +1,3 @@
-// Next action: Toggle Button for main-text
-// Split click functions between main-text & info-box
-// Create utility function for click event - text/info-box update
-
 function MapMaker(canvas, globalTime, data) {
     // Base
     var map = this;
@@ -99,10 +95,6 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
 
     for (let i = 0; i < locationLength; i++) {
         map.location = new Location(map.canvas, data, globalTime,i);
-    
-        // Why? Might be obsolete? Handle via map.location?
-        // Character has correct way of handling this
-        let shape = data[globalTime].locations[i];
 
         // Define Location
         map.location.define();
@@ -110,25 +102,25 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
         if (map.location.context.isPointInPath(x,y)) {
             infoBox.classList.add("active-menu");
             ibToggle.classList.add("active-btn")
-            ibTitle.innerHTML = shape.name;
-            ibImg.src = shape.img;
+            ibTitle.innerHTML = map.location.name;
+            ibImg.src = map.location.img;
 
 
-            console.log(shape)
             ibLink.forEach(e => {
-                e.href = shape.link;
+                console.log(map.location)
+                e.href = map.location.link;
             });
             
             // Purge Info area & repopulate
             ibArea.innerHTML = "";
-            shape.info.area.forEach(e => {
+            map.location.info.area.forEach(e => {
                 // Set Text
                 map.setInfobox(e,ibArea,"dt","dd");
             }); 
 
             // Purge Info Box & repopulate
             ibText.innerHTML = "";
-            shape.info.text.forEach(e => {
+            map.location.info.text.forEach(e => {
                 // Set Text
                 map.setInfobox(e,ibText, "h4", "p");
             }); 
@@ -155,7 +147,7 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
             ibImg.src = character.img; 
 
             ibLink.forEach(e => {
-                e.href = character.src;
+                e.href = character.link;
             });
 
             // Purge Info area & repopulate

@@ -12,8 +12,8 @@
     - [x] Path to story bar
     - [X] Locations & Characters to info box
     - [x] Add reset button( + esc)
-- [ ] Add wiki links
-    - [ ] Create wiki sample page
+- [x] Add wiki links
+    - [x] Create wiki sample page
 - [ ] Transform object system to percentage base ( 1000*1000 grid)
 - [ ] Clean up code
     - [ ] Merge character & location
@@ -21,6 +21,7 @@
     - [ ] Unify overlapping event listeners
 - [ ] Clean up design
     - [ ] Toggle switches for info bar and info box
+    - [ ] Info box not visible when not prefilled
 - [ ] Create proper sample data
 - [ ] Version 1 complete (present!)
 

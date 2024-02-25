@@ -14,7 +14,7 @@ function Character (canvas, data, globalTime, index) {
     character.w = data[globalTime].characters[index].w;
     character.h = data[globalTime].characters[index].h;
     character.icon = data[globalTime].characters[index].icon;
-    character.src = data[globalTime].characters[index].link;
+    character.link = data[globalTime].characters[index].link;
     character.img = data[globalTime].characters[index].img;
     character.info = data[globalTime].characters[index].info;
 }

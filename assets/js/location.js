@@ -10,11 +10,13 @@ function Location (canvas, data, globalTime, index) {
     // Declarations might be doing nothing
     location.description = data[globalTime].locations[index].description;
     location.name = data[globalTime].locations[index].name;
-    location.src = data[globalTime].locations[index].link;
+    location.link = data[globalTime].locations[index].link;
+    location.img = data[globalTime].locations[index].img;
     location.points = data[globalTime].locations[index].points;
     location.fill = data[globalTime].locations[index].design.fill;
     location.stroke = data[globalTime].locations[index].design.stroke;
     location.lineWidth = data[globalTime].locations[index].design.lineW;
+    location.info = data[globalTime].locations[index].info;
 }
 
 
