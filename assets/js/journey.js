@@ -1,8 +1,6 @@
 function Journey (canvas, data, globalTime, index) {
     // Base
     let journey = this;
-    const cw = canvas.cw;
-    const ch = canvas.ch;
 
     // Global Attributes
     journey.canvas = canvas;
@@ -11,8 +9,8 @@ function Journey (canvas, data, globalTime, index) {
     journey.time = globalTime;
     journey.index = index;
     journey.path = journey.data[journey.time].journeys[index];
-    journey.ch = ch;
-    journey.cw = cw;
+    journey.ch = canvas.ch;
+    journey.cw = canvas.cw;
     
 }
 

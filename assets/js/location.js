@@ -1,3 +1,5 @@
+// Next action 20240225: Rework location to percentage values
+
 function Location (canvas, data, globalTime, index) {
     //
     let location = this;
@@ -17,13 +19,17 @@ function Location (canvas, data, globalTime, index) {
     location.stroke = data[globalTime].locations[index].design.stroke;
     location.lineWidth = data[globalTime].locations[index].design.lineW;
     location.info = data[globalTime].locations[index].info;
+    location.ch = canvas.ch;
+    location.cw = canvas.cw;
 }
 
 
 Location.prototype.draw = function() {
     // Base
     let location = this;
-
+    let cw = location.cw;
+    let ch = location.ch;
+    
     let points = location.points;
 
     location.context.fillStyle = location.fill;
@@ -31,11 +37,11 @@ Location.prototype.draw = function() {
     location.context.lineWidth = location.lineWidth;
 
     location.context.beginPath();
-    location.context.moveTo(points[0].x, points[0].y);
+    location.context.moveTo(points[0].x * cw, points[0].y * ch);
     for (var i = 1; i < points.length; i++) {
-        location.context.lineTo(points[i].x, points[i].y);
+        location.context.lineTo(points[i].x * cw, points[i].y * ch);
     }
-    location.context.lineTo(points[0].x, points[0].y);
+    location.context.lineTo(points[0].x * cw, points[0].y * ch);
     location.context.fill();
     location.context.stroke();
 }
@@ -43,13 +49,15 @@ Location.prototype.draw = function() {
 Location.prototype.define = function() {
     // Base
     let location = this;
+    let cw = location.cw;
+    let ch = location.ch;
 
     let points = location.points;
 
     location.context.beginPath();
-    location.context.moveTo(points[0].x, points[0].y);
+    location.context.moveTo(points[0].x * cw, points[0].y * ch);
     for (var i = 1; i < points.length; i++) {
-        location.context.lineTo(points[i].x, points[i].y);
+        location.context.lineTo(points[i].x * cw, points[i].y * ch);
     }
 }
 
