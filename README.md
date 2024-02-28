@@ -14,7 +14,7 @@
     - [x] Add reset button( + esc)
 - [x] Add wiki links
     - [x] Create wiki sample page
-- [ ] Transform object system to percentage base ( 1000*1000 grid)
+- [x] Transform object system to percentage base ( 1000*1000 grid)
 - [ ] Clean up code
     - [ ] Merge character & location
     - [ ] Unify overlapping defines
