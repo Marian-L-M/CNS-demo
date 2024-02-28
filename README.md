@@ -20,6 +20,7 @@
     - [ ] Unify overlapping defines
     - [ ] Unify overlapping event listeners
     - [ ] Unify click events, needs to break if one target is found (Journeys overlapping locations)
+    - [ ] Fix layering: Chars > Journeys > Locations
 - [ ] Clean up design
     - [ ] Toggle switches for info bar and info box
     - [ ] Info box not visible when not prefilled
