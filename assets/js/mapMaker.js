@@ -190,7 +190,7 @@ MapMaker.prototype.createCharacters = function() {
     // Character
     for (let i = 0; i < charactersLength; i++) {
         map.character = new Character(map.canvas, data, globalTime, i);
-        map.character.create()
+        map.character.create() // Obsolete with generator constructor
         map.character.draw()
     }
 }
@@ -267,7 +267,7 @@ MapMaker.prototype.createEvents = function() {
 }
 
 
-// Infobox functions
+// Utility functions
 MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType){
     const title = document.createElement(titleType);
     const titleNode = document.createTextNode(ib.title);
@@ -278,3 +278,7 @@ MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType
     para.appendChild(node);
     container.append(title, para);
 }
+
+// MapMaker.prototype.clickLoop = function( Array){
+
+// }
