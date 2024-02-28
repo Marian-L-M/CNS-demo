@@ -1,15 +1,11 @@
-// Next action 20240225: Rework location to percentage values
-
 function Location (canvas, data, globalTime, index) {
-    //
+    // Base
     let location = this;
 
     // Global Attributes
     location.canvas = canvas;
     location.context = location.canvas.getContext('2d');
 
-    // Note 2024/02/15
-    // Declarations might be doing nothing
     location.description = data[globalTime].locations[index].description;
     location.name = data[globalTime].locations[index].name;
     location.link = data[globalTime].locations[index].link;
