@@ -454,6 +454,20 @@ timeScroller.value = timeIndexStart;
 timeScroller.min = timeIndexStart;
 timeScroller.max = timeIndexMax;
 
+// Global Variables
+let mainTitle = document.getElementById("main-title") ;
+let mainContent = document.getElementById("main-content") ;
+
+let mouselabel = document.getElementById("mouse-label")
+
+let infoBox = document.getElementById("info-box") ;
+let ibToggle = document.getElementById("toggle-info-box") ;
+let ibImg = document.getElementById("ib-img") ;
+let ibLink = document.querySelectorAll(".ib-link") ;
+let ibTitle = document.getElementById("ib-title") ;
+let ibText = document.getElementById("info-text") ;
+let ibArea = document.getElementById("info-area") ;
+
 // Load data
 window.onload = function(){
     setPage()
@@ -509,7 +523,6 @@ window.addEventListener("keydown", (e) => {
 });
 
 // // Set Cursor Label
-let mouselabel = document.getElementById("mouse-label")
 let mousePos = { x: undefined, y: undefined };
 window.addEventListener('mousemove', (e) => {
     mousePos = { x: e.clientX, y: e.clientY };

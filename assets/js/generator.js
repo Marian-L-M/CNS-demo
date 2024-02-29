@@ -1,5 +1,6 @@
 // For future purposes refactor type character to type image
-
+// Refactor data into unified naming
+// Journeys into generator
 function Generator (canvas, data, globalTime, index, type) {
     // Base
     let generator = this;
@@ -26,7 +27,6 @@ function Generator (canvas, data, globalTime, index, type) {
             
             // Style
             generator.w = data[globalTime].characters[index].w;
-            generator.h = data[globalTime].characters[index].h; // Delete h - not needed for square icons
             generator.x = data[globalTime].characters[index].x;
             generator.y = data[globalTime].characters[index].y;
             break;
@@ -98,9 +98,26 @@ Generator.prototype.define = function () {
 
     switch(generator.type){
         case 'character':
+            const x = generator.x * generator.cw;
+            const y = generator.y * generator.ch;
+            const w = generator.w * generator.cw; 
+        
+            generator.context.beginPath();
+            generator.context.moveTo(x, y);
+            generator.context.lineTo((x + w), y);
+            generator.context.lineTo((x + w), (y + w));
+            generator.context.lineTo(x, (y + w));
+            generator.context.lineTo(x, y);
 
             break;
         case 'location': 
+            const points = generator.points;
+
+            generator.context.beginPath();
+            generator.context.moveTo(points[0].x * cw, points[0].y * ch);
+            for (var i = 1; i < points.length; i++) {
+                generator.context.lineTo(points[i].x * cw, points[i].y * ch);
+            }
             break;
         default:
             break;

@@ -42,7 +42,7 @@ MapMaker.prototype.runMapLoop = function() {
     // Create Map Objects
     map.createObjects();
 
-
+    // Animation Loop
     window.requestAnimationFrame(function() {
         map.runMapLoop();
     });
@@ -60,13 +60,12 @@ MapMaker.prototype.createObjects = function() {
     // Base
     var map = this;
     
-    // Characters
-    map.createCharacters();
-
-    // Locations
+    
+    // Locations & Journeys
     map.createEvents();
-
-    // map.createHoverEvents();
+    
+    // Characters & Icons
+    map.createIcons();
 }
 
 MapMaker.prototype.createClickEvents = function(canvas, event) {
@@ -77,99 +76,39 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-
-    // Infobar
-    let mainTitle = document.getElementById("main-title") ;
-    let mainContent = document.getElementById("main-content") ;
-    let infoBox = document.getElementById("info-box") ;
-    let ibToggle = document.getElementById("toggle-info-box") ;
-    let ibImg = document.getElementById("ib-img") ;
-    let ibLink = document.querySelectorAll(".ib-link") ;
-    let ibTitle = document.getElementById("ib-title") ;
-    let ibText = document.getElementById("info-text") ;
-    let ibArea = document.getElementById("info-area") ;
+    let locationLength = data[globalTime].locations.length
+    let charactersLength = data[globalTime].characters.length;
+    let journeysLength = data[globalTime].journeys.length; 
 
     // Location click events
-    let locationLength = data[globalTime].locations.length
-
-
     for (let i = 0; i < locationLength; i++) {
-        map.location = new Location(map.canvas, data, globalTime,i);
+        // Create Location Path
+        map.location = new Generator(map.canvas, data, globalTime,i, 'location');
 
         // Define Location
         map.location.define();
 
+        // Populate infobox
         if (map.location.context.isPointInPath(x,y)) {
-            infoBox.classList.add("active-menu");
-            ibToggle.classList.add("active-btn")
-            ibTitle.innerHTML = map.location.name;
-            ibImg.src = map.location.img;
-
-
-            ibLink.forEach(e => {
-                console.log(map.location)
-                e.href = map.location.link;
-            });
-            
-            // Purge Info area & repopulate
-            ibArea.innerHTML = "";
-            map.location.info.area.forEach(e => {
-                // Set Text
-                map.setInfobox(e,ibArea,"dt","dd");
-            }); 
-
-            // Purge Info Box & repopulate
-            ibText.innerHTML = "";
-            map.location.info.text.forEach(e => {
-                // Set Text
-                map.setInfobox(e,ibText, "h4", "p");
-            }); 
+            map.infoboxClickActions(map.location);
         };
     };
 
     // Character click events
-    let charactersLength = data[globalTime].characters.length;
-
     for (let i = 0; i < charactersLength; i++) {
-        map.character = new Character(map.canvas, data, globalTime, i);
+        // Create Charater Path
+        map.character = new Generator(map.canvas, data, globalTime, i, 'character');
 
         // Define character location
-        map.character.define(map.character);
+        map.character.define();
 
+        // Populate infobox
         if (map.character.context.isPointInPath(x,y)) {
-            mainTitle.innerHTML = map.character.name;
-            infoBox.classList.add("active-menu");
-            ibToggle.classList.add("active-btn")
-
-            let character = map.character
-
-            ibTitle.innerHTML = character.name;            
-            ibImg.src = character.img; 
-
-            ibLink.forEach(e => {
-                e.href = character.link;
-            });
-
-            // Purge Info area & repopulate
-            ibArea.innerHTML = "";
-            character.info.area.forEach(e => {
-                // Set Text
-                map.setInfobox(e,ibArea,"dt","dd");
-            }); 
-
-            // Purge Info Box & repopulate
-            ibText.innerHTML = "";
-            character.info.text.forEach(e => {
-                // Set Text
-                map.setInfobox(e,ibText, "h4", "p");
-            }); 
+            map.infoboxClickActions(map.character);
         }
     }
 
     // Journey click events
-    let journeysLength = data[globalTime].journeys.length; 
-    const oh = 20;
-
     for (let i = 0; i < journeysLength; i++) {
         for (let j = 0; j < map.journey.path.length; j++) {
             map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
@@ -182,15 +121,14 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     };
 }
 
-MapMaker.prototype.createCharacters = function() {
+MapMaker.prototype.createIcons = function() {
     // Setup
     let map = this;
     let charactersLength = data[globalTime].characters.length
 
-    // Character
+    // Characters
     for (let i = 0; i < charactersLength; i++) {
-        map.character = new Character(map.canvas, data, globalTime, i);
-        map.character.create() // Obsolete with generator constructor
+        map.character = new Generator(map.canvas, data, globalTime, i, 'character');
         map.character.draw()
     }
 }
@@ -201,15 +139,13 @@ MapMaker.prototype.createEvents = function() {
     let locationLength = data[globalTime].locations.length
     let charactersLength = data[globalTime].characters.length
     let journeysLength = data[globalTime].journeys.length
-
     
     // Mouse movement for hover functions
     var r = map.canvas.getBoundingClientRect()
-    let mouselabel = document.getElementById("mouse-label") // Doesnt actually need to be declared again
     
     // Draw Locations
     for (let i = 0; i < locationLength; i++) {
-        map.location = new Location(map.canvas, data, globalTime,i);
+        map.location = new Generator(map.canvas, data, globalTime,i, 'location');
         map.location.draw();
     }
 
@@ -227,9 +163,11 @@ MapMaker.prototype.createEvents = function() {
         // Reset mouse label
         mouselabel.innerHTML = "";
 
+        // 240229 Next action: unify hover functions + clean up main.js (Split files between: data, variables, utilities)
+
         // Location hover
         for (var i = 0; i < locationLength; i++) {
-            map.location = new Location(map.canvas, data, globalTime,i);
+            map.location = new Generator(map.canvas, data, globalTime,i, 'location');
             map.location.define();
             if (map.location.context.isPointInPath(x,y)) {
                 mouselabel.innerHTML = map.location.name;
@@ -238,21 +176,14 @@ MapMaker.prototype.createEvents = function() {
 
         // Character hover
         for (var i = 0; i < charactersLength; i++) {
-            map.character = new Character(map.canvas, data, globalTime,i);
+            map.character = new Generator(map.canvas, data, globalTime,i, 'character');
             map.character.define();
             if (map.character.context.isPointInPath(x,y)) {
                 mouselabel.innerHTML = map.character.name;
             }
         }
 
-        // Character hover
-        for (var i = 0; i < journeysLength; i++) {
-            map.character = new Character(map.canvas, data, globalTime,i);
-            map.character.define();
-            if (map.character.context.isPointInPath(x,y)) {
-                mouselabel.innerHTML = map.character.name;
-            }
-        }
+        // Journey hover
         for (let i = 0; i < journeysLength; i++) {
             for (let j = 0; j < map.journey.path.length; j++) {
                 map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
@@ -268,6 +199,31 @@ MapMaker.prototype.createEvents = function() {
 
 
 // Utility functions
+MapMaker.prototype.infoboxClickActions = function (content){
+    infoBox.classList.add("active-menu");
+    ibToggle.classList.add("active-btn")
+    ibTitle.innerHTML = content.name;
+    ibImg.src = content.img;
+
+    // Set links
+    ibLink.forEach(e => {
+        e.href = content.link;
+    });
+    
+    // Purge Info area & repopulate
+    ibArea.innerHTML = "";
+    content.info.area.forEach(e => {
+        // Set Text
+        this.setInfobox(e,ibArea,"dt","dd");
+    }); 
+
+    // Purge Info Box & repopulate
+    ibText.innerHTML = "";
+    content.info.text.forEach(e => {
+        // Set Text
+        this.setInfobox(e,ibText, "h4", "p");
+    }); 
+}
 MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType){
     const title = document.createElement(titleType);
     const titleNode = document.createTextNode(ib.title);
@@ -278,7 +234,3 @@ MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType
     para.appendChild(node);
     container.append(title, para);
 }
-
-// MapMaker.prototype.clickLoop = function( Array){
-
-// }
