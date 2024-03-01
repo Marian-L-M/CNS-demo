@@ -76,37 +76,13 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    let locationLength = data[globalTime].locations.length
-    let charactersLength = data[globalTime].characters.length;
     let journeysLength = data[globalTime].journeys.length; 
 
     // Location click events
-    for (let i = 0; i < locationLength; i++) {
-        // Create Location Path
-        map.location = new Generator(map.canvas, data, globalTime,i, 'location');
-
-        // Define Location
-        map.location.define();
-
-        // Populate infobox
-        if (map.location.context.isPointInPath(x,y)) {
-            map.infoboxClickActions(map.location);
-        };
-    };
-
+    map.createClickLoop("location", x, y)
+    
     // Character click events
-    for (let i = 0; i < charactersLength; i++) {
-        // Create Charater Path
-        map.character = new Generator(map.canvas, data, globalTime, i, 'character');
-
-        // Define character location
-        map.character.define();
-
-        // Populate infobox
-        if (map.character.context.isPointInPath(x,y)) {
-            map.infoboxClickActions(map.character);
-        }
-    }
+    map.createClickLoop("character", x, y)
 
     // Journey click events
     for (let i = 0; i < journeysLength; i++) {
@@ -199,7 +175,42 @@ MapMaker.prototype.createEvents = function() {
 
 
 // Utility functions
+
+// Click events
+MapMaker.prototype.createClickLoop = function (type, x, y){
+    // Base
+    let map = this;
+
+    // Get array length
+    let length;
+    switch(type){
+        case'location':
+            length = data[globalTime].locations.length;
+            break;
+        case'character':
+            length = data[globalTime].characters.length;
+            break;
+    };
+
+    for (let i = 0; i < length; i++) {
+        // Create Location Path
+        map.object = new Generator(map.canvas, data, globalTime,i, type);
+
+        // Define Location
+        map.object.define();
+
+        // Populate infobox
+        if (map.object.context.isPointInPath(x,y)) {
+            map.infoboxClickActions(map.object);
+        };
+    };
+};
+
+// Infobox
 MapMaker.prototype.infoboxClickActions = function (content){
+    // Base
+    let map = this;
+
     infoBox.classList.add("active-menu");
     ibToggle.classList.add("active-btn")
     ibTitle.innerHTML = content.name;
@@ -214,16 +225,17 @@ MapMaker.prototype.infoboxClickActions = function (content){
     ibArea.innerHTML = "";
     content.info.area.forEach(e => {
         // Set Text
-        this.setInfobox(e,ibArea,"dt","dd");
+        map.setInfobox(e,ibArea,"dt","dd");
     }); 
 
     // Purge Info Box & repopulate
     ibText.innerHTML = "";
     content.info.text.forEach(e => {
         // Set Text
-        this.setInfobox(e,ibText, "h4", "p");
+        map.setInfobox(e,ibText, "h4", "p");
     }); 
 }
+
 MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType){
     const title = document.createElement(titleType);
     const titleNode = document.createTextNode(ib.title);
