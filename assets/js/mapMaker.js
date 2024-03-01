@@ -76,7 +76,7 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    let journeysLength = data[globalTime].journeys.length; 
+    // let journeysLength = data[globalTime].journeys.length; 
 
     // Location click events
     map.createClickLoop("location", x, y)
@@ -85,16 +85,17 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     map.createClickLoop("character", x, y)
 
     // Journey click events
-    for (let i = 0; i < journeysLength; i++) {
-        for (let j = 0; j < map.journey.path.length; j++) {
-            map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
-            map.journeyEvent.defineEvent();
-            if (map.journeyEvent.context.isPointInPath(x,y)) {
-                mainTitle.innerHTML = map.journeyEvent.name;
-                mainContent.innerHTML = map.journeyEvent.description;
-            }
-        }
-    };
+    // Journey in nested group makes no sense -> refactor, bind with a foreign key instead of nesting
+    // for (let i = 0; i < journeysLength; i++) {
+    //     for (let j = 0; j < map.journey.path.length; j++) {
+    //         map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
+    //         map.journeyEvent.defineEvent();
+    //         if (map.journeyEvent.context.isPointInPath(x,y)) {
+    //             mainTitle.innerHTML = map.journeyEvent.name;
+    //             mainContent.innerHTML = map.journeyEvent.description;
+    //         }
+    //     }
+    // };
 }
 
 MapMaker.prototype.createIcons = function() {
@@ -131,6 +132,13 @@ MapMaker.prototype.createEvents = function() {
         map.journey.draw();
     }
 
+    // Draw Journey lines
+    let journeyData = data[globalTime].journeys;
+    for (let i = 0; i < (journeysLength - 1); i++) {
+        // map.journey = new Journey(map.canvas, data, globalTime,i);
+        map.drawNodeLine(journeyData[i].x, journeyData[i].y,journeyData[i + 1].x, journeyData[i + 1].y);
+    }
+
     // Set mouse label contents
     map.canvas.onmousemove = (e) => {
         let x = e.clientX - r.left;
@@ -160,15 +168,15 @@ MapMaker.prototype.createEvents = function() {
         }
 
         // Journey hover
-        for (let i = 0; i < journeysLength; i++) {
-            for (let j = 0; j < map.journey.path.length; j++) {
-                map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
-                map.journeyEvent.defineEvent();
-                if (map.journeyEvent.context.isPointInPath(x,y)) {
-                    mouselabel.innerHTML = map.journeyEvent.name;
-                }
-            }
-        };
+        // for (let i = 0; i < journeysLength; i++) {
+        //     for (let j = 0; j < map.journey.path.length; j++) {
+        //         map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
+        //         map.journeyEvent.defineEvent();
+        //         if (map.journeyEvent.context.isPointInPath(x,y)) {
+        //             mouselabel.innerHTML = map.journeyEvent.name;
+        //         }
+        //     }
+        // };
         
     }
 }
@@ -246,3 +254,18 @@ MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType
     para.appendChild(node);
     container.append(title, para);
 }
+
+
+MapMaker.prototype.drawNodeLine = function(x,y,lx,ly) {
+
+        // 240301 To Do:
+        // Adjust for CW & CH
+
+        // Setup
+        let journey = this;
+        journey.context.beginPath();
+        journey.context.moveTo(x,y);
+        journey.context.lineTo(lx,ly);
+        journey.context.stroke();
+        journey.context.fill();
+    }
