@@ -85,17 +85,16 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     map.createClickLoop("character", x, y)
 
     // Journey click events
-    // Journey in nested group makes no sense -> refactor, bind with a foreign key instead of nesting
-    // for (let i = 0; i < journeysLength; i++) {
-    //     for (let j = 0; j < map.journey.path.length; j++) {
-    //         map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
-    //         map.journeyEvent.defineEvent();
-    //         if (map.journeyEvent.context.isPointInPath(x,y)) {
-    //             mainTitle.innerHTML = map.journeyEvent.name;
-    //             mainContent.innerHTML = map.journeyEvent.description;
-    //         }
-    //     }
-    // };
+    let journeysLength = data[globalTime].journeys.length
+    for (let i = 0; i < journeysLength; i++) {
+        map.journey = new Journey (map.canvas, data, globalTime, i)
+        map.journey.defineNode(map.journey.x, map.journey.y, 5);
+        if (map.journey.context.isPointInPath(x,y)) {
+            mainTitle.innerHTML = map.journey.name;
+            mainContent.innerHTML = map.journey.description;
+            break;
+        }
+    };
 }
 
 MapMaker.prototype.createIcons = function() {
@@ -165,7 +164,7 @@ MapMaker.prototype.createEvents = function() {
         // Journey hover
         for (let i = 0; i < journeysLength; i++) {
             map.journey = new Journey(map.canvas, data, globalTime, i)
-            map.journey.defineNode(map.journey.x * map.journey.cw, map.journey.y * map.journey.ch, 5);
+            map.journey.defineNode(map.journey.x, map.journey.y, 5);
 
             if (map.journey.context.isPointInPath(x,y)) {
                 mouselabel.innerHTML = map.journey.name;
@@ -217,6 +216,7 @@ MapMaker.prototype.createClickLoop = function (type, x, y){
         // Populate infobox
         if (map.object.context.isPointInPath(x,y)) {
             map.infoboxClickActions(map.object);
+            break;
         };
     };
 };
@@ -270,6 +270,9 @@ MapMaker.prototype.drawNodeLine = function(x,y,lx,ly) {
         const ch = journey.journey.ch;
 
         journey.context.beginPath();
+        journey.context.lineWidth=4;
+        journey.context.strokeStyle= "black";
+        journey.context.fillStyle= "black";
         journey.context.moveTo(cw*x, ch*y);
         journey.context.lineTo(cw*lx, ch*ly);
         journey.context.stroke();
