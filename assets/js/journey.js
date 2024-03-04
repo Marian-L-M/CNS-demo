@@ -35,22 +35,22 @@ Journey.prototype.draw = function() {
     // let nodeLimit = path.length;
     journey.context.beginPath();
 
-    journey.drawNode(journey.cw*journey.x, journey.ch*journey.y)
+    journey.defineNode(journey.cw*journey.x, journey.ch*journey.y, 5)
     
     journey.context.stroke();
     journey.context.fill();
 }
-// 240301 Add define node
-Journey.prototype.drawNode = function(x,y) {
+
+Journey.prototype.defineNode = function(x,y, offset) {
     // Setup
     let journey = this;
     
     journey.context.moveTo(x,y);
-    journey.context.lineTo(x - 5 , y - 5);
-    journey.context.lineTo(x + 5 , y - 5);
-    journey.context.lineTo(x + 5 , y + 5);
-    journey.context.lineTo(x - 5 , y + 5);
-    journey.context.lineTo(x - 5 , y - 5);
+    journey.context.lineTo(x - offset , y - offset);
+    journey.context.lineTo(x + offset , y - offset);
+    journey.context.lineTo(x + offset , y + offset);
+    journey.context.lineTo(x - offset , y + offset);
+    journey.context.lineTo(x - offset , y - offset);
     
 }
 

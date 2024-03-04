@@ -135,9 +135,12 @@ MapMaker.prototype.createEvents = function() {
     // Draw Journey lines
     let journeyData = data[globalTime].journeys;
     for (let i = 0; i < (journeysLength - 1); i++) {
-        // map.journey = new Journey(map.canvas, data, globalTime,i);
-        map.drawNodeLine(journeyData[i].x, journeyData[i].y,journeyData[i + 1].x, journeyData[i + 1].y);
+        // Draw line if next journey is of same key
+        if(journeyData[i].key == journeyData[i + 1].key) {
+            map.drawNodeLine(journeyData[i].x, journeyData[i].y,journeyData[i + 1].x, journeyData[i + 1].y);
+        }
     }
+
 
     // Set mouse label contents
     map.canvas.onmousemove = (e) => {
@@ -155,8 +158,20 @@ MapMaker.prototype.createEvents = function() {
             map.location.define();
             if (map.location.context.isPointInPath(x,y)) {
                 mouselabel.innerHTML = map.location.name;
+                break;
             }
         }
+
+        // Journey hover
+        for (let i = 0; i < journeysLength; i++) {
+            map.journey = new Journey(map.canvas, data, globalTime, i)
+            map.journey.defineNode(map.journey.x * map.journey.cw, map.journey.y * map.journey.ch, 5);
+
+            if (map.journey.context.isPointInPath(x,y)) {
+                mouselabel.innerHTML = map.journey.name;
+                break;
+            }
+        };
 
         // Character hover
         for (var i = 0; i < charactersLength; i++) {
@@ -164,19 +179,9 @@ MapMaker.prototype.createEvents = function() {
             map.character.define();
             if (map.character.context.isPointInPath(x,y)) {
                 mouselabel.innerHTML = map.character.name;
+                break;
             }
         }
-
-        // Journey hover
-        // for (let i = 0; i < journeysLength; i++) {
-        //     for (let j = 0; j < map.journey.path.length; j++) {
-        //         map.journeyEvent = new JourneyEvent (map.canvas, data, globalTime, i, j)
-        //         map.journeyEvent.defineEvent();
-        //         if (map.journeyEvent.context.isPointInPath(x,y)) {
-        //             mouselabel.innerHTML = map.journeyEvent.name;
-        //         }
-        //     }
-        // };
         
     }
 }
@@ -197,6 +202,8 @@ MapMaker.prototype.createClickLoop = function (type, x, y){
             break;
         case'character':
             length = data[globalTime].characters.length;
+            break;
+        default:
             break;
     };
 
@@ -257,15 +264,14 @@ MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType
 
 
 MapMaker.prototype.drawNodeLine = function(x,y,lx,ly) {
-
-        // 240301 To Do:
-        // Adjust for CW & CH
-
         // Setup
         let journey = this;
+        const cw = journey.journey.cw;
+        const ch = journey.journey.ch;
+
         journey.context.beginPath();
-        journey.context.moveTo(x,y);
-        journey.context.lineTo(lx,ly);
+        journey.context.moveTo(cw*x, ch*y);
+        journey.context.lineTo(cw*lx, ch*ly);
         journey.context.stroke();
         journey.context.fill();
     }
