@@ -76,7 +76,7 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    // let journeysLength = data[globalTime].journeys.length; 
+    let journeysLength = data[globalTime].journeys.length
 
     // Location click events
     map.createClickLoop("location", x, y)
@@ -85,10 +85,10 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     map.createClickLoop("character", x, y)
 
     // Journey click events
-    let journeysLength = data[globalTime].journeys.length
+    // 240306: Next action Unify generator attribute declarations -> unify data naming convention
     for (let i = 0; i < journeysLength; i++) {
-        map.journey = new Journey (map.canvas, data, globalTime, i)
-        map.journey.defineNode(map.journey.x, map.journey.y, 5);
+        map.journey = new Generator (map.canvas, data, globalTime, i, "journey")
+        map.journey.defineNode();
         if (map.journey.context.isPointInPath(x,y)) {
             mainTitle.innerHTML = map.journey.name;
             mainContent.innerHTML = map.journey.description;
@@ -125,18 +125,16 @@ MapMaker.prototype.createEvents = function() {
         map.location.draw();
     }
 
-    // Draw Journeys
-    for (let i = 0; i < journeysLength; i++) {
-        map.journey = new Journey(map.canvas, data, globalTime,i);
-        map.journey.draw();
-    }
-
-    // Draw Journey lines
+    // Draw Journeys + lines
     let journeyData = data[globalTime].journeys;
-    for (let i = 0; i < (journeysLength - 1); i++) {
-        // Draw line if next journey is of same key
-        if(journeyData[i].key == journeyData[i + 1].key) {
-            map.drawNodeLine(journeyData[i].x, journeyData[i].y,journeyData[i + 1].x, journeyData[i + 1].y);
+    for (let i = 0; i < journeysLength; i++) {
+        map.journey = new Generator(map.canvas, data, globalTime,i,'journey');
+        map.journey.draw();
+        if(i < (journeysLength - 1)){
+            if(journeyData[i].key == journeyData[i + 1].key) {
+                // map.drawNodeLine(journeyData[i].x, journeyData[i].y,journeyData[i + 1].x, journeyData[i + 1].y);
+                map.journey.drawNodeLine(data)
+            }
         }
     }
 
@@ -163,8 +161,8 @@ MapMaker.prototype.createEvents = function() {
 
         // Journey hover
         for (let i = 0; i < journeysLength; i++) {
-            map.journey = new Journey(map.canvas, data, globalTime, i)
-            map.journey.defineNode(map.journey.x, map.journey.y, 5);
+            map.journey = new Generator(map.canvas, data, globalTime, i, 'journey')
+            map.journey.defineNode();
 
             if (map.journey.context.isPointInPath(x,y)) {
                 mouselabel.innerHTML = map.journey.name;
@@ -261,20 +259,3 @@ MapMaker.prototype.setInfobox = function ( ib, container, titleType, contentType
     para.appendChild(node);
     container.append(title, para);
 }
-
-
-MapMaker.prototype.drawNodeLine = function(x,y,lx,ly) {
-        // Setup
-        let journey = this;
-        const cw = journey.journey.cw;
-        const ch = journey.journey.ch;
-
-        journey.context.beginPath();
-        journey.context.lineWidth=4;
-        journey.context.strokeStyle= "black";
-        journey.context.fillStyle= "black";
-        journey.context.moveTo(cw*x, ch*y);
-        journey.context.lineTo(cw*lx, ch*ly);
-        journey.context.stroke();
-        journey.context.fill();
-    }
