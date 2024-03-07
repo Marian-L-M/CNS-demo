@@ -16,12 +16,14 @@
     - [x] Create wiki sample page
 - [x] Transform object system to percentage base ( 1000*1000 grid)
 - [ ] Clean up code
-    - [ ] Merge character & location
-    - [ ] Unify overlapping defines
+    - [x] Merge character & location
+    - [x] Unify overlapping defines
     - [ ] Unify overlapping event listeners
     - [ ] Unify click events, needs to break if one target is found (Journeys overlapping locations)
     - [ ] Fix layering: Chars > Journeys > Locations
     - [ ] Chreate Event Icon clickable type from character template
+    - [ ] Unify data object (Merge character, location, journey into single object list. With a type property to define which is which)
+    - [ ] Simplify generator for less differentiation in the switch cases
 - [ ] Clean up design
     - [ ] Toggle switches for info bar and info box
     - [ ] Info box not visible when not prefilled

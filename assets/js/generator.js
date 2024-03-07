@@ -98,7 +98,7 @@ Generator.prototype.draw = function() {
         case 'journey':
             generator.context.strokeStyle= "black";
             generator.context.fillStyle= "black";
-            generator.defineNode();
+            generator.define();
             generator.context.stroke();
             generator.context.fill();
             break;
@@ -112,11 +112,11 @@ Generator.prototype.define = function () {
     let generator = this;
     const cw = generator.cw;
     const ch = generator.ch;
+    const x = generator.x * generator.cw;
+    const y = generator.y * generator.ch;
 
     switch(generator.type){
         case 'character':
-            const x = generator.x * generator.cw;
-            const y = generator.y * generator.ch;
             const w = generator.w * generator.cw; 
         
             generator.context.beginPath();
@@ -136,25 +136,19 @@ Generator.prototype.define = function () {
                 generator.context.lineTo(points[i].x * cw, points[i].y * ch);
             }
             break;
+        case 'journey': 
+            const offset = 5;
+
+            generator.context.beginPath();
+            generator.context.moveTo(x,y);
+            generator.context.lineTo(x - offset , y - offset);
+            generator.context.lineTo(x + offset , y - offset);
+            generator.context.lineTo(x + offset , y + offset);
+            generator.context.lineTo(x - offset , y + offset);
+            generator.context.lineTo(x - offset , y - offset);
         default:
             break;
     }
-}
-
-Generator.prototype.defineNode = function() {
-        // Base
-        let generator = this;
-        const x = generator.x * generator.cw
-        const y = generator.y * generator.ch
-        const offset = 5;
-
-        generator.context.beginPath();
-        generator.context.moveTo(x,y);
-        generator.context.lineTo(x - offset , y - offset);
-        generator.context.lineTo(x + offset , y - offset);
-        generator.context.lineTo(x + offset , y + offset);
-        generator.context.lineTo(x - offset , y + offset);
-        generator.context.lineTo(x - offset , y - offset);
 }
 
 Generator.prototype.drawNodeLine = function(data) {
