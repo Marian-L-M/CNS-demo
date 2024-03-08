@@ -14,6 +14,7 @@ function Generator (canvas, data, globalTime, index, type) {
     generator.context = generator.canvas.getContext('2d');
     generator.globalTime = globalTime;
     generator.index = index; // 240306 To do: Use for draw NodeLine
+    generator.iconSize = 55;
 
     // Specifications
     switch(type){
@@ -28,7 +29,6 @@ function Generator (canvas, data, globalTime, index, type) {
             generator.link = data[globalTime].characters[index].link;
             
             // Style
-            generator.w = data[globalTime].characters[index].w; // Icon width should be fixed, no need to store size in data
             generator.x = data[globalTime].characters[index].x;
             generator.y = data[globalTime].characters[index].y;
             break;
@@ -75,8 +75,8 @@ Generator.prototype.draw = function() {
                 generator.img, 
                 (generator.x * generator.cw), 
                 (generator.y * generator.ch), 
-                (generator.w * generator.cw), 
-                (generator.w * generator.cw) 
+                (generator.iconSize * generator.cw), 
+                (generator.iconSize * generator.cw) 
             );
             break;
         case 'location': 
@@ -117,7 +117,7 @@ Generator.prototype.define = function () {
 
     switch(generator.type){
         case 'character':
-            const w = generator.w * generator.cw; 
+            const w = generator.iconSize * generator.cw; 
         
             generator.context.beginPath();
             generator.context.moveTo(x, y);

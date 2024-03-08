@@ -15,7 +15,6 @@ let data = [
                 "img": "assets/img/characters/character-1-full.jpg",
                 "x": 115,
                 "y": 115,
-                "w": 55,
                 "info":{
                     "area":[{
                         "title" : "Character-1",
@@ -67,7 +66,6 @@ let data = [
                 "img": "assets/img/characters/character-2-full.jpg",
                 "x": 815,
                 "y": 415,
-                "w": 55,
                 "info":{
                     "area":[{
                         "title" : "Character-2",
