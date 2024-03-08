@@ -93,15 +93,12 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
 MapMaker.prototype.createIcons = function() {
     // Setup
     let map = this;
-    let charactersLength = data[globalTime].characters.length
 
     // Characters
     // After refactoring expand character to accomodate icons in general (histori events etc.)
-    for (let i = 0; i < charactersLength; i++) {
-        map.character = new Generator(map.canvas, data, globalTime, i, 'character');
-        map.character.draw()
-    }
+    map.drawIcon('character')
 }
+
 MapMaker.prototype.drawObjects = function() {
     // Setup
     let map = this;
@@ -178,6 +175,17 @@ MapMaker.prototype.getTypeLength = function(type) {
     return length;
 }
 
+MapMaker.prototype.drawIcon = function(type) {
+    // Base
+    let map = this;
+    const length = map.getTypeLength(type);
+
+    for (let i = 0; i < length; i++) {
+        map.object = new Generator(map.canvas, data, globalTime,i, type);
+        map.object.draw()
+    }
+}
+
 MapMaker.prototype.hoverAction = function(type, x, y) {
     // Base
     let map = this;
@@ -201,7 +209,8 @@ MapMaker.prototype.createClickLoop = function (type, x, y){
     // Get array length
     let length = map.getTypeLength(type);
     switch(type){
-        case 'location' || 'character':
+        case 'location':
+        case 'character':
             map.runClickLoopIb(type, length, x, y)
             break;
         case'journey':
@@ -234,7 +243,6 @@ MapMaker.prototype.runClickLoopIb = function (type, length, x, y){
 MapMaker.prototype.runClickLoopMain = function (type, length, x, y){
     // Base
     let map = this;
-    console.log(map)
     for (let i = 0; i < length; i++) {
         // Create Location Path
         map.object = new Generator(map.canvas, data, globalTime,i, type);
@@ -250,6 +258,8 @@ MapMaker.prototype.runClickLoopMain = function (type, length, x, y){
         }
     };
 }
+
+
 
 // Infobox
 MapMaker.prototype.infoboxClickActions = function (content){
