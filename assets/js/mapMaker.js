@@ -61,8 +61,8 @@ MapMaker.prototype.createObjects = function() {
     var map = this;
     
     
-    // 240307 Hover Events -> rename and move out of createObjects
-    map.createEvents();
+    // Hover events
+    map.createHoverEvents();
     
     // Draw Location and paths
     map.drawObjects();
@@ -81,13 +81,13 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     const y = event.clientY - rect.top;
 
     // Location click events
-    map.createClickLoop("location", x, y)
+    map.createClickLoop("location", x, y);
     
     // Character click events
-    map.createClickLoop("character", x, y)
+    map.createClickLoop("character", x, y);
 
     // Journey click events
-    map.createClickLoop("journey", x, y)
+    map.createClickLoop("journey", x, y);
 }
 
 MapMaker.prototype.createIcons = function() {
@@ -105,18 +105,19 @@ MapMaker.prototype.createIcons = function() {
 MapMaker.prototype.drawObjects = function() {
     // Setup
     let map = this;
-    let journeysLength = data[globalTime].journeys.length
+    let locationsLength = map.getTypeLength('location');
+    let journeysLength = map.getTypeLength('journey');
     let journeyData = data[globalTime].journeys;
     
     // Draw Locations
     // 240307 Next action: Unify draw functions/loops
-    for (let i = 0; i < map.getTypeLength('location'); i++) {
+    for (let i = 0; i < locationsLength;  i++) {
         map.location = new Generator(map.canvas, data, globalTime,i, 'location');
         map.location.draw();
     }
 
     // Draw Journeys + lines
-    for (let i = 0; i < map.getTypeLength('journey'); i++) {
+    for (let i = 0; i < journeysLength; i++) {
         map.journey = new Generator(map.canvas, data, globalTime,i,'journey');
         map.journey.draw();
         if(i < (journeysLength - 1)){
@@ -127,12 +128,9 @@ MapMaker.prototype.drawObjects = function() {
     }
 }
 
-MapMaker.prototype.createEvents = function() {
+MapMaker.prototype.createHoverEvents = function() {
     // Setup
     let map = this;
-    let locationLength = data[globalTime].locations.length
-    let charactersLength = data[globalTime].characters.length
-    let journeysLength = data[globalTime].journeys.length
 
     // Mouse movement for hover functions
     var r = map.canvas.getBoundingClientRect()
@@ -145,45 +143,21 @@ MapMaker.prototype.createEvents = function() {
         // Reset mouse label
         mouselabel.innerHTML = "";
 
-        // 240229 Next action: unify hover functions + clean up main.js (Split files between: data, variables, utilities)
-
-        // Location hover
-        for (var i = 0; i < locationLength; i++) {
-            map.location = new Generator(map.canvas, data, globalTime,i, 'location');
-            map.location.define();
-            if (map.location.context.isPointInPath(x,y)) {
-                mouselabel.innerHTML = map.location.name;
-                break;
-            }
-        }
-
-        // Journey hover
-        for (let i = 0; i < journeysLength; i++) {
-            map.journey = new Generator(map.canvas, data, globalTime, i, 'journey')
-            map.journey.define();
-
-            if (map.journey.context.isPointInPath(x,y)) {
-                mouselabel.innerHTML = map.journey.name;
-                break;
-            }
-        };
-
-        // Character hover
-        for (var i = 0; i < charactersLength; i++) {
-            map.character = new Generator(map.canvas, data, globalTime,i, 'character');
-            map.character.define();
-            if (map.character.context.isPointInPath(x,y)) {
-                mouselabel.innerHTML = map.character.name;
-                break;
-            }
-        }
+        // Location hover mouse label
+        map.hoverAction('location',x,y);
         
+        // // Journey hover mouse label
+        map.hoverAction('journey',x,y);
+        
+        // Character hover mouse label
+        map.hoverAction('character',x,y);
     }
 }
 
 
-// Utility functions
+// ======= Utility functions ============
 // Base for unified click, draw, and hover functions
+// 240308 Approach feels clunky
 MapMaker.prototype.getTypeLength = function(type) {
     // Base
     let map = this;
@@ -204,24 +178,33 @@ MapMaker.prototype.getTypeLength = function(type) {
     return length;
 }
 
+MapMaker.prototype.hoverAction = function(type, x, y) {
+    // Base
+    let map = this;
+    const length = map.getTypeLength(type);
+
+    for (var i = 0; i < length; i++) {
+        map.object = new Generator(map.canvas, data, globalTime,i, type);
+        map.object.define();
+        if (map.object.context.isPointInPath(x,y)) {
+            mouselabel.innerHTML = map.object.name;
+            break;
+        }
+    }
+}
+
 // Fill infobox and main box
 MapMaker.prototype.createClickLoop = function (type, x, y){
     // Base
     let map = this;
 
     // Get array length
-    let length;
+    let length = map.getTypeLength(type);
     switch(type){
-        case'location':
-            length = data[globalTime].locations.length;
-            map.runClickLoopIb(type, length, x, y)
-            break;
-        case'character':
-            length = data[globalTime].characters.length;
+        case 'location' || 'character':
             map.runClickLoopIb(type, length, x, y)
             break;
         case'journey':
-            length = data[globalTime].journeys.length;
             map.runClickLoopMain(type, length, x, y)
             break;
         default:
@@ -251,7 +234,7 @@ MapMaker.prototype.runClickLoopIb = function (type, length, x, y){
 MapMaker.prototype.runClickLoopMain = function (type, length, x, y){
     // Base
     let map = this;
-
+    console.log(map)
     for (let i = 0; i < length; i++) {
         // Create Location Path
         map.object = new Generator(map.canvas, data, globalTime,i, type);
@@ -260,9 +243,9 @@ MapMaker.prototype.runClickLoopMain = function (type, length, x, y){
         map.object.define();
 
         // Populate infobox
-        if (map.journey.context.isPointInPath(x,y)) {
-            mainTitle.innerHTML = map.journey.name;
-            mainContent.innerHTML = map.journey.description;
+        if (map.object.context.isPointInPath(x,y)) {
+            mainTitle.innerHTML = map.object.name;
+            mainContent.innerHTML = map.object.description;
             break;
         }
     };
