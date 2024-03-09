@@ -1,7 +1,9 @@
 // For future purposes refactor type character to type image
 // Refactor data into unified naming
-// Journeys into generator
-function Generator (canvas, data, globalTime, index, type) {
+// Goal of data refactoring: make draw actions be selected automatically depending on type. Just loop over data with generator.
+// No more switch case function calls in Mapmaker.
+// Unified property names
+function Generator (canvas, input, globalTime, index, type) {
     // Base
     let generator = this;
 
@@ -16,50 +18,57 @@ function Generator (canvas, data, globalTime, index, type) {
     generator.index = index; // 240306 To do: Use for draw NodeLine
     generator.iconSize = 55;
 
+    // Data Object
+    // For transition length is the same for object and character, however when integrating location/journey expect changes needed for MapMaker calls
+    
     // Specifications
     switch(type){
-        case 'character': // Refactor into icons?
+        case 'character': 
+            // 240309 Next action : Transition characters to object
+            const data = input[globalTime].object[index];
+            generator.type = data.type;
+
             // Content
             generator.type = "character";
-            generator.name = data[globalTime].characters[index].name;
-            generator.description = data[globalTime].characters[index].description;
-            generator.icon = data[globalTime].characters[index].icon;
-            generator.img = data[globalTime].characters[index].img;
-            generator.info = data[globalTime].characters[index].info;
-            generator.link = data[globalTime].characters[index].link;
+            generator.name = input[globalTime].characters[index].name;
+            generator.description = input[globalTime].characters[index].description;
+            generator.icon = input[globalTime].characters[index].icon;
+            generator.img = input[globalTime].characters[index].img;
+            generator.info = input[globalTime].characters[index].info;
+            generator.link = input[globalTime].characters[index].link;
             
             // Style
-            generator.x = data[globalTime].characters[index].x;
-            generator.y = data[globalTime].characters[index].y;
+            generator.x = input[globalTime].characters[index].x;
+            generator.y = input[globalTime].characters[index].y;
             break;
         case 'location':
             // Content
             generator.type = "location";
-            generator.name = data[globalTime].locations[index].name;
-            generator.description = data[globalTime].locations[index].description;
-            generator.img = data[globalTime].locations[index].img;
-            generator.info = data[globalTime].locations[index].info;
-            generator.link = data[globalTime].locations[index].link;
+            generator.name = input[globalTime].locations[index].name;
+            generator.description = input[globalTime].locations[index].description;
+            generator.img = input[globalTime].locations[index].img;
+            generator.info = input[globalTime].locations[index].info;
+            generator.link = input[globalTime].locations[index].link;
             
             // Style
-            generator.fill = data[globalTime].locations[index].design.fill;
-            generator.lineWidth = data[globalTime].locations[index].design.lineW;
-            generator.points = data[globalTime].locations[index].points;
-            generator.stroke = data[globalTime].locations[index].design.stroke;
+            generator.fill = input[globalTime].locations[index].design.fill;
+            generator.lineWidth = input[globalTime].locations[index].design.lineW;
+            generator.points = input[globalTime].locations[index].points;
+            generator.stroke = input[globalTime].locations[index].design.stroke;
             break;
         case 'journey':
             generator.type = "journey";
-            generator.key = data[globalTime].journeys[index].key;
-            generator.name = data[globalTime].journeys[index].name;
-            generator.description = data[globalTime].journeys[index].description;
-            generator.x = data[globalTime].journeys[index].x;
-            generator.y = data[globalTime].journeys[index].y;
+            generator.key = input[globalTime].journeys[index].key;
+            generator.name = input[globalTime].journeys[index].name;
+            generator.description = input[globalTime].journeys[index].description;
+            generator.x = input[globalTime].journeys[index].x;
+            generator.y = input[globalTime].journeys[index].y;
             
             // For Drawing lines
-            if(data[globalTime].journeys[index + 1]) {
-                generator.lKey = data[globalTime].journeys[index + 1].key;
-                generator.lx = data[globalTime].journeys[index + 1].x;
-                generator.ly = data[globalTime].journeys[index + 1].y;
+            if(input[globalTime].journeys[index + 1]) {
+                generator.lKey = input[globalTime].journeys[index + 1].key;
+                generator.lx = input[globalTime].journeys[index + 1].x;
+                generator.ly = input[globalTime].journeys[index + 1].y;
                 if (generator.key == generator.lKey) {
                     generator.hasNext = true;
                 }

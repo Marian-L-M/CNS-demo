@@ -1,3 +1,4 @@
+// Next action 240309: Move character into object (type: character)
 let data = [
     {
         "id": 0,
@@ -5,6 +6,97 @@ let data = [
         "title": "I am an explanatory title",
         "content": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia esse consectetur culpa excepturi iste odit modi ullam nam ea, est neque quis id vitae animi, molestiae dolorum officia sequi consequuntur.</p>",
         "baseMap": "assets/img/kamolin-map.jpg",
+        "object":[
+            {
+                "id": 0,
+                "type": "character",
+                "name": "char-1",
+                "link": "/wiki/char-1.html",
+                "description": " Hello! I am char-1!",
+                "icon": "assets/img/characters/character-1.png",
+                "img": "assets/img/characters/character-1-full.jpg",
+                "x": 115,
+                "y": 115,
+                "info":{
+                    "area":[{
+                        "title" : "Character-1",
+                        "content" : "Character that comes first",
+                    },
+                        {
+                        "title" : "Age",
+                        "content" : "XYZ",
+                    },
+                        {
+                        "title" : "other info",
+                        "content" : "ABCDEFGHIJ",
+                    },
+                        {
+                        "title" : "other info",
+                        "content" : "ABCDEFGHIJ",
+                    },
+                        {
+                        "title" : "other info",
+                        "content" : "ABCDEFGHIJ",
+                    },
+                        {
+                        "title" : "other info",
+                        "content" : "ABCDEFGHIJ",
+                    },],
+                    "text":[{
+                        "title" : "Joerg",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-2",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-3",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-4",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
+                    },],
+                },
+            },{
+                "id": 1,
+                "type": "character",
+                "name": "char-2",
+                "link": "/wiki/char-2.html",
+                "description": " Hello! I am char-2!",
+                "icon": "assets/img/characters/character-2.png",
+                "img": "assets/img/characters/character-2-full.jpg",
+                "x": 815,
+                "y": 415,
+                "info":{
+                    "area":[{
+                        "title" : "Character-2",
+                        "content" : "Character that barely didnt make the cut",
+                    },
+                        {
+                        "title" : "Age",
+                        "content" : "z-Y-X",
+                    },],
+                    "text":[{
+                        "title" : "Petra",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-2",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-3",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
+                    },
+                        {
+                        "title" : "title-1-4",
+                        "content" : "paragraph text paragraph textparagraph textparagraph text",
+                    },],
+                },
+            }
+        ],
         "characters" : [
             {
                 "id": 0,

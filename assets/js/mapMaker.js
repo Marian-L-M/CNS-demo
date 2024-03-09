@@ -104,10 +104,8 @@ MapMaker.prototype.drawObjects = function() {
     let map = this;
     let locationsLength = map.getTypeLength('location');
     let journeysLength = map.getTypeLength('journey');
-    let journeyData = data[globalTime].journeys;
     
     // Draw Locations
-    // 240307 Next action: Unify draw functions/loops
     for (let i = 0; i < locationsLength;  i++) {
         map.location = new Generator(map.canvas, data, globalTime,i, 'location');
         map.location.draw();
