@@ -54,6 +54,16 @@ function Generator (canvas, data, globalTime, index, type) {
             generator.description = data[globalTime].journeys[index].description;
             generator.x = data[globalTime].journeys[index].x;
             generator.y = data[globalTime].journeys[index].y;
+            
+            // For Drawing lines
+            if(data[globalTime].journeys[index + 1]) {
+                generator.lKey = data[globalTime].journeys[index + 1].key;
+                generator.lx = data[globalTime].journeys[index + 1].x;
+                generator.ly = data[globalTime].journeys[index + 1].y;
+                if (generator.key == generator.lKey) {
+                    generator.hasNext = true;
+                }
+            }
             break;
         default:
             break;
@@ -151,14 +161,13 @@ Generator.prototype.define = function () {
     }
 }
 
-Generator.prototype.drawNodeLine = function(data) {
-    
+Generator.prototype.drawNodeLine = function() {
     // Setup
     let generator = this;
     const x = generator.x;
     const y = generator.y;
-    const lx = data[globalTime].journeys[generator.index + 1].x;
-    const ly = data[globalTime].journeys[generator.index + 1].y;
+    const lx = generator.lx;
+    const ly = generator.ly;
 
     const cw = generator.cw;
     const ch = generator.ch;

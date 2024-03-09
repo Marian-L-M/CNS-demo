@@ -95,7 +95,7 @@ MapMaker.prototype.createIcons = function() {
     let map = this;
 
     // Characters
-    // After refactoring expand character to accomodate icons in general (histori events etc.)
+    // After refactoring expand character to accomodate icons in general (history events etc.)
     map.drawIcon('character')
 }
 
@@ -113,14 +113,13 @@ MapMaker.prototype.drawObjects = function() {
         map.location.draw();
     }
 
-    // Draw Journeys + lines
+    // Draw Journeys
     for (let i = 0; i < journeysLength; i++) {
         map.journey = new Generator(map.canvas, data, globalTime,i,'journey');
         map.journey.draw();
-        if(i < (journeysLength - 1)){
-            if(journeyData[i].key == journeyData[i + 1].key) {
-                map.journey.drawNodeLine(data)
-            }
+        // Draw lines
+        if(map.journey.hasNext){
+            map.journey.drawNodeLine()
         }
     }
 }
