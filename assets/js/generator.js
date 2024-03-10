@@ -25,21 +25,21 @@ function Generator (canvas, input, globalTime, index, type) {
     switch(type){
         case 'character': 
             // 240309 Next action : Transition characters to object
-            const data = input[globalTime].object[index];
+            const data = input[globalTime].object.icons[index];
             generator.type = data.type;
 
             // Content
-            generator.type = "character";
-            generator.name = input[globalTime].characters[index].name;
-            generator.description = input[globalTime].characters[index].description;
-            generator.icon = input[globalTime].characters[index].icon;
-            generator.img = input[globalTime].characters[index].img;
-            generator.info = input[globalTime].characters[index].info;
-            generator.link = input[globalTime].characters[index].link;
+            // generator.type = "character";
+            generator.name = data.name;
+            generator.description = data.description;
+            generator.icon = data.icon;
+            generator.img = data.img;
+            generator.info = data.info;
+            generator.link = data.link;
             
             // Style
-            generator.x = input[globalTime].characters[index].x;
-            generator.y = input[globalTime].characters[index].y;
+            generator.x = data.x;
+            generator.y = data.y;
             break;
         case 'location':
             // Content

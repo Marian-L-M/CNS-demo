@@ -161,7 +161,7 @@ MapMaker.prototype.getTypeLength = function(type) {
             length = data[globalTime].locations.length;
             break;
         case'character':
-            length = data[globalTime].characters.length;
+            length = data[globalTime].object.icons.length;
             break;
         case'journey':
             length = data[globalTime].journeys.length;
