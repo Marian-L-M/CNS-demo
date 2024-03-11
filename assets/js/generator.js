@@ -19,56 +19,35 @@ function Generator (canvas, input, globalTime, index, type) {
     generator.iconSize = 55;
 
     // Data Object
-    // For transition length is the same for object and character, however when integrating location/journey expect changes needed for MapMaker calls
-    
     // Specifications
+    let data;
     switch(type){
         case 'character': 
-            // 240309 Next action : Transition characters to object
-            const data = input[globalTime].object.icons[index];
-            generator.type = data.type;
-
-            // Content
-            // generator.type = "character";
-            generator.name = data.name;
-            generator.description = data.description;
-            generator.icon = data.icon;
-            generator.img = data.img;
-            generator.info = data.info;
-            generator.link = data.link;
-            
-            // Style
-            generator.x = data.x;
-            generator.y = data.y;
+            // data
+            data = input[globalTime].object.icons[index];
             break;
         case 'location':
-            // Content
-            generator.type = "location";
-            generator.name = input[globalTime].locations[index].name;
-            generator.description = input[globalTime].locations[index].description;
-            generator.img = input[globalTime].locations[index].img;
-            generator.info = input[globalTime].locations[index].info;
-            generator.link = input[globalTime].locations[index].link;
-            
+            // data
+            data = input[globalTime].object.areas[index];
+
             // Style
-            generator.fill = input[globalTime].locations[index].design.fill;
-            generator.lineWidth = input[globalTime].locations[index].design.lineW;
-            generator.points = input[globalTime].locations[index].points;
-            generator.stroke = input[globalTime].locations[index].design.stroke;
+            generator.fill = data.design.fill; // Missing on char, journey
+            generator.lineWidth = data.design.lineW; // Missing on char, journey
+            generator.points = data.points; // Missing on char, journey
+            generator.stroke = data.design.stroke; // Missing on char, journey
             break;
         case 'journey':
-            generator.type = "journey";
-            generator.key = input[globalTime].journeys[index].key;
-            generator.name = input[globalTime].journeys[index].name;
-            generator.description = input[globalTime].journeys[index].description;
-            generator.x = input[globalTime].journeys[index].x;
-            generator.y = input[globalTime].journeys[index].y;
+            // data
+            data = input[globalTime].object.paths[index];
+            let nextData = input[globalTime].object.paths[index + 1];
+
+            generator.key = data.key; // Removal will break nextData logic
             
             // For Drawing lines
-            if(input[globalTime].journeys[index + 1]) {
-                generator.lKey = input[globalTime].journeys[index + 1].key;
-                generator.lx = input[globalTime].journeys[index + 1].x;
-                generator.ly = input[globalTime].journeys[index + 1].y;
+            if(nextData) {
+                generator.lKey = nextData.key;
+                generator.lx = nextData.x;
+                generator.ly = nextData.y;
                 if (generator.key == generator.lKey) {
                     generator.hasNext = true;
                 }
@@ -77,6 +56,19 @@ function Generator (canvas, input, globalTime, index, type) {
         default:
             break;
     }
+
+    // Standard declarations
+    generator.type = data.type;
+    generator.name = data.name
+    generator.description = data.description;
+    generator.x = data.x; // Missing on location
+    generator.y = data.y; // Missing on location
+
+    // Info
+    generator.icon = data.icon; // Missing on location
+    generator.img = data.img;
+    generator.info = data.info;
+    generator.link = data.link;
 }
 
 Generator.prototype.draw = function() {
