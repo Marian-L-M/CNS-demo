@@ -10,7 +10,7 @@ let data = [
             "icons":[
                 {
                     "id": 0,
-                    "type": "character",
+                    "subtype": "character",
                     "name": "char-1",
                     "link": "/wiki/char-1.html",
                     "description": " Hello! I am char-1!",
@@ -62,7 +62,7 @@ let data = [
                     },
                 },{
                     "id": 1,
-                    "type": "character",
+                    "subtype": "character",
                     "name": "char-2",
                     "link": "/wiki/char-2.html",
                     "description": " Hello! I am char-2!",
@@ -101,7 +101,7 @@ let data = [
             "areas":[
                 {
                     "id" : 0,
-                    "type": "location",
+                    "subtype": "location",
                     "name" : "triangle",
                     "link": "/wiki/location-1.html",
                     "description": "I am a triangle",
@@ -165,7 +165,7 @@ let data = [
                     },
                 }, {
                     "id" : 1,
-                    "type": "location",
+                    "subtype": "location",
                     "name" : "parallelogram",
                     "link": "/wiki/location-2.html",
                     "description": "I am a parallelogram",
@@ -232,7 +232,7 @@ let data = [
                     },
                 }, {
                     "id" : 2,
-                    "type": "location",
+                    "subtype": "location",
                     "name" : "parasffsallelogram",
                     "link": "/wiki/location-3.html",
                     "description": "I am an abomination",
@@ -299,7 +299,7 @@ let data = [
                     },
                 }, {
                     "id" : 3,
-                    "type": "location",
+                    "subtype": "location",
                     "name" : "random shape",
                     "link": "/wiki/location-4.html",
                     "description": "I am a random shape",
@@ -369,7 +369,7 @@ let data = [
             "paths": [
                 {
                     "id": 0,
-                    "type": "journey",
+                    "subtype": "journey",
                     "key": "event",
                     "name": "event-1",
                     "description": "Battle of the bushes",
@@ -378,7 +378,7 @@ let data = [
                 },
                 {
                     "id": 1,
-                    "type": "journey",
+                    "subtype": "journey",
                     "key": "event",
                     "name": "event-2",
                     "description": "Trimming of the bushes",
@@ -387,7 +387,7 @@ let data = [
                 },
                 {
                     "id": 2,
-                    "type": "journey",
+                    "subtype": "journey",
                     "key": "event",
                     "name": "event-3",
                     "description": "OK, lets stop these dirty metaphors",
@@ -396,7 +396,7 @@ let data = [
                 },
                 {
                     "id": 3,
-                    "type": "journey",
+                    "subtype": "journey",
                     "key": "event",
                     "name": "event-4",
                     "description": "Look, this one is not even getting a description. Happy now?",
@@ -405,7 +405,7 @@ let data = [
                 },
                 {
                     "id": 10,
-                    "type": "journey",
+                    "subtype": "journey",
                     "key": "quest",
                     "name": "quest-1",
                     "description": "Rise of the Beavers",
@@ -414,7 +414,7 @@ let data = [
                 },
                 {
                     "id": 11,
-                    "type": "journey",
+                    "subtype": "journey",
                     "key": "quest",
                     "name": "quest-2",
                     "description": "Devourers of TImber",
@@ -423,7 +423,7 @@ let data = [
                 },
                 {
                     "id": 12,
-                    "type": "journey",
+                    "subtype": "journey",
                     "key": "quest",
                     "name": "quest-3",
                     "description": "flooding in Beavertown",
@@ -432,7 +432,7 @@ let data = [
                 },
                 {
                     "id":13,
-                    "type": "journey",
+                    "subtype": "journey",
                     "key": "quest",
                     "name": "quest-4",
                     "description": "Just can't help myself",

@@ -22,7 +22,7 @@ function Generator (canvas, input, globalTime, index, type) {
     // Specifications
     let data;
     switch(type){
-        case 'character': 
+        case 'icon': 
             // data
             data = input[globalTime].object.icons[index];
             break;
@@ -58,7 +58,8 @@ function Generator (canvas, input, globalTime, index, type) {
     }
 
     // Standard declarations
-    generator.type = data.type;
+    generator.type = type;
+    generator.subtype = data.subtype;
     generator.name = data.name
     generator.description = data.description;
     generator.x = data.x; // Missing on location
@@ -78,7 +79,7 @@ Generator.prototype.draw = function() {
     const ch = generator.ch;
 
     switch(generator.type){
-        case 'character':
+        case 'icon':
             generator.img = new Image();
             generator.img.src = generator.icon;
 
@@ -127,7 +128,7 @@ Generator.prototype.define = function () {
     const y = generator.y * generator.ch;
 
     switch(generator.type){
-        case 'character':
+        case 'icon':
             const w = generator.iconSize * generator.cw; 
         
             generator.context.beginPath();

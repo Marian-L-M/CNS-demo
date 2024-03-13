@@ -66,9 +66,6 @@ MapMaker.prototype.createObjects = function() {
     
     // Draw Location and paths
     map.drawObjects();
-
-    // Characters & Icons
-    map.createIcons();
 }
 
 MapMaker.prototype.createClickEvents = function(canvas, event) {
@@ -83,43 +80,25 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     // Location click events
     map.createClickLoop("location", x, y);
     
-    // Character click events
-    map.createClickLoop("character", x, y);
+    // Icon click events
+    map.createClickLoop("icon", x, y);
 
     // Journey click events
     map.createClickLoop("journey", x, y);
 }
 
-MapMaker.prototype.createIcons = function() {
-    // Setup
-    let map = this;
-
-    // Characters
-    // After refactoring expand character to accomodate icons in general (history events etc.)
-    map.drawIcon('character')
-}
-
 MapMaker.prototype.drawObjects = function() {
     // Setup
     let map = this;
-    let locationsLength = map.getTypeLength('location');
-    let journeysLength = map.getTypeLength('journey');
     
     // Draw Locations
-    for (let i = 0; i < locationsLength;  i++) {
-        map.location = new Generator(map.canvas, data, globalTime,i, 'location');
-        map.location.draw();
-    }
-
+    map.drawHandler("location")
+    
     // Draw Journeys
-    for (let i = 0; i < journeysLength; i++) {
-        map.journey = new Generator(map.canvas, data, globalTime,i,'journey');
-        map.journey.draw();
-        // Draw lines
-        if(map.journey.hasNext){
-            map.journey.drawNodeLine()
-        }
-    }
+    map.drawHandler("journey")
+
+    // Draw Characters & Icons
+    map.drawHandler("icon")
 }
 
 MapMaker.prototype.createHoverEvents = function() {
@@ -144,7 +123,7 @@ MapMaker.prototype.createHoverEvents = function() {
         map.hoverAction('journey',x,y);
         
         // Character hover mouse label
-        map.hoverAction('character',x,y);
+        map.hoverAction("icon",x,y);
     }
 }
 
@@ -155,12 +134,13 @@ MapMaker.prototype.createHoverEvents = function() {
 MapMaker.prototype.getTypeLength = function(type) {
     // Base
     let map = this;
+
     let length;
     switch(type){
         case'location':
             length = data[globalTime].object.areas.length;
             break;
-        case'character':
+        case "icon":
             length = data[globalTime].object.icons.length;
             break;
         case'journey':
@@ -172,7 +152,7 @@ MapMaker.prototype.getTypeLength = function(type) {
     return length;
 }
 
-MapMaker.prototype.drawIcon = function(type) {
+MapMaker.prototype.drawHandler = function(type) {
     // Base
     let map = this;
     const length = map.getTypeLength(type);
@@ -180,9 +160,14 @@ MapMaker.prototype.drawIcon = function(type) {
     for (let i = 0; i < length; i++) {
         map.object = new Generator(map.canvas, data, globalTime,i, type);
         map.object.draw()
+        // Draw lines
+        if(map.object.hasNext){
+            map.object.drawNodeLine()
+        }
     }
 }
 
+// Move hover action into generator
 MapMaker.prototype.hoverAction = function(type, x, y) {
     // Base
     let map = this;
@@ -207,7 +192,7 @@ MapMaker.prototype.createClickLoop = function (type, x, y){
     let length = map.getTypeLength(type);
     switch(type){
         case 'location':
-        case 'character':
+        case "icon":
             map.runClickLoopIb(type, length, x, y)
             break;
         case'journey':
