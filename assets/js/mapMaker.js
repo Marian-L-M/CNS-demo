@@ -18,10 +18,14 @@ MapMaker.prototype.bindEvents = function() {
     // Base
     var map = this;
 
+    // Hover events
+    map.createHoverEvents();
+    
     // Click Listener for wiki functions
     map.canvas.addEventListener('mousedown', function(e) {
         map.createClickEvents(canvas, e)
     });
+
 };
 
 MapMaker.prototype.start = function() {
@@ -60,10 +64,6 @@ MapMaker.prototype.createObjects = function() {
     // Base
     var map = this;
     
-    
-    // Hover events
-    map.createHoverEvents();
-    
     // Draw Location and paths
     map.drawObjects();
 }
@@ -85,20 +85,6 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
 
     // Journey click events
     map.createClickLoop("journey", x, y);
-}
-
-MapMaker.prototype.drawObjects = function() {
-    // Setup
-    let map = this;
-    
-    // Draw Locations
-    map.drawHandler("location")
-    
-    // Draw Journeys
-    map.drawHandler("journey")
-
-    // Draw Characters & Icons
-    map.drawHandler("icon")
 }
 
 MapMaker.prototype.createHoverEvents = function() {
@@ -125,6 +111,20 @@ MapMaker.prototype.createHoverEvents = function() {
         // Character hover mouse label
         map.hoverAction("icon",x,y);
     }
+}
+
+MapMaker.prototype.drawObjects = function() {
+    // Setup
+    let map = this;
+    
+    // Draw Locations
+    map.drawHandler("location")
+    
+    // Draw Journeys
+    map.drawHandler("journey")
+
+    // Draw Characters & Icons
+    map.drawHandler("icon")
 }
 
 
