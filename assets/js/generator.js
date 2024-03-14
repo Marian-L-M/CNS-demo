@@ -1,4 +1,3 @@
-// For future purposes refactor type character to type image
 // Refactor data into unified naming
 // Goal of data refactoring: make draw actions be selected automatically depending on type. Just loop over data with generator.
 // No more switch case function calls in Mapmaker.
@@ -16,7 +15,8 @@ function Generator (canvas, input, globalTime, index, type) {
     generator.context = generator.canvas.getContext('2d');
     generator.globalTime = globalTime;
     generator.index = index; // 240306 To do: Use for draw NodeLine
-    generator.iconSize = 55;
+    generator.iconSize = 55 * generator.cw;
+
 
     // Data Object
     // Specifications
@@ -31,23 +31,25 @@ function Generator (canvas, input, globalTime, index, type) {
             data = input[globalTime].object.areas[index];
 
             // Style
-            generator.fill = data.design.fill; // Missing on char, journey
-            generator.lineWidth = data.design.lineW; // Missing on char, journey
-            generator.points = data.points; // Missing on char, journey
-            generator.stroke = data.design.stroke; // Missing on char, journey
+            generator.fill = data.design.fill; 
+            generator.lineWidth = data.design.lineW; 
+            generator.points = data.points; 
+            generator.stroke = data.design.stroke; 
             break;
         case 'journey':
             // data
             data = input[globalTime].object.paths[index];
             let nextData = input[globalTime].object.paths[index + 1];
 
-            generator.key = data.key; // Removal will break nextData logic
+            generator.key = data.key; 
             
             // For Drawing lines
             if(nextData) {
                 generator.lKey = nextData.key;
                 generator.lx = nextData.x;
                 generator.ly = nextData.y;
+                generator.clx = generator.lx * generator.cw;
+                generator.cly = generator.ly * generator.ch;
                 if (generator.key == generator.lKey) {
                     generator.hasNext = true;
                 }
@@ -64,19 +66,24 @@ function Generator (canvas, input, globalTime, index, type) {
     generator.description = data.description;
     generator.x = data.x; // Missing on location
     generator.y = data.y; // Missing on location
+    generator.cx = generator.x * generator.cw;
+    generator.cy = generator.y * generator.ch;
 
     // Info
     generator.icon = data.icon; // Missing on location
     generator.img = data.img;
     generator.info = data.info;
     generator.link = data.link;
+
+    // Design
+    generator.context.strokeStyle= (generator.stroke ? generator.stroke : "black");
+    generator.context.fillStyle= (generator.fill ? generator.fill : "black");
+    generator.context.lineWidth = generator.lineWidth;
 }
 
 Generator.prototype.draw = function() {
     // Base
     let generator = this;
-    const cw = generator.cw;
-    const ch = generator.ch;
 
     switch(generator.type){
         case 'icon':
@@ -85,34 +92,17 @@ Generator.prototype.draw = function() {
 
             generator.context.drawImage(
                 generator.img, 
-                (generator.x * generator.cw), 
-                (generator.y * generator.ch), 
-                (generator.iconSize * generator.cw), 
-                (generator.iconSize * generator.cw) 
+                (generator.cx), 
+                (generator.cy), 
+                (generator.iconSize), 
+                (generator.iconSize) 
             );
             break;
-        case 'location': 
-            let points = generator.points;
-
-            generator.context.fillStyle = generator.fill;
-            generator.context.strokeStyle = generator.stroke;
-            generator.context.lineWidth = generator.lineWidth;
-        
-            generator.context.beginPath();
-            generator.context.moveTo(points[0].x * cw, points[0].y * ch);
-            for (var i = 1; i < points.length; i++) {
-                generator.context.lineTo(points[i].x * cw, points[i].y * ch);
-            }
-            generator.context.lineTo(points[0].x * cw, points[0].y * ch);
-            generator.context.fill();
-            generator.context.stroke();
-            break;
+        case 'location':         
         case 'journey':
-            generator.context.strokeStyle= "black";
-            generator.context.fillStyle= "black";
             generator.define();
-            generator.context.stroke();
             generator.context.fill();
+            generator.context.stroke();
             break;
         default:
             break;
@@ -124,14 +114,15 @@ Generator.prototype.define = function () {
     let generator = this;
     const cw = generator.cw;
     const ch = generator.ch;
-    const x = generator.x * generator.cw;
-    const y = generator.y * generator.ch;
+    const x = generator.cx;
+    const y = generator.cy;
+
+    generator.context.beginPath();
 
     switch(generator.type){
         case 'icon':
-            const w = generator.iconSize * generator.cw; 
+            const w = generator.iconSize; 
         
-            generator.context.beginPath();
             generator.context.moveTo(x, y);
             generator.context.lineTo((x + w), y);
             generator.context.lineTo((x + w), (y + w));
@@ -142,16 +133,15 @@ Generator.prototype.define = function () {
         case 'location': 
             const points = generator.points;
 
-            generator.context.beginPath();
             generator.context.moveTo(points[0].x * cw, points[0].y * ch);
             for (var i = 1; i < points.length; i++) {
                 generator.context.lineTo(points[i].x * cw, points[i].y * ch);
             }
+            generator.context.lineTo(points[0].x * cw, points[0].y * ch);
             break;
         case 'journey': 
-            const offset = 5;
+            const offset = generator.iconSize / (10 * generator.cw);
 
-            generator.context.beginPath();
             generator.context.moveTo(x,y);
             generator.context.lineTo(x - offset , y - offset);
             generator.context.lineTo(x + offset , y - offset);
@@ -166,20 +156,11 @@ Generator.prototype.define = function () {
 Generator.prototype.drawNodeLine = function() {
     // Setup
     let generator = this;
-    const x = generator.x;
-    const y = generator.y;
-    const lx = generator.lx;
-    const ly = generator.ly;
-
-    const cw = generator.cw;
-    const ch = generator.ch;
 
     generator.context.beginPath();
     generator.context.lineWidth=4;
-    generator.context.strokeStyle= "black";
-    generator.context.fillStyle= "black";
-    generator.context.moveTo(cw*x, ch*y);
-    generator.context.lineTo(cw*lx, ch*ly);
+    generator.context.moveTo(generator.cx, generator.cy);
+    generator.context.lineTo(generator.clx, generator.cly);
     generator.context.stroke();
     generator.context.fill();
 }

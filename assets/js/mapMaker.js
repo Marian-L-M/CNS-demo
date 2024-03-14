@@ -203,6 +203,7 @@ MapMaker.prototype.createClickLoop = function (type, x, y){
     };
 };
 
+// 240313 Unify click loops
 MapMaker.prototype.runClickLoopIb = function (type, length, x, y){
     // Base
     let map = this;
@@ -240,8 +241,6 @@ MapMaker.prototype.runClickLoopMain = function (type, length, x, y){
         }
     };
 }
-
-
 
 // Infobox
 MapMaker.prototype.infoboxClickActions = function (content){
