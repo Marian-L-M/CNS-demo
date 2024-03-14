@@ -18,12 +18,13 @@
 - [ ] Clean up code
     - [x] Merge character & location
     - [x] Unify overlapping defines
-    - [ ] Unify overlapping event listeners
-    - [ ] Unify click events, needs to break if one target is found (Journeys overlapping locations)
-    - [ ] Fix layering: Chars > Journeys > Locations
-    - [ ] Chreate Event Icon clickable type from character template
-    - [ ] Unify data object (Merge character, location, journey into single object list. With a type property to define which is which)
-    - [ ] Simplify generator for less differentiation in the switch cases
+    - [x] Unify overlapping event listeners
+    - [x] Unify click events, needs to break if one target is found (Journeys overlapping locations)
+    - [x] Fix layering: Chars > Journeys > Locations
+    - [x] Create Event Icon clickable type from character template
+    - [x] Unify data object (Merge character, location, journey into single object list. With a type property to define which is which)
+    - [x] Simplify generator for less differentiation in the switch cases
+- [ ] Try to implement character animation
 - [ ] Clean up design
     - [ ] Toggle switches for info bar and info box
     - [ ] Info box not visible when not prefilled
