@@ -190,21 +190,10 @@ MapMaker.prototype.createClickLoop = function (type, x, y){
 
     // Get array length
     let length = map.getTypeLength(type);
-    switch(type){
-        case 'location':
-        case "icon":
-            map.runClickLoopIb(type, length, x, y)
-            break;
-        case'journey':
-            map.runClickLoopMain(type, length, x, y)
-            break;
-        default:
-            break;
-    };
+    map.runClickLoop(type, length, x, y)
 };
 
-// 240313 Unify click loops
-MapMaker.prototype.runClickLoopIb = function (type, length, x, y){
+MapMaker.prototype.runClickLoop = function (type, length, x, y){
     // Base
     let map = this;
 
@@ -217,33 +206,28 @@ MapMaker.prototype.runClickLoopIb = function (type, length, x, y){
 
         // Populate infobox
         if (map.object.context.isPointInPath(x,y)) {
-            map.infoboxClickActions(map.object);
-            break;
+            switch(type){
+                case 'location':
+                case "icon":
+                    map.populateInfoBox(map.object);
+                    break;
+                case'journey':                    
+                    map.populateMainBox(map.object);
+                    break;
+            }
         };
     };
 }
 
-MapMaker.prototype.runClickLoopMain = function (type, length, x, y){
+// Populate functions
+MapMaker.prototype.populateMainBox = function (content){
     // Base
     let map = this;
-    for (let i = 0; i < length; i++) {
-        // Create Location Path
-        map.object = new Generator(map.canvas, data, globalTime,i, type);
-
-        // Define Location
-        map.object.define();
-
-        // Populate infobox
-        if (map.object.context.isPointInPath(x,y)) {
-            mainTitle.innerHTML = map.object.name;
-            mainContent.innerHTML = map.object.description;
-            break;
-        }
-    };
+    mainTitle.innerHTML = map.object.name;
+    mainContent.innerHTML = map.object.description;
 }
 
-// Infobox
-MapMaker.prototype.infoboxClickActions = function (content){
+MapMaker.prototype.populateInfoBox = function (content){
     // Base
     let map = this;
 
