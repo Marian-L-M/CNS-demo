@@ -448,8 +448,12 @@ let data = [
 // Initialize
 // Canvas
 const canvas = document.getElementById("main-visual");
+const anim = document.getElementById("animation-layer");
 canvas.width = window.innerWidth * 0.95;
 canvas.height = window.innerHeight * 0.95 //4:3 aspect ratio
+
+anim.width = window.innerWidth * 0.95;
+anim.height = window.innerHeight * 0.95 //4:3 aspect ratio
 
 // Time Controls
 let timeIndexStart = 0;
@@ -485,6 +489,7 @@ window.onload = function(){
 function setPage() {
     setCanvas();
     setTimeIndex();
+    animateCanvas();
 }
 
 // Set Canvas contents
@@ -492,6 +497,12 @@ function setCanvas() {
     // Load Map Object
     let mapInstance = new MapMaker(canvas, globalTime, data)
     mapInstance.start();
+}
+
+function animateCanvas() {
+    // Load Map Object
+    let animInstance = new MapAnimator(anim, globalTime, data)
+    animInstance.start();
 }
 
 // Set time index and time display

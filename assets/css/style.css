@@ -143,6 +143,7 @@ body {
   grid-template-rows: 3fr 1fr 2.5vh;
   grid-template-areas: "mv mv" "content content" "content content";
 }
+.canvas-base #animation-layer,
 .canvas-base #main-visual {
   grid-row: 1/3;
   grid-column: 1/3;
@@ -158,6 +159,11 @@ body {
 #main-visual {
   position: relative;
   z-index: 10;
+}
+#animation-layer {
+  position: relative;
+  pointer-events: none;
+  z-index: 11;
 }
 
 #map-element {

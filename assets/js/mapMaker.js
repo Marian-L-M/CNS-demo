@@ -58,6 +58,11 @@ MapMaker.prototype.drawInitialScreen = function() {
 
     // Clear Canvas
     map.context.clearRect(0, 0, map.canvas.width, map.canvas.height);
+
+    //240315 Animation
+    // Approach drawing must occur after clearRect
+    // Coordinates must be handled in a property that is not being overwritten
+ 
 }
 
 MapMaker.prototype.createObjects = function() {
