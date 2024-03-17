@@ -15,74 +15,69 @@
   MapAnimator.prototype.start = function() {
     // Base
     let anim = this;
-    
-    // Setup
-    window.requestAnimationFrame(function() {
-        anim.runAnimationLoop();
-    });
+
+    // Run animations
+    anim.runAnimationLoop();
 };
 
-// 240315: Interval and Animation frame together seem like a waste -> unify
+// States should be handled in animation not mapmaker -> handle animation
 // Map image to data
 MapAnimator.prototype.runAnimationLoop = function() {
     // Base
     let anim = this;
-    
-    // Setup
-    var  img = new Image;
-    img.src = 'http://www.gravatar.com/avatar/a1f80339c0cef95be6dc73e0ac510d5d?s=32&d=identicon&r=PG';
-    // Start Animation
-    img.addEventListener('load', function () {
-        var interval = setInterval(function() {
-          var x = 0, y = 0;
-          
-          return function () {
-            anim.context.clearRect(0, 0, anim.canvas.width, anim.canvas.height);
-            anim.context.drawImage(img, x, y);
-    
-            x += 1;
-            if (x > anim.context.canvas.width) {
-              x = 0;
-            }
-          };
-        }(), 1000/40);
-      }, false);
+    anim.currentState = "ANIMATION_PLAYING";
+
+    // Game State
+    switch(anim.currentState) {
+        case "INITIAL":
+            // Draw INITIAl SCREEN
+            // anim.drawInitialScreen()
+            break
+        case "ANIMATION_PLAYING":
+            // Draw ANIMATION SCREEN
+            anim.drawAnimation()
+            break
+        default:
+            break;
+    }
 }
 
-// window.requestAnimationFrame(animationLoop);
+MapAnimator.prototype.drawAnimation = function() {
+    // Base
+    let anim = this;
 
-// function animationLoop(){
+    // Setup
+    let zero;
 
-//     // Clear Canvas
-//     context.clearRect(0, 0, canvas.width, canvas.height);
-    
-//     // Update
-//     // Bounce bottom
-//     if (ballY + ballRadius > canvas.height){ 
-//         changeY *= -1;
-//     }
-    
-//     // Bounce top
-//     if (ballY - ballRadius < 0 ){ 
-//         changeY *= -1;
-//     }
-    
-//     // Bounce right
-//     if (ballX + ballRadius > canvas.width){ 
-//         changeX *= -1;
-//     }
-//     // Bounce left
-//     if (ballX - ballRadius < 0){ 
-//         changeX *= -1;
-//     }
+    requestAnimationFrame(firstFrame);
 
+    function firstFrame(timeStamp) {
+        zero = timeStamp;
+        animate(timeStamp);
+    }
 
-//     ballX += changeX;
-//     ballY += changeY;
-    
-//     // Draw
-//     drawBall(ballX, ballY, ballRadius, ballColor)
-    
-//     //Animate
-//     window.requestAnimationFrame(animationLoop);
-// }
+    function animate(timeStamp) {
+        const value = (timeStamp - zero) / 1500;
+        if (value < 1) {
+            anim.drawAnimatedElement(value)
+            requestAnimationFrame((t) => animate(t));
+        } else {
+            anim.drawAnimatedElement(value)
+        }
+    }
+}
+
+MapAnimator.prototype.drawAnimatedElement = function(progress) {
+    // Base
+    let anim = this;
+    const length = data[globalTime].object.icons.length;
+
+    // Draw
+    anim.context.clearRect(0, 0, anim.canvas.width, anim.canvas.height);
+
+    // 240317 Next action: Remap to only drawing those that have previous, else just draw
+    for (let i = 0; i < length; i++) {
+        anim.object = new Generator(anim.canvas, data, globalTime,i, "icon");
+        anim.object.drawAnimated(progress)
+    }
+}

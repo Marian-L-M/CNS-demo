@@ -25,6 +25,16 @@ function Generator (canvas, input, globalTime, index, type) {
         case 'icon': 
             // data
             data = input[globalTime].object.icons[index];
+            if(data.hasNext) {
+                generator.hasNext = true;
+                generator.cnx = data.nx * generator.cw;
+                generator.cny = data.ny * generator.ch;
+            }
+            if(data.hasPrevious) {
+                generator.hasPrevious = true;
+                generator.cpx = data.px * generator.cw;
+                generator.cpy = data.py * generator.ch;
+            }
             break;
         case 'location':
             // data
@@ -107,6 +117,27 @@ Generator.prototype.draw = function() {
         default:
             break;
     }
+}
+
+Generator.prototype.drawAnimated = function(progress) {
+    // Base
+    let generator = this;
+    const diffX = generator.cx - generator.cpx;
+    const diffY = generator.cy - generator.cpy;
+
+    const currentX = generator.cpx + (diffX * progress);
+    const currentY = generator.cpy + (diffY * progress);
+
+    generator.img = new Image();
+    generator.img.src = generator.icon;
+
+    generator.context.drawImage(
+        generator.img, 
+        (currentX), 
+        (currentY), 
+        (generator.iconSize), 
+        (generator.iconSize) 
+    );
 }
 
 Generator.prototype.define = function () {

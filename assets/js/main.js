@@ -16,8 +16,14 @@ let data = [
                     "description": " Hello! I am char-1!",
                     "icon": "assets/img/characters/character-1.png",
                     "img": "assets/img/characters/character-1-full.jpg",
-                    "x": 115,
-                    "y": 115,
+                    "x": 450,
+                    "y": 250,
+                    "hasNext": false,
+                    "nx": 0,
+                    "ny": 0,
+                    "hasPrevious": true,
+                    "px": 115,
+                    "py": 115,
                     "info":{
                         "area":[{
                             "title" : "Character-1",
@@ -70,6 +76,12 @@ let data = [
                     "img": "assets/img/characters/character-2-full.jpg",
                     "x": 815,
                     "y": 415,
+                    "hasNext": false,
+                    "nx": 0,
+                    "ny": 0,
+                    "hasPrevious": true,
+                    "px": 815,
+                    "py": 115,
                     "info":{
                         "area":[{
                             "title" : "Character-2",
