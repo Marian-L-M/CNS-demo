@@ -79,7 +79,7 @@ MapAnimator.prototype.drawAnimatedElement = function(progress) {
     anim.context.clearRect(0, 0, anim.canvas.width, anim.canvas.height);
 
     for (let i = 0; i < length; i++) {
-        anim.object = new Generator(anim.canvas, data, globalTime,i, "icon");
+        anim.object = new Generator(anim.canvas, data, globalTime,i, 'icons');
         if (anim.object.hasPrevious) {
             anim.object.drawAnimated(progress)
         }

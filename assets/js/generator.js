@@ -22,7 +22,7 @@ function Generator (canvas, input, globalTime, index, type) {
     // Specifications
     let data;
     switch(type){
-        case 'icon': 
+        case 'icons': 
             // data
             data = input[globalTime].object.icons[index];
             if(data.hasNext) {
@@ -36,7 +36,7 @@ function Generator (canvas, input, globalTime, index, type) {
                 generator.cpy = data.py * generator.ch;
             }
             break;
-        case 'location':
+        case 'areas':
             // data
             data = input[globalTime].object.areas[index];
 
@@ -46,7 +46,7 @@ function Generator (canvas, input, globalTime, index, type) {
             generator.points = data.points; 
             generator.stroke = data.design.stroke; 
             break;
-        case 'journey':
+        case 'paths':
             // data
             data = input[globalTime].object.paths[index];
             let nextData = input[globalTime].object.paths[index + 1];
@@ -96,7 +96,7 @@ Generator.prototype.draw = function() {
     let generator = this;
 
     switch(generator.type){
-        case 'icon':
+        case 'icons':
             generator.img = new Image();
             generator.img.src = generator.icon;
 
@@ -108,8 +108,8 @@ Generator.prototype.draw = function() {
                 (generator.iconSize) 
             );
             break;
-        case 'location':         
-        case 'journey':
+        case 'areas':         
+        case 'paths':
             generator.define();
             generator.context.fill();
             generator.context.stroke();
@@ -151,7 +151,7 @@ Generator.prototype.define = function () {
     generator.context.beginPath();
 
     switch(generator.type){
-        case 'icon':
+        case 'icons':
             const w = generator.iconSize; 
         
             generator.context.moveTo(x, y);
@@ -161,7 +161,7 @@ Generator.prototype.define = function () {
             generator.context.lineTo(x, y);
 
             break;
-        case 'location': 
+        case 'areas': 
             const points = generator.points;
 
             generator.context.moveTo(points[0].x * cw, points[0].y * ch);
@@ -170,7 +170,7 @@ Generator.prototype.define = function () {
             }
             generator.context.lineTo(points[0].x * cw, points[0].y * ch);
             break;
-        case 'journey': 
+        case 'paths': 
             const offset = generator.iconSize / (10 * generator.cw);
 
             generator.context.moveTo(x,y);

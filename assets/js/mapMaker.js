@@ -81,13 +81,13 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     const y = event.clientY - rect.top;
 
     // Location click events
-    map.createClickLoop("location", x, y);
+    map.createClickLoop('areas', x, y);
     
     // Icon click events
-    map.createClickLoop("icon", x, y);
+    map.createClickLoop('icons', x, y);
 
     // Journey click events
-    map.createClickLoop("journey", x, y);
+    map.createClickLoop('paths', x, y);
 }
 
 MapMaker.prototype.createHoverEvents = function() {
@@ -106,13 +106,13 @@ MapMaker.prototype.createHoverEvents = function() {
         mouselabel.innerHTML = "";
 
         // Location hover mouse label
-        map.hoverAction('location',x,y);
+        map.hoverAction('areas',x,y);
         
         // // Journey hover mouse label
-        map.hoverAction('journey',x,y);
+        map.hoverAction('paths',x,y);
         
         // Character hover mouse label
-        map.hoverAction("icon",x,y);
+        map.hoverAction('icons',x,y);
     }
 }
 
@@ -121,37 +121,22 @@ MapMaker.prototype.drawObjects = function() {
     let map = this;
     
     // Draw Locations
-    map.drawHandler("location")
+    map.drawHandler('areas')
     
     // Draw Journeys
-    map.drawHandler("journey")
+    map.drawHandler('paths')
 
     // Draw Characters & Icons
-    // map.drawHandler("icon")
+    // map.drawHandler('icons')
 }
 
 
 // ======= Utility functions ============
 // Base for unified click, draw, and hover functions
-// 240308 Approach feels clunky
 MapMaker.prototype.getTypeLength = function(type) {
-    // Base
-    let map = this;
 
-    let length;
-    switch(type){
-        case'location':
-            length = data[globalTime].object.areas.length;
-            break;
-        case "icon":
-            length = data[globalTime].object.icons.length;
-            break;
-        case'journey':
-            length = data[globalTime].object.paths.length;
-            break;
-        default:
-            break;
-    }
+    let length = data[globalTime].object[type].length;
+
     return length;
 }
 
@@ -210,11 +195,11 @@ MapMaker.prototype.runClickLoop = function (type, length, x, y){
         // Populate infobox
         if (map.object.context.isPointInPath(x,y)) {
             switch(type){
-                case 'location':
-                case "icon":
+                case 'areas':
+                case 'icons':
                     map.populateInfoBox(map.object);
                     break;
-                case'journey':                    
+                case'paths':                    
                     map.populateMainBox(map.object);
                     break;
             }
