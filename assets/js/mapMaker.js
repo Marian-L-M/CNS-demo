@@ -1,3 +1,4 @@
+// 240317 next action: Separate Infobox and Mainbox feels like bad UI, make them overlap + not cover map
 function MapMaker(canvas, globalTime, data) {
     // Base
     var map = this;
@@ -5,6 +6,7 @@ function MapMaker(canvas, globalTime, data) {
     // Global Atrributes
     map.canvas = canvas;
     map.context = map.canvas.getContext('2d');
+    map.objectKeys = Object.keys(data[globalTime].object);
 
     // Grid 1000*1000
     map.canvas.cw  = canvas.width / 1000;
@@ -33,23 +35,7 @@ MapMaker.prototype.start = function() {
     let map = this;
     
     // Start Map
-    map.runMapLoop();
-};
-
-MapMaker.prototype.runMapLoop = function() {
-    // Base
-    let map = this;
-
-    // Draw INITIAl SCREEN
     map.drawInitialScreen()
-    
-    // Create Map Objects
-    map.createObjects();
-
-    // Animation Loop
-    window.requestAnimationFrame(function() {
-        map.runMapLoop();
-    });
 };
 
 MapMaker.prototype.drawInitialScreen = function() {
@@ -58,6 +44,9 @@ MapMaker.prototype.drawInitialScreen = function() {
 
     // Clear Canvas
     map.context.clearRect(0, 0, map.canvas.width, map.canvas.height);
+
+    // Create Map Objects
+    map.createObjects();
 }
 
 MapMaker.prototype.createObjects = function() {
@@ -77,14 +66,8 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
 
-    // Location click events
-    map.createClickLoop("location", x, y);
-    
-    // Icon click events
-    map.createClickLoop("icon", x, y);
-
-    // Journey click events
-    map.createClickLoop("journey", x, y);
+    // Click events location-paths-icons
+    map.objectKeys.forEach((e) => map.createClickLoop(e,x,y));
 }
 
 MapMaker.prototype.createHoverEvents = function() {
@@ -102,14 +85,8 @@ MapMaker.prototype.createHoverEvents = function() {
         // Reset mouse label
         mouselabel.innerHTML = "";
 
-        // Location hover mouse label
-        map.hoverAction('location',x,y);
-        
-        // // Journey hover mouse label
-        map.hoverAction('journey',x,y);
-        
-        // Character hover mouse label
-        map.hoverAction("icon",x,y);
+        // Hover mouse labels location-paths-icons
+        map.objectKeys.forEach((e) => map.hoverAction(e,x,y));
     }
 }
 
@@ -118,37 +95,22 @@ MapMaker.prototype.drawObjects = function() {
     let map = this;
     
     // Draw Locations
-    map.drawHandler("location")
+    map.drawHandler('areas')
     
     // Draw Journeys
-    map.drawHandler("journey")
+    map.drawHandler('paths')
 
     // Draw Characters & Icons
-    map.drawHandler("icon")
+    // map.drawHandler('icons')
 }
 
 
 // ======= Utility functions ============
 // Base for unified click, draw, and hover functions
-// 240308 Approach feels clunky
 MapMaker.prototype.getTypeLength = function(type) {
-    // Base
-    let map = this;
 
-    let length;
-    switch(type){
-        case'location':
-            length = data[globalTime].object.areas.length;
-            break;
-        case "icon":
-            length = data[globalTime].object.icons.length;
-            break;
-        case'journey':
-            length = data[globalTime].object.paths.length;
-            break;
-        default:
-            break;
-    }
+    let length = data[globalTime].object[type].length;
+
     return length;
 }
 
@@ -207,11 +169,11 @@ MapMaker.prototype.runClickLoop = function (type, length, x, y){
         // Populate infobox
         if (map.object.context.isPointInPath(x,y)) {
             switch(type){
-                case 'location':
-                case "icon":
+                case 'areas':
+                case 'icons':
                     map.populateInfoBox(map.object);
                     break;
-                case'journey':                    
+                case'paths':                    
                     map.populateMainBox(map.object);
                     break;
             }
