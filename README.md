@@ -24,8 +24,9 @@
     - [x] Create Event Icon clickable type from character template
     - [x] Unify data object (Merge character, location, journey into single object list. With a type property to define which is which)
     - [x] Simplify generator for less differentiation in the switch cases
-- [ ] Try to implement character animation
+- [x] Try to implement character animation
     - [ ] Rework reset button
+- [ ] Current version seems to consume tremendous processing power/battery -> optimize
 - [ ] Clean up design
     - [ ] Toggle switches for info bar and info box
     - [ ] Info box not visible when not prefilled

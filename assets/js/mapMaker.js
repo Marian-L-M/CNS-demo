@@ -6,6 +6,7 @@ function MapMaker(canvas, globalTime, data) {
     // Global Atrributes
     map.canvas = canvas;
     map.context = map.canvas.getContext('2d');
+    map.objectKeys = Object.keys(data[globalTime].object);
 
     // Grid 1000*1000
     map.canvas.cw  = canvas.width / 1000;
@@ -65,14 +66,8 @@ MapMaker.prototype.createClickEvents = function(canvas, event) {
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
 
-    // Location click events
-    map.createClickLoop('areas', x, y);
-    
-    // Icon click events
-    map.createClickLoop('icons', x, y);
-
-    // Journey click events
-    map.createClickLoop('paths', x, y);
+    // Click events location-paths-icons
+    map.objectKeys.forEach((e) => map.createClickLoop(e,x,y));
 }
 
 MapMaker.prototype.createHoverEvents = function() {
@@ -90,14 +85,8 @@ MapMaker.prototype.createHoverEvents = function() {
         // Reset mouse label
         mouselabel.innerHTML = "";
 
-        // Location hover mouse label
-        map.hoverAction('areas',x,y);
-        
-        // // Journey hover mouse label
-        map.hoverAction('paths',x,y);
-        
-        // Character hover mouse label
-        map.hoverAction('icons',x,y);
+        // Hover mouse labels location-paths-icons
+        map.objectKeys.forEach((e) => map.hoverAction(e,x,y));
     }
 }
 
