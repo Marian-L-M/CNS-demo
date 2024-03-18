@@ -1,6 +1,5 @@
 // 240317 next action: Adjust reset buttons
 // 240317 next action: Create next step data
-// 240317 next action: Create next step data
 function MapAnimator (canvas, globalTime,data) {
     // Base
     let anim = this;
@@ -23,26 +22,13 @@ function MapAnimator (canvas, globalTime,data) {
     anim.runAnimationLoop();
 };
 
-// States should be handled in animation not mapmaker -> handle animation
 // Map image to data
 MapAnimator.prototype.runAnimationLoop = function() {
     // Base
     let anim = this;
-    anim.currentState = "ANIMATION_PLAYING";
 
-    // Game State
-    switch(anim.currentState) {
-        case "INITIAL":
-            // Draw INITIAl SCREEN
-            // anim.drawInitialScreen()
-            break
-        case "ANIMATION_PLAYING":
-            // Draw ANIMATION SCREEN
-            anim.drawAnimation()
-            break
-        default:
-            break;
-    }
+    // Draw animations
+    anim.drawAnimation()
 }
 
 MapAnimator.prototype.drawAnimation = function() {

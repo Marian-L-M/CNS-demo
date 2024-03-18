@@ -34,24 +34,7 @@ MapMaker.prototype.start = function() {
     let map = this;
     
     // Start Map
-    map.runMapLoop();
-};
-
-MapMaker.prototype.runMapLoop = function() {
-    // Base
-    let map = this;
-
-    // Draw INITIAl SCREEN
     map.drawInitialScreen()
-    
-    // Create Map Objects
-    map.createObjects();
-
-    // Animation Loop
-    // 240315 Is that actually needed?
-    window.requestAnimationFrame(function() {
-        map.runMapLoop();
-    });
 };
 
 MapMaker.prototype.drawInitialScreen = function() {
@@ -60,7 +43,9 @@ MapMaker.prototype.drawInitialScreen = function() {
 
     // Clear Canvas
     map.context.clearRect(0, 0, map.canvas.width, map.canvas.height);
- 
+
+    // Create Map Objects
+    map.createObjects();
 }
 
 MapMaker.prototype.createObjects = function() {
