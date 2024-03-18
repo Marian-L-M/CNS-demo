@@ -1,3 +1,4 @@
+// 240317 next action: Separate Infobox and Mainbox feels like bad UI, make them overlap + not cover map
 function MapMaker(canvas, globalTime, data) {
     // Base
     var map = this;

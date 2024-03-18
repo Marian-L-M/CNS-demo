@@ -1,4 +1,7 @@
-  function MapAnimator (canvas, globalTime,data) {
+// 240317 next action: Adjust reset buttons
+// 240317 next action: Create next step data
+// 240317 next action: Create next step data
+function MapAnimator (canvas, globalTime,data) {
     // Base
     let anim = this;
 
@@ -75,9 +78,13 @@ MapAnimator.prototype.drawAnimatedElement = function(progress) {
     // Draw
     anim.context.clearRect(0, 0, anim.canvas.width, anim.canvas.height);
 
-    // 240317 Next action: Remap to only drawing those that have previous, else just draw
     for (let i = 0; i < length; i++) {
         anim.object = new Generator(anim.canvas, data, globalTime,i, "icon");
-        anim.object.drawAnimated(progress)
+        if (anim.object.hasPrevious) {
+            anim.object.drawAnimated(progress)
+        }
+        else {
+            anim.object.draw()
+        }
     }
 }
