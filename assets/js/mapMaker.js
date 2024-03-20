@@ -185,6 +185,7 @@ MapMaker.prototype.runClickLoop = function (type, length, x, y){
 MapMaker.prototype.populateMainBox = function (content){
     // Base
     let map = this;
+    mainText.classList.add("active-menu");
     mainTitle.innerHTML = map.object.name;
     mainContent.innerHTML = map.object.description;
 }
@@ -192,7 +193,7 @@ MapMaker.prototype.populateMainBox = function (content){
 MapMaker.prototype.populateInfoBox = function (content){
     // Base
     let map = this;
-
+    infoBox.style.display = "block"
     infoBox.classList.add("active-menu");
     ibToggle.classList.add("active-btn")
     ibTitle.innerHTML = content.name;

@@ -14,7 +14,7 @@ function Generator (canvas, input, globalTime, index, type) {
     generator.canvas = canvas;
     generator.context = generator.canvas.getContext('2d');
     generator.globalTime = globalTime;
-    generator.index = index; // 240306 To do: Use for draw NodeLine
+    generator.index = index; 
     generator.iconSize = 55 * generator.cw;
 
 

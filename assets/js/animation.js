@@ -1,4 +1,3 @@
-// 240317 next action: Adjust reset buttons
 // 240317 next action: Create next step data
 function MapAnimator (canvas, globalTime,data) {
     // Base

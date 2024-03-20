@@ -25,7 +25,7 @@
     - [x] Unify data object (Merge character, location, journey into single object list. With a type property to define which is which)
     - [x] Simplify generator for less differentiation in the switch cases
 - [x] Try to implement character animation
-    - [ ] Rework reset button
+    - [x] Rework reset button
 - [ ] Current version seems to consume tremendous processing power/battery -> optimize
 - [ ] Clean up design
     - [ ] Toggle switches for info bar and info box

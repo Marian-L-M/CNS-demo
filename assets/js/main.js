@@ -936,6 +936,7 @@ timeScroller.max = timeIndexMax;
 // Global Variables
 let mainTitle = document.getElementById("main-title") ;
 let mainContent = document.getElementById("main-content") ;
+let mainText = document.getElementById("main-text") ;
 
 let mouselabel = document.getElementById("mouse-label")
 
@@ -995,6 +996,7 @@ function setTimeIndex() {
 window.addEventListener("keydown", (e) => {
     switch(e.code){
         case 'Escape':
+            animateCanvas();
             resetMainText();
             break;
         case 'KeyH':
